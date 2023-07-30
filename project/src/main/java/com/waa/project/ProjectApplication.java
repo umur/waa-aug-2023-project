@@ -6,19 +6,23 @@ import com.waa.project.entity.UserProfile;
 import com.waa.project.entity.UserRole;
 import com.waa.project.repository.UserProfileRepository;
 import com.waa.project.repository.UserRepository;
+import com.waa.project.service.impl.UserServiceImpl;
+import com.waa.project.util.LoggingUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Year;
 
 @SpringBootApplication
+@EnableAspectJAutoProxy
 public class ProjectApplication {
-
     public static void main(String[] args) {
-
         ConfigurableApplicationContext configurableApplicationContext = SpringApplication.run(ProjectApplication.class);
 
         // Set up default data
@@ -55,11 +59,13 @@ public class ProjectApplication {
         // Save the User to the database using UserRepository
         userRepository.save(user);
 
-
-        System.out.println(userRepository.findAll());
+        // Get List user
+        LoggingUtil.logMessage(ProjectApplication.class,"get All" + userRepository.findAll());
 
         // Verify password
-        System.out.println(user.checkPassword("password123"));
-    }
+        LoggingUtil.logMessage(ProjectApplication.class,"check password: "+ user.checkPassword("password123"));
 
+        // Get User
+        LoggingUtil.logMessage(ProjectApplication.class,"get user: "+ new UserServiceImpl(userRepository).getUsers());
+    }
 }
