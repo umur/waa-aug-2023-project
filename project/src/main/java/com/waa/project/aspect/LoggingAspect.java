@@ -15,6 +15,6 @@ import org.springframework.stereotype.Component;
 public class LoggingAspect {
     @After("@annotation(com.waa.project.aspect.annotation.LogMe)")
     public void log(JoinPoint joinPoint){
-        LoggingUtil.logMessage("Method Excution: " + joinPoint.getSignature().getName(),LoggingAspect.class);
+        LoggingUtil.logMessage("Method Excution: " + joinPoint.getSignature().getName());
     }
 }
