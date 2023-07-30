@@ -1,5 +1,7 @@
 package com.waa.project.service.impl;
 
+import com.waa.project.aspect.annotation.ExecutionTime;
+import com.waa.project.aspect.annotation.LogMe;
 import com.waa.project.dto.responseDto.UsersDto;
 import com.waa.project.entity.User;
 import com.waa.project.repository.UserRepository;
@@ -15,6 +17,8 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     public final UserRepository userRepository;
 
+    @ExecutionTime
+    @LogMe
     @Override
     public List<UsersDto> getUsers() {
         var entityList =  userRepository.findAll();

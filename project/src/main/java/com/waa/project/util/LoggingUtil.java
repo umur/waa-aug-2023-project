@@ -10,7 +10,7 @@ public final class LoggingUtil {
     }
 
     // Example method that uses the logger to log a message
-    public static void logMessage(Class<?> clazz, String message) {
+    public static void logMessage(String message,Class<?> clazz) {
         Logger log = LoggerFactory.getLogger(clazz);
         log.info("Logged message: {}", message);
     }

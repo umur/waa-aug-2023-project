@@ -60,12 +60,12 @@ public class ProjectApplication {
         userRepository.save(user);
 
         // Get List user
-        LoggingUtil.logMessage(ProjectApplication.class,"get All" + userRepository.findAll());
+        LoggingUtil.logMessage("get All" + userRepository.findAll(),ProjectApplication.class);
 
         // Verify password
-        LoggingUtil.logMessage(ProjectApplication.class,"check password: "+ user.checkPassword("password123"));
+        LoggingUtil.logMessage("check password: "+ user.checkPassword("password123"),ProjectApplication.class);
 
         // Get User
-        LoggingUtil.logMessage(ProjectApplication.class,"get user: "+ new UserServiceImpl(userRepository).getUsers());
+        LoggingUtil.logMessage("get user: "+ new UserServiceImpl(userRepository).getUsers(),ProjectApplication.class);
     }
 }
