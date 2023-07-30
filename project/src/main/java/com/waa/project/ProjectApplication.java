@@ -38,7 +38,7 @@ public class ProjectApplication {
         userProfile.setAddress("123 Main Street");
         userProfile.setPhoneNumber(123456789);
         userProfile.setGraduationYear(Year.of(2015));
-        userProfile.setNumberOfExperience(Year.of(6));
+//        userProfile.setNumberOfExperience(Year.of(6));
         userProfile.setProfilePicture("R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
 
         // Save the UserProfile to the database using UserProfileRepository (if you have one)
