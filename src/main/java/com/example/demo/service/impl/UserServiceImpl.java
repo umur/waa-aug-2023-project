@@ -21,9 +21,10 @@ public class UserServiceImpl implements UserService {
     private UserRepo userRepo;
     private final ModelMapper modelMapper;
     @Override
-    public void save(UserDto userDto) {
+    public UserDto save(UserDto userDto) {
         User user = modelMapper.map(userDto, User.class);
         userRepo.save(user);
+        return userDto;
     }
 
     @Override
@@ -37,15 +38,18 @@ public class UserServiceImpl implements UserService {
     public UserDto getById(int id) {
         Optional<User> userOptional = userRepo.findById(id);
         if(userOptional.isEmpty()){
-            throw new EntityNotFoundException("User with ID " + id + " not found.");
+            return null;
         }
         User user = userOptional.get();
         return modelMapper.map(user, UserDto.class);
     }
 
     @Override
-    public void update(UserDto userDto, int id) {
+    public UserDto update(UserDto userDto, int id) {
         UserDto entityDto = getById(id);
+        if(entityDto == null){
+            return null;
+        }
         User user = modelMapper.map(entityDto, User.class);
         if(userDto.getEmail() != null) user.setEmail(userDto.getEmail());
         if(userDto.getFirstName() != null) user.setFirstName(userDto.getFirstName());
@@ -53,10 +57,16 @@ public class UserServiceImpl implements UserService {
         if(userDto.getPassword() != null) user.setPassword(userDto.getPassword());
 
         userRepo.save(user);
+        return modelMapper.map(user, UserDto.class);
     }
 
     @Override
-    public void delete(int id) {
+    public boolean delete(int id) {
+        UserDto entityDto = getById(id);
+        if(entityDto == null){
+            return false;
+        }
         userRepo.deleteById(id);
+        return true;
     }
 }
