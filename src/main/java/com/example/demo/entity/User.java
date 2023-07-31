@@ -3,6 +3,8 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import java.util.List;
 
@@ -18,4 +20,15 @@ public class User {
     private String firstName;
     private String lastName;
     private String role;
+
+    @OneToMany(mappedBy = "surveyAuthor")
+    @Cascade(CascadeType.ALL)
+    private List<Survey> surveys;
+    @OneToMany(mappedBy = "user")
+    @Cascade(CascadeType.ALL)
+    private List<SurveyAnswer> surveyAnswerList;
+    @OneToMany(mappedBy = "questionAuthor")
+    @Cascade(CascadeType.ALL)
+    private List<SurveyQuestion> surveyQuestionList;
+    
 }
