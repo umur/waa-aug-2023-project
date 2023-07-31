@@ -43,7 +43,6 @@ public class UserController {
     public ResponseEntity<UserDto> update(@PathVariable int id, @RequestBody UserDto userDto){
         UserDto updatedUser = userService.update(userDto, id);
         if(updatedUser == null) {
-            System.out.println("nullllllllo");
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(updatedUser);
