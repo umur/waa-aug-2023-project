@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 public class JobDto {
     @Id
-    private int id;
+    private long id;
     private String title;
     private String description;
     private String state;

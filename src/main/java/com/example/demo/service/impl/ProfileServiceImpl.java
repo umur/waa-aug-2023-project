@@ -22,8 +22,8 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public ProfileDto save(ProfileDto profileDto) {
         Profile profile = modelMapper.map(profileDto, Profile.class);
-        profileRepo.save(profile);
-        return profileDto;
+        Profile newProfile = profileRepo.save(profile);
+        return modelMapper.map(newProfile, ProfileDto.class);
     }
 
     @Override
@@ -57,8 +57,8 @@ public class ProfileServiceImpl implements ProfileService {
         if(profileDto.getEmail() != null) profile.setEmail(profileDto.getEmail());
         if(profileDto.getProfilePicture() != null) profile.setProfilePicture(profileDto.getProfilePicture());
 
-        profileRepo.save(profile);
-        return modelMapper.map(profile, ProfileDto.class);
+        Profile updatedProfile = profileRepo.save(profile);
+        return modelMapper.map(updatedProfile, ProfileDto.class);
     }
 
     @Override

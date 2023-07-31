@@ -23,8 +23,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto save(UserDto userDto) {
         User user = modelMapper.map(userDto, User.class);
-        userRepo.save(user);
-        return userDto;
+        User newUser = userRepo.save(user);
+        return modelMapper.map(newUser, UserDto.class);
     }
 
     @Override
@@ -56,8 +56,8 @@ public class UserServiceImpl implements UserService {
         if(userDto.getLastName() != null) user.setLastName(userDto.getLastName());
         if(userDto.getPassword() != null) user.setPassword(userDto.getPassword());
 
-        userRepo.save(user);
-        return modelMapper.map(user, UserDto.class);
+        User updatedUser = userRepo.save(user);
+        return modelMapper.map(updatedUser, UserDto.class);
     }
 
     @Override

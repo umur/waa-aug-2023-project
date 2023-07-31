@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 public class ProfileDto {
     @Id
-    private int id;
+    private long id;
     private String state;
     private String city;
     private Integer graduationYear;

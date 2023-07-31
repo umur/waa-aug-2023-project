@@ -1,12 +1,14 @@
 package com.example.demo.dto;
 
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
 public class UserDto {
-    private int id;
+    @Id
+    private long id;
     private String email;
     private String password;
     private String firstName;

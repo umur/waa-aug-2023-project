@@ -10,7 +10,8 @@ import lombok.Setter;
 @Getter
 public class Profile {
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String state;
     private String city;
     private Integer graduationYear;

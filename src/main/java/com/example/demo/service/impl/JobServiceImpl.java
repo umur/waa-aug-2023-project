@@ -22,8 +22,8 @@ public class JobServiceImpl implements JobService {
     @Override
     public JobDto save(JobDto jobDto) {
         Job job = modelMapper.map(jobDto, Job.class);
-        jobRepo.save(job);
-        return jobDto;
+        Job newJob = jobRepo.save(job);
+        return modelMapper.map(newJob, JobDto.class);
     }
 
     @Override
@@ -55,8 +55,8 @@ public class JobServiceImpl implements JobService {
         if(jobDto.getState() != null) job.setState(jobDto.getState());
         if(jobDto.getDescription() != null) job.setDescription(jobDto.getDescription());
         if(jobDto.getTitle() != null) job.setTitle(jobDto.getTitle());
-        jobRepo.save(job);
-        return modelMapper.map(job, JobDto.class);
+        Job updatedJob = jobRepo.save(job);
+        return modelMapper.map(updatedJob, JobDto.class);
     }
 
     @Override
