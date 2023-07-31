@@ -9,19 +9,15 @@ import java.util.List;
 
 @Service
 public class JobExperienceServiceImpl implements JobExperienceService {
-
     private final JobExperienceRepository jobExperienceRepository;
-
     @Autowired
     public JobExperienceServiceImpl(JobExperienceRepository jobExperienceRepository) {
         this.jobExperienceRepository = jobExperienceRepository;
     }
-
     @Override
     public List<JobExperience> getAllJobExperiences() {
         return jobExperienceRepository.findAll();
     }
-
     @Override
     public JobExperience createJobExperience(JobExperience jobExperience) {
         return jobExperienceRepository.save(jobExperience);

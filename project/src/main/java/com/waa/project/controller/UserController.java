@@ -2,12 +2,10 @@ package com.waa.project.controller;
 
 import com.waa.project.dto.responseDto.CustomResponseDto;
 import com.waa.project.dto.responseDto.UsersDto;
-import com.waa.project.entity.User;
 import com.waa.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,10 +14,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
-public class projectController {
+public class UserController {
     @Autowired
     private UserService userService;
-
     @GetMapping
     public ResponseEntity<CustomResponseDto<List<UsersDto>>> getAllUsers() {
         List<UsersDto> users = userService.getUsers();

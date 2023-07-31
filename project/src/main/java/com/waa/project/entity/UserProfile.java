@@ -24,7 +24,7 @@ public class UserProfile {
     private String lastName;
     private LocalDate dateOfBirth;
     private Gender gender;
-    private String Address;
+    private String address;
     private int phoneNumber;
     private Year graduationYear;
     private Year numberOfExperience;

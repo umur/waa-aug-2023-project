@@ -12,20 +12,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/job-experiences")
 public class JobExperienceController {
-
     private final JobExperienceService jobExperienceService;
-
     @Autowired
     public JobExperienceController(JobExperienceService jobExperienceService) {
         this.jobExperienceService = jobExperienceService;
     }
-
     @GetMapping
     public ResponseEntity<List<JobExperience>> getAllJobExperiences() {
         List<JobExperience> jobExperiences = jobExperienceService.getAllJobExperiences();
         return new ResponseEntity<>(jobExperiences, HttpStatus.OK);
     }
-
     @PostMapping
     public ResponseEntity<JobExperience> createJobExperience(@RequestBody JobExperience jobExperience) {
         JobExperience createdJobExperience = jobExperienceService.createJobExperience(jobExperience);

@@ -21,17 +21,19 @@ public class User {
     private boolean isActive;
     private LocalDateTime lastLogin;
     private int loginAttempt;
+
     @OneToOne
     private UserProfile profile;
+
     public void setPassword(String password) {
-        this.password = BCrypt.withDefaults().hashToString(12,password.toCharArray());
+        this.password = BCrypt.withDefaults().hashToString(12, password.toCharArray());
     }
+
     public boolean checkPassword(String inputPassword) {
-        return BCrypt.verifyer().verify(inputPassword.toCharArray(),this.password).verified;
+        return BCrypt.verifyer().verify(inputPassword.toCharArray(), this.password).verified;
     }
 
     public boolean canEditProfile(User editingUser) {
-
         if (editingUser.getUserRole() == UserRole.FACULTY || editingUser.getUserRole() == UserRole.ALUMNI) {
             // Check if the editingUser's ID matches the ID of the user whose profile is being edited
             return editingUser.getId() == this.getId();
