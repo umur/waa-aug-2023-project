@@ -29,19 +29,19 @@ public class UserServiceImpl implements UserService {
     public List<UsersDto> getUsers() {
         var entityList =  userRepository.findAll();
         List<UsersDto> dtoList = new ArrayList<>();
-        UsersDto usersDto = new UsersDto();
-        entityList.forEach(entity -> {
-            usersDto.setId(entity.getId());
-            usersDto.setEmail(entity.getEmail());
-            usersDto.setPassword(entity.getPassword());
-            usersDto.setUserRole(entity.getUserRole());
-            usersDto.setPassword(entity.getPassword());
-            usersDto.setLastLogin(entity.getLastLogin());
-            usersDto.setProfile(entity.getProfile());
-            usersDto.setLoginAttempt(entity.getLoginAttempt());
-            usersDto.setActive(entity.isActive());
-            dtoList.add(usersDto);
-        });
+//        UsersDto usersDto = new UsersDto();
+//        entityList.forEach(entity -> {
+//            usersDto.setId(entity.getId());
+//            usersDto.setEmail(entity.getEmail());
+//            usersDto.setPassword(entity.getPassword());
+//            usersDto.setUserRole(entity.getUserRole());
+//            usersDto.setPassword(entity.getPassword());
+//            usersDto.setLastLogin(entity.getLastLogin());
+//            usersDto.setProfile(entity.getProfile());
+//            usersDto.setLoginAttempt(entity.getLoginAttempt());
+//            usersDto.setActive(entity.isActive());
+//            dtoList.add(usersDto);
+//        });
         return dtoList;
     }
 
@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByEmail(String email) {
-        return userRepository.findByEmail(email);
+        return userRepository.findByEmail(email).get();
     }
 
     @Override
