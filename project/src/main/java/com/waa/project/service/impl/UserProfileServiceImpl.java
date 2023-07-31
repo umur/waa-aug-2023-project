@@ -1,5 +1,6 @@
 package com.waa.project.service.impl;
 
+import com.waa.project.aspect.annotation.LogMe;
 import com.waa.project.dto.responseDto.UsersDto;
 import com.waa.project.entity.JobExperience;
 import com.waa.project.entity.UserProfile;
@@ -24,7 +25,9 @@ public class UserProfileServiceImpl implements UserProfileService {
     }
 
     @Override
+    @LogMe
     public UserProfile createUserProfile(UserProfile userProfile) {
+
         return userProfileRepository.save(userProfile);
     }
 

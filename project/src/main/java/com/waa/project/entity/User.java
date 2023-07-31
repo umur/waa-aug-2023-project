@@ -30,17 +30,21 @@ public class User {
         return BCrypt.verifyer().verify(inputPassword.toCharArray(),this.password).verified;
     }
 
-    public boolean canEditProfile(User editingUser) {
+//    public boolean canEditProfile(User editingUser) {
+//
+//        if (editingUser.getUserRole() == UserRole.FACULTY || editingUser.getUserRole() == UserRole.ALUMNI) {
+//            // Check if the editingUser's ID matches the ID of the user whose profile is being edited
+//            return editingUser.getId() == this.getId();
+//        }
+//
+//        if (editingUser.getUserRole() == UserRole.ADMIN) {
+//            return true;
+//        }
+//
+//        return false; // Any other user role does not have permission to edit profiles
+//    }
 
-        if (editingUser.getUserRole() == UserRole.FACULTY || editingUser.getUserRole() == UserRole.ALUMNI) {
-            // Check if the editingUser's ID matches the ID of the user whose profile is being edited
-            return editingUser.getId() == this.getId();
-        }
-
-        if (editingUser.getUserRole() == UserRole.ADMIN) {
-            return true;
-        }
-
-        return false; // Any other user role does not have permission to edit profiles
+    public UserProfile getProfile() {
+        return profile;
     }
 }
