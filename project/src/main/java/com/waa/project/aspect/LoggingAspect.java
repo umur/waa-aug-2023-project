@@ -1,5 +1,6 @@
 package com.waa.project.aspect;
 
+import com.waa.project.entity.UserProfile;
 import com.waa.project.util.LoggingUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -17,4 +18,10 @@ public class LoggingAspect {
     public void log(JoinPoint joinPoint){
         LoggingUtil.logMessage("Method Excution: " + joinPoint.getSignature().getName());
     }
+//    @After("execution(* com.waa.project.service.impl.UserProfileServiceImpl.createUserProfile(..)) && args( userProfile )")
+//    public void logCreatProfile(JoinPoint joinPoint, UserProfile userProfile){
+//        LoggingUtil.logMessage("new User profile created");
+//
+//    }
+
 }//

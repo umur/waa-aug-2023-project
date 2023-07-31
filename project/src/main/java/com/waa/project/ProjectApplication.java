@@ -26,46 +26,46 @@ public class ProjectApplication {
         ConfigurableApplicationContext configurableApplicationContext = SpringApplication.run(ProjectApplication.class);
 
         // Set up default data
-        UserRepository userRepository = configurableApplicationContext.getBean(UserRepository.class);
-        UserProfileRepository userProfileRepository = configurableApplicationContext.getBean(UserProfileRepository.class);
-
-        // Create a new UserProfile instance and fill the data
-        UserProfile userProfile = new UserProfile();
-        userProfile.setFirstName("John");
-        userProfile.setLastName("Doe");
-        userProfile.setDateOfBirth(LocalDate.of(1990, 5, 15));
-        userProfile.setGender(Gender.Male);
-        userProfile.setAddress("123 Main Street");
-        userProfile.setPhoneNumber(123456789);
-        userProfile.setGraduationYear(Year.of(2015));
-        userProfile.setNumberOfExperience(Year.of(6));
-        userProfile.setProfilePicture("R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
-
-        // Save the UserProfile to the database using UserProfileRepository (if you have one)
-        userProfileRepository.save(userProfile);
-
-        // Create a new User instance and fill the data
-        User user = new User();
-        user.setEmail("user@example.com");
-        user.setPassword("password123");
-        user.setUserRole(UserRole.ALUMNI);
-        user.setActive(true);
-        user.setLastLogin(LocalDateTime.now());
-        user.setLoginAttempt(0);
-
-        // Associate the saved UserProfile with the User
-        user.setProfile(userProfile);
-
-        // Save the User to the database using UserRepository
-        userRepository.save(user);
-
-        // Get List user
-        LoggingUtil.logMessage("get All" + userRepository.findAll());
-
-        // Verify password
-        LoggingUtil.logMessage("check password: "+ user.checkPassword("password123"));
-
-        // Get User
-        LoggingUtil.logMessage("get user: "+ new UserServiceImpl(userRepository).getUsers());
+//        UserRepository userRepository = configurableApplicationContext.getBean(UserRepository.class);
+//        UserProfileRepository userProfileRepository = configurableApplicationContext.getBean(UserProfileRepository.class);
+//
+//        // Create a new UserProfile instance and fill the data
+//        UserProfile userProfile = new UserProfile();
+//        userProfile.setFirstName("John");
+//        userProfile.setLastName("Doe");
+//        userProfile.setDateOfBirth(LocalDate.of(1990, 5, 15));
+//        userProfile.setGender(Gender.Male);
+//        userProfile.setAddress("123 Main Street");
+//        userProfile.setPhoneNumber(123456789);
+//        userProfile.setGraduationYear(Year.of(2015));
+//        userProfile.setNumberOfExperience(Year.of(6));
+//        userProfile.setProfilePicture("R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
+//
+//        // Save the UserProfile to the database using UserProfileRepository (if you have one)
+//        userProfileRepository.save(userProfile);
+//
+//        // Create a new User instance and fill the data
+//        User user = new User();
+//        user.setEmail("user@example.com");
+//        user.setPassword("password123");
+//        user.setUserRole(UserRole.ALUMNI);
+//        user.setActive(true);
+//        user.setLastLogin(LocalDateTime.now());
+//        user.setLoginAttempt(0);
+//
+//        // Associate the saved UserProfile with the User
+//        user.setProfile(userProfile);
+//
+//        // Save the User to the database using UserRepository
+//        userRepository.save(user);
+//
+//        // Get List user
+//        LoggingUtil.logMessage("get All" + userRepository.findAll());
+//
+//        // Verify password
+//        LoggingUtil.logMessage("check/ password: "+ user.checkPassword("password123"));
+//
+//        // Get User
+//        LoggingUtil.logMessage("get user: "+ new UserServiceImpl(userRepository).getUsers());
     }
 }
