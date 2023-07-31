@@ -28,7 +28,7 @@ public class SurveyQuestionService implements ISurveyQuestionService {
     @Autowired
     private UserRepo userRepo;
     @Override
-    public SurveyQuestionDto getById(int id) {
+    public SurveyQuestionDto getById(long id) {
         Optional<SurveyQuestion> surveyQuestion=surveyQuestionRepo.findById(id);
         if(surveyQuestion.isPresent()){
             return modelMapper.map(surveyQuestion, SurveyQuestionDto.class);
@@ -37,7 +37,7 @@ public class SurveyQuestionService implements ISurveyQuestionService {
     }
 
     @Override
-    public SurveyQuestionDto save(Integer userId, SurveyQuestionDto surveyQuestionDto) {
+    public SurveyQuestionDto save(long userId, SurveyQuestionDto surveyQuestionDto) {
         User user =userRepo.findById(userId).orElse(null);
         surveyQuestionDto.setQuestionAuthor(user);
         surveyQuestionDto.setCreatedAt(LocalDateTime.now());
@@ -58,7 +58,7 @@ public class SurveyQuestionService implements ISurveyQuestionService {
     }
 
     @Override
-    public SurveyQuestionDto update(int userId, int questionId, SurveyQuestionDto surveyQuestionDto) throws IllegalAccessException {
+    public SurveyQuestionDto update(long userId, long questionId, SurveyQuestionDto surveyQuestionDto) throws IllegalAccessException {
         Optional<SurveyQuestion> surveyQuestion= surveyQuestionRepo.findById(questionId);
         if(surveyQuestion.isPresent()){
             SurveyQuestion surveyQuestionEntity=surveyQuestion.get();
@@ -75,7 +75,7 @@ public class SurveyQuestionService implements ISurveyQuestionService {
     }
 
     @Override
-    public boolean delete(int userId, int surveyQuestionId) throws IllegalAccessException {
+    public boolean delete(long userId, long surveyQuestionId) throws IllegalAccessException {
         SurveyQuestion surveyQuestion= surveyQuestionRepo.findById(surveyQuestionId).orElseThrow(()->new ResourceNotFoundException("Survey question not found"));
         if(surveyQuestion.getQuestionAuthor().getId()==userId){
             surveyQuestionRepo.deleteById(surveyQuestionId);

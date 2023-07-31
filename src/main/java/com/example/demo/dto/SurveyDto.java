@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SurveyDto {
-    private int id;
+    private long id;
     private String title;
     private String description;
     private LocalDateTime startDate;

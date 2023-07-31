@@ -27,7 +27,7 @@ public class SurveyService implements ISurveyService {
 
 
     @Override
-    public SurveyDto getById(int id) {
+    public SurveyDto getById(long id) {
         Optional<Survey> survey=surveyRepo.findById(id);
         if(survey.isPresent()){
             return modelMapper.map(survey,SurveyDto.class);
@@ -36,7 +36,7 @@ public class SurveyService implements ISurveyService {
     }
 
     @Override
-    public SurveyDto save(Integer userId, SurveyDto surveyDto) {
+    public SurveyDto save(long userId, SurveyDto surveyDto) {
 //        User user=userRepo.findById(userId)
 //                .orElseThrow(()->new ResourceNotFoundException("User not found","id",userId));
         User user =userRepo.findById(userId).orElse(null);
@@ -59,7 +59,7 @@ public class SurveyService implements ISurveyService {
     }
 
     @Override
-    public SurveyDto update(int userId, int surveyId, SurveyDto surveyDto) throws IllegalAccessException {
+    public SurveyDto update(long userId, long surveyId, SurveyDto surveyDto) throws IllegalAccessException {
         Optional<Survey> survey= surveyRepo.findById(surveyId);
         if(survey.isPresent()){
             Survey surveyEntity=survey.get();
@@ -79,7 +79,7 @@ public class SurveyService implements ISurveyService {
     }
 
     @Override
-    public boolean delete(int userId, int id) throws IllegalAccessException {
+    public boolean delete(long userId, long id) throws IllegalAccessException {
         Survey survey= surveyRepo.findById(id).orElseThrow(()->new ResourceNotFoundException("Survey not found for ","id: ",id));
         if(survey.getSurveyAuthor().getId()==userId){
             surveyRepo.deleteById(id);

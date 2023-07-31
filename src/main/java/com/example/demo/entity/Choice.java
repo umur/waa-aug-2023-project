@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class Choice implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     private String content;
     @ManyToOne
     private SurveyQuestion surveyQuestion;

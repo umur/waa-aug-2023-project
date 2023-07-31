@@ -15,7 +15,7 @@ import java.util.List;
 public class SurveyQuestion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     private String question;
     private QuestionType questionType;
     private boolean isRequired;

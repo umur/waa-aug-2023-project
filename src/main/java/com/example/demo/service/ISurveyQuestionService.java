@@ -10,9 +10,9 @@ import java.util.Optional;
 
 public interface ISurveyQuestionService {
 
-    SurveyQuestionDto getById(int id);
-    SurveyQuestionDto save(Integer userId, SurveyQuestionDto surveyQuestionDto);
+    SurveyQuestionDto getById(long id);
+    SurveyQuestionDto save(long userId, SurveyQuestionDto surveyQuestionDto);
     List<SurveyQuestionDto> getAll();
-    SurveyQuestionDto update(int userId,int questionId,SurveyQuestionDto surveyQuestionDto) throws IllegalAccessException;
-    boolean delete(int userId,int surveyQuestionId) throws IllegalAccessException;
+    SurveyQuestionDto update(long userId,long questionId,SurveyQuestionDto surveyQuestionDto) throws IllegalAccessException;
+    boolean delete(long userId,long surveyQuestionId) throws IllegalAccessException;
 }

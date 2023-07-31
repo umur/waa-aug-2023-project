@@ -30,7 +30,7 @@ public class SurveyController {
         }
     }
     @GetMapping("/{surveyId}")
-    public ResponseEntity<SurveyDto> getById(@PathVariable int surveyId) {
+    public ResponseEntity<SurveyDto> getById(@PathVariable long surveyId) {
         try{
             return ResponseEntity.ok(surveyService.getById(surveyId));
         }
@@ -39,11 +39,11 @@ public class SurveyController {
         }
     }
     @PostMapping("/user/{userId}")
-    public ResponseEntity<SurveyDto> save(@PathVariable int userId, @RequestBody SurveyDto surveyDto){
+    public ResponseEntity<SurveyDto> save(@PathVariable long userId, @RequestBody SurveyDto surveyDto){
         return ResponseEntity.ok(surveyService.save(userId,surveyDto));
     }
     @PutMapping("/{surveyId}/user/{userId}")
-    public ResponseEntity<SurveyDto> update(@PathVariable int userId,@PathVariable int surveyId,@RequestBody SurveyDto surveyDto){
+    public ResponseEntity<SurveyDto> update(@PathVariable long userId,@PathVariable long surveyId,@RequestBody SurveyDto surveyDto){
         try{
             return ResponseEntity.ok(surveyService.update(userId, surveyId, surveyDto));
         }
@@ -55,7 +55,7 @@ public class SurveyController {
         }
     }
     @DeleteMapping("{surveyId}/user/{userId}")
-    public ResponseEntity<Boolean> delete(@PathVariable int userId,@PathVariable int surveyId){
+    public ResponseEntity<Boolean> delete(@PathVariable long userId,@PathVariable long surveyId){
         /*
          * delete should be enabled for admin
          * */
