@@ -7,7 +7,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class EventDto {
-    private int id;
+    private long id;
     private String title;
     private String description;
     private LocalDate date;

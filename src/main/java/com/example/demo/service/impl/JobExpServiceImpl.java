@@ -30,7 +30,7 @@ public class JobExpServiceImpl implements JobExpService {
     }
 
     @Override
-    public JobExpDto updateJobExperience(Integer jobExperienceId, JobExpDto jobExpDto) {
+    public JobExpDto updateJobExperience(Long jobExperienceId, JobExpDto jobExpDto) {
         JobExperience existingJobExperience = jobExpRepo.findById(jobExperienceId).orElse(null);
         if (existingJobExperience == null) {
             return null;
@@ -49,7 +49,7 @@ public class JobExpServiceImpl implements JobExpService {
     }
 
     @Override
-    public void deleteJobExperience(Integer jobExperienceId) {
+    public void deleteJobExperience(Long jobExperienceId) {
         JobExperience existingJobExp = jobExpRepo.findById(jobExperienceId).orElse(null);
         if (existingJobExp == null) {
 //            throw new NotFoundException("Event not found with ID: " + eventId);
@@ -69,7 +69,7 @@ public class JobExpServiceImpl implements JobExpService {
     }
 
     @Override
-    public JobExpDto getJobExperienceById(Integer jobExperienceId) {
+    public JobExpDto getJobExperienceById(Long jobExperienceId) {
         JobExperience jobExperience = jobExpRepo.findById(jobExperienceId).orElse(null);
         if (jobExperience == null) {
             return null;

@@ -8,11 +8,11 @@ import java.util.List;
 public interface EventService {
     EventDto createEvent(EventDto event);
 
-    EventDto updateEvent(Integer eventId, EventDto event);
+    EventDto updateEvent(Long eventId, EventDto event);
 
-    void deleteEvent(Integer eventId);
+    void deleteEvent(Long eventId);
 
     List<EventDto> getAllEvents();
 
-    EventDto getEventById(Integer eventId);
+    EventDto getEventById(Long eventId);
 }

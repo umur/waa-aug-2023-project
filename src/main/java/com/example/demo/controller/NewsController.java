@@ -27,7 +27,7 @@ public class NewsController {
 
     @PutMapping("/{newsId}")
     public ResponseEntity<NewsDto> updateNews(
-            @PathVariable Integer newsId,
+            @PathVariable Long newsId,
              @RequestBody NewsDto newsDto
     )
     {
@@ -40,7 +40,7 @@ public class NewsController {
     }
 
     @DeleteMapping("/{newsId}")
-    public ResponseEntity<Void> deleteNews(@PathVariable Integer newsId) {
+    public ResponseEntity<Void> deleteNews(@PathVariable Long newsId) {
         newsService.deleteNews(newsId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -52,7 +52,7 @@ public class NewsController {
     }
 
     @GetMapping("/{newsId}")
-    public ResponseEntity<NewsDto> getNewsById(@PathVariable Integer newsId) {
+    public ResponseEntity<NewsDto> getNewsById(@PathVariable Long newsId) {
         NewsDto news = newsService.getNewsById(newsId);
         if (news != null) {
             return new ResponseEntity<>(news, HttpStatus.OK);

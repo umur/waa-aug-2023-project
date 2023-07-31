@@ -13,7 +13,7 @@ import lombok.Setter;
 public class JobExperience {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     private String companyName;
     private String position;
     private String startDate;

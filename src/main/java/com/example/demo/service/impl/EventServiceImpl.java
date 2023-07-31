@@ -29,7 +29,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public EventDto updateEvent(Integer eventId, EventDto eventDto) {
+    public EventDto updateEvent(Long eventId, EventDto eventDto) {
         Event existingEvent = eventRepo.findById(eventId).orElse(null);
         if (existingEvent == null) {
             return null;
@@ -47,7 +47,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void deleteEvent(Integer eventId) {
+    public void deleteEvent(Long eventId) {
         Event existingEvent = eventRepo.findById(eventId).orElse(null);
         if (existingEvent == null) {
 //            throw new NotFoundException("Event not found with ID: " + eventId);
@@ -66,7 +66,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public EventDto getEventById(Integer eventId) {
+    public EventDto getEventById(Long eventId) {
         Event event = eventRepo.findById(eventId).orElse(null);
         if (event == null) {
 //            throw new NotFoundException("Event not found with ID: " + eventId);
