@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getById(int id) {
+    public UserDto getById(long id) {
         Optional<User> userOptional = userRepo.findById(id);
         if(userOptional.isEmpty()){
             return null;
@@ -45,11 +45,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto update(UserDto userDto, int id) {
-        UserDto entityDto = getById(id);
-        if(entityDto == null){
+    public UserDto update(UserDto userDto, long id) {
+        if(!userRepo.existsById(id)){
             return null;
         }
+        UserDto entityDto = getById(id);
         User user = modelMapper.map(entityDto, User.class);
         if(userDto.getEmail() != null) user.setEmail(userDto.getEmail());
         if(userDto.getFirstName() != null) user.setFirstName(userDto.getFirstName());
@@ -61,12 +61,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean delete(int id) {
-        UserDto entityDto = getById(id);
-        if(entityDto == null){
-            return false;
+    public boolean delete(long id) {
+        if(userRepo.existsById(id)){
+            userRepo.deleteById(id);
+            return true;
         }
-        userRepo.deleteById(id);
-        return true;
+        return false;
     }
 }

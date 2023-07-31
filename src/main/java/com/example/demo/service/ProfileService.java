@@ -7,7 +7,7 @@ import java.util.List;
 public interface ProfileService {
     ProfileDto save(ProfileDto profileDto);
     public List<ProfileDto> getAll();
-    ProfileDto getById(int id);
-    ProfileDto update(ProfileDto profileDto, int id);
-    boolean delete(int id);
+    ProfileDto getById(long id);
+    ProfileDto update(ProfileDto profileDto, long id);
+    boolean delete(long id);
 }

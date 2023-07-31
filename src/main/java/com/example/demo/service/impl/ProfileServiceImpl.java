@@ -34,7 +34,7 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public ProfileDto getById(int id) {
+    public ProfileDto getById(long id) {
         Optional<Profile> profileOptional = profileRepo.findById(id);
         if(profileOptional.isEmpty()){
             return null;
@@ -44,11 +44,11 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public ProfileDto update(ProfileDto profileDto, int id) {
-        ProfileDto entityDto = getById(id);
-        if(entityDto == null){
+    public ProfileDto update(ProfileDto profileDto, long id) {
+        if(!profileRepo.existsById(id)){
             return null;
         }
+        ProfileDto entityDto = getById(id);
         Profile profile = modelMapper.map(entityDto, Profile.class);
         if(profileDto.getState() != null) profile.setState(profileDto.getState());
         if(profileDto.getCity() != null) profile.setCity(profileDto.getCity());
@@ -62,12 +62,11 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public boolean delete(int id) {
-        ProfileDto entityDto = getById(id);
-        if(entityDto == null){
-            return false;
+    public boolean delete(long id) {
+        if(profileRepo.existsById(id)){
+            profileRepo.deleteById(id);
+            return true;
         }
-        profileRepo.deleteById(id);
-        return true;
+        return false;
     }
 }

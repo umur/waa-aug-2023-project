@@ -34,7 +34,7 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public JobDto getById(int id) {
+    public JobDto getById(long id) {
         Optional<Job> jobOptional = jobRepo.findById(id);
         if(jobOptional.isEmpty()){
             return null;
@@ -44,11 +44,11 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public JobDto update(JobDto jobDto, int id) {
-        JobDto entityDto = getById(id);
-        if(entityDto == null){
+    public JobDto update(JobDto jobDto, long id) {
+        if(!jobRepo.existsById(id)){
             return null;
         }
+        JobDto entityDto = getById(id);
         Job job = modelMapper.map(entityDto, Job.class);
         if(jobDto.getCompanyName() != null) job.setCompanyName(jobDto.getCompanyName());
         if(jobDto.getCity() != null) job.setCity(jobDto.getCity());
@@ -60,12 +60,11 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public boolean delete(int id) {
-        JobDto entityDto = getById(id);
-        if(entityDto == null){
-            return false;
+    public boolean delete(long id) {
+        if(jobRepo.existsById(id)){
+            jobRepo.deleteById(id);
+            return true;
         }
-        jobRepo.deleteById(id);
-        return true;
+        return false;
     }
 }
