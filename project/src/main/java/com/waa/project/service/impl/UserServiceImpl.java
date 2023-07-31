@@ -45,11 +45,6 @@ public class UserServiceImpl implements UserService {
         return dtoList;
     }
 
-
-
-
-
-
     @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email).get();
@@ -61,10 +56,8 @@ public class UserServiceImpl implements UserService {
         // If UserProfile and User are in the same repository, you can use userRepository.save(userProfile) directly
         userProfileRepository.save(userProfile);
     }
-
     @Override
     public void createUser(User newUser) {
         userRepository.save(newUser);
-
     }
 }

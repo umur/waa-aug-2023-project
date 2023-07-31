@@ -22,9 +22,6 @@ import java.util.List;
 public class UserProfileController {
     @Autowired
     private UserProfileService userProfileService;
-
-    @Autowired
-    private UserService userService;
     @Autowired
     private UserRepository userRepository;
 

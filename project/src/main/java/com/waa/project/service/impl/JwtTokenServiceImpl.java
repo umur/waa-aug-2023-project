@@ -43,5 +43,4 @@ public class JwtTokenServiceImpl implements JwtTokenService {
             return null;
         }
     }
-
 }
