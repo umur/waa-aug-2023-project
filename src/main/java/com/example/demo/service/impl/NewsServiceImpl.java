@@ -28,7 +28,7 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public NewsDto updateNews(Integer newsId, NewsDto newsDto) {
+    public NewsDto updateNews(Long newsId, NewsDto newsDto) {
         News existingNews = newsRepo.findById(newsId).orElse(null);
         if (existingNews == null) {
             return null;
@@ -45,7 +45,7 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public void deleteNews(Integer newsId) {
+    public void deleteNews(Long newsId) {
         newsRepo.deleteById(newsId);
     }
 
@@ -59,7 +59,7 @@ public class NewsServiceImpl implements NewsService {
 
 
     @Override
-    public NewsDto getNewsById(Integer newsId) {
+    public NewsDto getNewsById(Long newsId) {
         News news = newsRepo.findById(newsId).orElse(null);
         if (news == null) {
             return null;

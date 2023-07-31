@@ -27,7 +27,7 @@ public class EventController {
     }
 
     @PutMapping("/{eventId}")
-    public ResponseEntity<EventDto> updateEvent(@PathVariable Integer eventId, @RequestBody EventDto eventDto) {
+    public ResponseEntity<EventDto> updateEvent(@PathVariable Long eventId, @RequestBody EventDto eventDto) {
         EventDto updatedEvent = eventService.updateEvent(eventId, eventDto);
         if (updatedEvent != null) {
             return new ResponseEntity<>(updatedEvent, HttpStatus.OK);
@@ -37,7 +37,7 @@ public class EventController {
     }
 
     @DeleteMapping("/{eventId}")
-    public ResponseEntity<Void> deleteEvent(@PathVariable Integer eventId) {
+    public ResponseEntity<Void> deleteEvent(@PathVariable Long eventId) {
         eventService.deleteEvent(eventId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -49,7 +49,7 @@ public class EventController {
     }
 
     @GetMapping("/{eventId}")
-    public ResponseEntity<EventDto> getEventById(@PathVariable Integer eventId) {
+    public ResponseEntity<EventDto> getEventById(@PathVariable Long eventId) {
         EventDto event = eventService.getEventById(eventId);
         if (event != null) {
             return new ResponseEntity<>(event, HttpStatus.OK);

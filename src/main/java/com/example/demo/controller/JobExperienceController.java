@@ -27,7 +27,7 @@ public class JobExperienceController {
 
     @PutMapping("/{jobExperienceId}")
     public ResponseEntity<JobExpDto> updateJobExperience(
-            @PathVariable Integer jobExperienceId,
+            @PathVariable Long jobExperienceId,
             @RequestBody JobExpDto jobExperienceDto
     ) {
         JobExpDto updatedJobExperience = jobExpService.updateJobExperience(jobExperienceId, jobExperienceDto);
@@ -39,7 +39,7 @@ public class JobExperienceController {
     }
 
     @DeleteMapping("/{jobExperienceId}")
-    public ResponseEntity<Void> deleteJobExperience(@PathVariable Integer jobExperienceId) {
+    public ResponseEntity<Void> deleteJobExperience(@PathVariable Long jobExperienceId) {
         jobExpService.deleteJobExperience(jobExperienceId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -51,7 +51,7 @@ public class JobExperienceController {
     }
 
     @GetMapping("/{jobExperienceId}")
-    public ResponseEntity<JobExpDto> getJobExperienceById(@PathVariable Integer jobExperienceId) {
+    public ResponseEntity<JobExpDto> getJobExperienceById(@PathVariable Long jobExperienceId) {
         JobExpDto jobExperience = jobExpService.getJobExperienceById(jobExperienceId);
         if (jobExperience != null) {
             return new ResponseEntity<>(jobExperience, HttpStatus.OK);

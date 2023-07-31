@@ -8,11 +8,11 @@ import java.util.List;
 public interface JobExpService {
     JobExpDto createJobExperience(JobExpDto jobExpDto);
 
-    JobExpDto updateJobExperience(Integer jobExperienceId, JobExpDto jobExpDto);
+    JobExpDto updateJobExperience(Long jobExperienceId, JobExpDto jobExpDto);
 
-    void deleteJobExperience(Integer jobExperienceId);
+    void deleteJobExperience(Long jobExperienceId);
 
     List<JobExpDto> getAllJobExperiences();
 
-    JobExpDto getJobExperienceById(Integer jobExperienceId);
+    JobExpDto getJobExperienceById(Long jobExperienceId);
 }
