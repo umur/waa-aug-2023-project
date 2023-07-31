@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.UserDto;
+import com.example.demo.dto.UserLoginDto;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -53,6 +54,28 @@ public class UserController {
         boolean deleted = userService.delete(id);
         if (deleted) return ResponseEntity.noContent().build();
         return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> loginUser(@RequestBody UserLoginDto userLoginDto) {
+        String email = userLoginDto.getEmail();
+        String password = userLoginDto.getPassword();
+
+        //TODO Check for null or empty values, and valid email format
+
+        //TODO Call the UserService to perform authentication
+//        boolean isAuthenticated = userService.authenticateUser(email, password);
+//
+//        if (isAuthenticated) {
+//            return ResponseEntity.ok("Login successful");
+//        } else {
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+//        }
+        return ResponseEntity.ok("Login successful");
+    }
+    @GetMapping("/logout")
+    public ResponseEntity<String> logout(){
+        return ResponseEntity.ok("Logout successful");
     }
 
 }
