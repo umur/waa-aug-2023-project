@@ -4,8 +4,8 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
@@ -13,6 +13,8 @@ import java.util.List;
 @Setter
 @Entity
 @DiscriminatorValue(value = "ALUMNI")
+@SuperBuilder
+@NoArgsConstructor
 public class Alumni extends User{
     private String profilePic;
     private String phoneNum;

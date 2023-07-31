@@ -1,23 +1,68 @@
 package org.springers.waa_alumniplatform.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springers.waa_alumniplatform.enums.AccountStatus;
 import org.springers.waa_alumniplatform.enums.Role;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "userType")
-public abstract class User {
+@SuperBuilder
+@NoArgsConstructor
+public abstract class User implements UserDetails {
     @Id @GeneratedValue
     private int id;
     private String email;
     private String password;
+    private String firstName;
+    private String lastName;
     @Enumerated
     private AccountStatus accountStatus;
     @Enumerated
     private Role role;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
