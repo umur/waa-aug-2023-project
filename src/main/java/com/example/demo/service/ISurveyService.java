@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ISurveyService {
-    SurveyDto getById(int id);
+    SurveyDto getById(long id);
 
-    SurveyDto save(Integer userId, SurveyDto surveyDto);
+    SurveyDto save(long userId, SurveyDto surveyDto);
 
     List<SurveyDto> getAll();
-    SurveyDto update(int userId, int surveyId,SurveyDto surveyDto) throws IllegalAccessException;
-    boolean delete(int userId, int surveyId) throws IllegalAccessException;
+    SurveyDto update(long userId, long surveyId,SurveyDto surveyDto) throws IllegalAccessException;
+    boolean delete(long userId, long surveyId) throws IllegalAccessException;
 }

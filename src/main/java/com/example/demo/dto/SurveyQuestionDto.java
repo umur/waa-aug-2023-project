@@ -20,7 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SurveyQuestionDto {
-    private int id;
+    private long id;
     private String question;
     private QuestionType questionType;
     private boolean isRequired;

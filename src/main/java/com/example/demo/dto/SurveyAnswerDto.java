@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SurveyAnswerDto {
-    private int id;
+    private long id;
     private String answer;
     private LocalDateTime createdAt;
     private SurveyQuestionDto surveyQuestion;

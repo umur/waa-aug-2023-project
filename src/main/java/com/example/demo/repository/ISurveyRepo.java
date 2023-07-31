@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ISurveyRepo extends JpaRepository<Survey, Integer> {
+public interface ISurveyRepo extends JpaRepository<Survey, Long> {
 }

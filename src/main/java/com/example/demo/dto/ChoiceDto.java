@@ -4,6 +4,6 @@ import com.example.demo.entity.SurveyQuestion;
 import jakarta.persistence.ManyToOne;
 
 public class ChoiceDto {
-    private int id;
+    private long id;
     private String content;
 }
