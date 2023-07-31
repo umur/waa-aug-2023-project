@@ -29,26 +29,21 @@ public class UserServiceImpl implements UserService {
     public List<UsersDto> getUsers() {
         var entityList =  userRepository.findAll();
         List<UsersDto> dtoList = new ArrayList<>();
-//        UsersDto usersDto = new UsersDto();
-//        entityList.forEach(entity -> {
-//            usersDto.setId(entity.getId());
-//            usersDto.setEmail(entity.getEmail());
-//            usersDto.setPassword(entity.getPassword());
-//            usersDto.setUserRole(entity.getUserRole());
-//            usersDto.setPassword(entity.getPassword());
-//            usersDto.setLastLogin(entity.getLastLogin());
-//            usersDto.setProfile(entity.getProfile());
-//            usersDto.setLoginAttempt(entity.getLoginAttempt());
-//            usersDto.setActive(entity.isActive());
-//            dtoList.add(usersDto);
-//        });
+        UsersDto usersDto = new UsersDto();
+        entityList.forEach(entity -> {
+            usersDto.setId(entity.getId());
+            usersDto.setEmail(entity.getEmail());
+            usersDto.setPassword(entity.getPassword());
+            usersDto.setUserRole(entity.getUserRole());
+            usersDto.setPassword(entity.getPassword());
+            usersDto.setLastLogin(entity.getLastLogin());
+            usersDto.setProfile(entity.getProfile());
+            usersDto.setLoginAttempt(entity.getLoginAttempt());
+            usersDto.setActive(entity.isActive());
+            dtoList.add(usersDto);
+        });
         return dtoList;
     }
-
-
-
-
-
 
     @Override
     public User findByEmail(String email) {
@@ -61,10 +56,8 @@ public class UserServiceImpl implements UserService {
         // If UserProfile and User are in the same repository, you can use userRepository.save(userProfile) directly
         userProfileRepository.save(userProfile);
     }
-
     @Override
     public void createUser(User newUser) {
         userRepository.save(newUser);
-
     }
 }

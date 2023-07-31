@@ -22,9 +22,6 @@ import java.util.List;
 public class UserProfileController {
     @Autowired
     private UserProfileService userProfileService;
-
-    @Autowired
-    private UserService userService;
     @Autowired
     private UserRepository userRepository;
 
@@ -40,7 +37,6 @@ public class UserProfileController {
         return ResponseEntity.ok(getUserprofile);
     }
 
-
     @PostMapping
     public ResponseEntity<UserProfile> createUserProfile(@RequestBody UserProfile userProfile) {
         UserProfile createdUserProfile = userProfileService.createUserProfile(userProfile);
@@ -50,7 +46,6 @@ public class UserProfileController {
     public ResponseEntity<String> addJobExperienceToUserProfile(
             @PathVariable int userProfileId,
             @RequestBody JobExperience jobExperience) {
-
         try {
             userProfileService.addJobExperienceToUserProfile(userProfileId, jobExperience);
             return ResponseEntity.ok("Job experience added to the user profile.");

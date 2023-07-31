@@ -8,10 +8,7 @@ import java.util.List;
 
 public interface UserService {
     List<UsersDto> getUsers();
-
     User findByEmail(String userEmail);
-
     void saveUserProfile(UserProfile updatedProfile);
-
     void createUser(User newUser);
 }
