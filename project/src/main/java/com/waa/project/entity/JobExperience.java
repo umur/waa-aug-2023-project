@@ -7,6 +7,8 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.antlr.v4.runtime.misc.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -17,9 +19,21 @@ import java.time.LocalDate;
 public class JobExperience {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
+
     private String companyName;
-    private String potiosion;
+
+
+    private String position;
+
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate startDate;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate endDate;
     private boolean isDeleted;
+
+
+
 }
