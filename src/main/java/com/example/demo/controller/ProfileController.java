@@ -1,0 +1,58 @@
+package com.example.demo.controller;
+
+import com.example.demo.dto.ProfileDto;
+import com.example.demo.service.ProfileService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
+import java.util.List;
+
+@RestController
+@RequestMapping("/profiles")
+public class ProfileController {
+    @Autowired
+    private ProfileService profileService;
+
+    @PostMapping
+    public ResponseEntity<ProfileDto> save(@RequestBody ProfileDto profileDto){
+        ProfileDto createdProfile = profileService.save(profileDto);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/login")
+                .buildAndExpand(createdProfile.getId())
+                .toUri();
+        return  ResponseEntity.created(location).body(createdProfile);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ProfileDto>> getAll(){
+        List<ProfileDto> profileDtoList = profileService.getAll();
+        return ResponseEntity.ok(profileDtoList);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProfileDto> getById(@PathVariable int id){
+        ProfileDto profileDto = profileService.getById(id);
+        if(profileDto != null) return ResponseEntity.ok(profileDto);
+        return ResponseEntity.notFound().build();
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<ProfileDto> update(@PathVariable int id, @RequestBody ProfileDto profileDto){
+        ProfileDto updatedProfile = profileService.update(profileDto, id);
+        if(updatedProfile == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(updatedProfile);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable int id){
+        boolean deleted = profileService.delete(id);
+        if (deleted) return ResponseEntity.noContent().build();
+        return ResponseEntity.notFound().build();
+    }
+
+}

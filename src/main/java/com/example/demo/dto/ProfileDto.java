@@ -6,12 +6,13 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class UserDto {
+public class ProfileDto {
     @Id
     private long id;
+    private String state;
+    private String city;
+    private Integer graduationYear;
+    private String phone;
     private String email;
-    private String password;
-    private String firstName;
-    private String lastName;
-    private String role;
+    private String profilePicture;
 }
