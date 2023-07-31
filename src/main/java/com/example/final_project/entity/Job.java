@@ -19,6 +19,9 @@ public class Job {
     private int numRequired;
     private LocalDate postedOn;
     private LocalDate closingDate;
+    private String companyName;
+    @ManyToOne
+    private Address address;
     @OneToMany(mappedBy = "job")
     private List<Applicant> applicantList;
     @ManyToOne
