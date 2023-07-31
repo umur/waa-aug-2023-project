@@ -2,6 +2,7 @@ package com.waa.project;
 
 import com.waa.project.entity.*;
 import com.waa.project.repository.UserRepository;
+import com.waa.project.service.JwtTokenService;
 import com.waa.project.service.UserService;
 import com.waa.project.service.UserProfileService;
 import com.waa.project.service.JobExperienceService;
@@ -25,6 +26,7 @@ public class ProjectApplication {
         UserService userService = configurableApplicationContext.getBean(UserService.class);
         UserProfileService userProfileService = configurableApplicationContext.getBean(UserProfileService.class);
         JobExperienceService jobExperienceService = configurableApplicationContext.getBean(JobExperienceService.class);
+        JwtTokenService jwtTokenService = configurableApplicationContext.getBean(JwtTokenService.class);
 
         UserRepository userRepository = configurableApplicationContext.getBean(UserRepository.class);
 
@@ -74,5 +76,8 @@ public class ProjectApplication {
 
         // Get List user
         LoggingUtil.logMessage("get All: " + userRepository.findAll());
+
+        // Generate Token
+        LoggingUtil.logMessage("Generate Token: " + jwtTokenService.generateToken(user));
     }
 }

@@ -7,6 +7,7 @@ import com.waa.project.dto.responseDto.UsersDto;
 import com.waa.project.entity.User;
 import com.waa.project.entity.UserRole;
 import com.waa.project.repository.UserRepository;
+import com.waa.project.service.JwtTokenService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

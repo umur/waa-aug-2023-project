@@ -4,6 +4,8 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.waa.project.service.JwtTokenService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -12,14 +14,13 @@ import java.time.Duration;
 import java.time.Instant;
 
 @Service
-public class JwtTokenService {
-
+public class JwtTokenServiceImpl implements JwtTokenService {
     private static final Duration JWT_TOKEN_VALIDITY = Duration.ofMinutes(20);
 
     private final Algorithm hmac512;
     private final JWTVerifier verifier;
 
-    public JwtTokenService(@Value("${jwt.secret}") final String secret) {
+    public JwtTokenServiceImpl(@Value("${jwt.secret}") final String secret) {
         this.hmac512 = Algorithm.HMAC512(secret);
         this.verifier = JWT.require(this.hmac512).build();
     }

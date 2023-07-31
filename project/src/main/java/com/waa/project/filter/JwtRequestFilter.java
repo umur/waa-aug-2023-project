@@ -2,7 +2,7 @@ package com.waa.project.filter;
 
 import com.waa.project.entity.User;
 import com.waa.project.repository.UserRepository;
-import com.waa.project.service.impl.JwtTokenService;
+import com.waa.project.service.JwtTokenService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
