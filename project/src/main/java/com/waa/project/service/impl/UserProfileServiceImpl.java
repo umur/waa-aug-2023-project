@@ -1,13 +1,10 @@
 package com.waa.project.service.impl;
 
-import com.waa.project.aspect.annotation.LogMe;
-import com.waa.project.dto.responseDto.UsersDto;
 import com.waa.project.entity.JobExperience;
 import com.waa.project.entity.UserProfile;
 import com.waa.project.repository.UserProfileRepository;
 import com.waa.project.service.JobExperienceService;
 import com.waa.project.service.UserProfileService;
-import com.waa.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

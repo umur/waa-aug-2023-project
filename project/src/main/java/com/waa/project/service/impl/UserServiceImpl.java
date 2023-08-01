@@ -1,7 +1,5 @@
 package com.waa.project.service.impl;
 
-import com.waa.project.aspect.annotation.ExecutionTime;
-import com.waa.project.aspect.annotation.LogMe;
 import com.waa.project.dto.responseDto.UsersDto;
 import com.waa.project.entity.User;
 import com.waa.project.entity.UserProfile;
@@ -23,8 +21,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserProfileRepository userProfileRepository;
 
-    @ExecutionTime
-    @LogMe
     @Override
     public List<UsersDto> getUsers() {
         var entityList =  userRepository.findAll();

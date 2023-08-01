@@ -1,7 +1,5 @@
 package com.waa.project.service.impl;
 
-import com.waa.project.aspect.annotation.ExecutionTime;
-import com.waa.project.aspect.annotation.LogMe;
 import com.waa.project.dto.requestDto.LoginRequestDto;
 import com.waa.project.dto.responseDto.LoginResponseDto;
 import com.waa.project.dto.responseDto.RegistrationDto;
@@ -11,7 +9,6 @@ import com.waa.project.entity.UserRole;
 import com.waa.project.repository.UserRepository;
 import com.waa.project.service.AuthenticationService;
 import com.waa.project.service.JwtTokenService;
-import com.waa.project.util.LoggingUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
