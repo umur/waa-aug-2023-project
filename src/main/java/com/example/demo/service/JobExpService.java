@@ -6,13 +6,13 @@ import com.example.demo.dto.JobExpDto;
 import java.util.List;
 
 public interface JobExpService {
-    JobExpDto createJobExperience(JobExpDto jobExpDto);
+    JobExpDto createJobExperience(long profileId, JobExpDto jobExpDto);
 
-    JobExpDto updateJobExperience(Long jobExperienceId, JobExpDto jobExpDto);
+    JobExpDto updateJobExperience(long profileId, long jobExperienceId, JobExpDto jobExpDto) throws IllegalAccessException;
 
-    void deleteJobExperience(Long jobExperienceId);
+    void deleteJobExperience(long jobExperienceId);
 
     List<JobExpDto> getAllJobExperiences();
 
-    JobExpDto getJobExperienceById(Long jobExperienceId);
+    JobExpDto getJobExperienceById(long jobExperienceId);
 }

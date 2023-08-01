@@ -1,10 +1,10 @@
 package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import jakarta.persistence.*;
+
 
 @Entity
 @Getter
@@ -18,6 +18,7 @@ public class JobExperience {
     private String startDate;
     private String endDate;
     private String description;
+    private boolean isDeleted;
 
     @JsonBackReference
     @ManyToOne

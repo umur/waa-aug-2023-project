@@ -1,9 +1,7 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,6 +18,10 @@ public class Event {
     private String description;
     private LocalDate date;
     private String location;
+    private boolean isDeleted;
 
+    @JsonBackReference
+    @ManyToOne
+    private User organizer;
 
 }

@@ -2,6 +2,7 @@ package com.example.demo.dto;
 
 import com.example.demo.entity.JobExperience;
 import com.example.demo.entity.User;
+import com.example.demo.entity.Profile;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,4 +23,5 @@ public class ProfileDto {
     private boolean isDeleted = false;
     private List<JobExperience> jobExperiences;
     private User user;
+    private Profile profile;
 }

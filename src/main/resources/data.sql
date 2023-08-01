@@ -24,27 +24,28 @@ VALUES
     ( 'New York', 'New York City', 2021, '987-654-3210', 'jane@example.com', 'profile_pic_2.jpg', 5, false);
     
 -- Dummy data for Event table
-INSERT INTO event (title, description, date, location) VALUES
-                                                           ('Alumni Reunion', 'Join us for our alumni reunion.', '2023-08-15', 'University Campus'),
-                                                           ('Networking Workshop', 'Learn valuable networking tips.', '2023-09-10', 'Conference Center'),
-                                                           ('Career Fair', 'Connect with potential employers.', '2023-10-20', 'Exhibition Hall'),
-                                                           ('Industry Conference', 'Stay updated on the latest trends.', '2023-11-05', 'Convention Center'),
-                                                           ('Leadership Summit', 'Enhance your leadership skills.', '2023-12-01', 'Grand Hotel');
+INSERT INTO Event (title, description, date, location, is_deleted, organizer_id)
+VALUES
+    ('Sample Event 1', 'This is a sample event description 1.', '2023-08-10', 'Sample Location 1', false, 1),
+    ('Sample Event 2', 'This is a sample event description 2.', '2023-08-15', 'Sample Location 2', false, 2),
+    ('Sample Event 3', 'This is a sample event description 3.', '2023-08-20', 'Sample Location 3', false, 3),
+    ('Sample Event 4', 'This is a sample event description 4.', '2023-08-25', 'Sample Location 4', false, 4),
+    ('Sample Event 5', 'This is a sample event description 5.', '2023-08-30', 'Sample Location 5', false, 5);
 
 -- Dummy data for JobExperience table
-INSERT INTO job_experience (company_name, position, start_date, end_date, description, profile_id) VALUES
-                                                                                        ('ABC Company', 'Software Engineer', '2010-05-15', '2015-08-30', 'Developed web applications.', 1),
-                                                                                        ('XYZ Corporation', 'Marketing Manager', '2015-09-01', '2020-12-31', 'Managed marketing campaigns.',2),
-                                                                                        ('DEF Solutions', 'Data Analyst', '2018-02-20', '2022-06-30', 'Analyzed and visualized data.',3),
-                                                                                        ('GHI Tech', 'Product Manager', '2020-10-10', '2023-03-15', 'Led product development efforts.',4),
-                                                                                        ('JKL Innovations', 'Software Developer', '2022-01-05', '2023-06-30', 'Worked on mobile app development.',5);
+INSERT INTO Job_experience (company_name, position, start_date, end_date, description, is_deleted, profile_id)
+VALUES
+    ('Sample Company 1', 'Sample Position 1', '2020-01-01', '2021-12-31', 'This is a sample job experience description 1.', false, 1),
+    ('Sample Company 2', 'Sample Position 2', '2018-06-15', '2022-03-31', 'This is a sample job experience description 2.', false, 2),
+    ('Sample Company 3', 'Sample Position 3', '2019-03-01', '2023-07-31', 'This is a sample job experience description 3.', false, 3),
+    ('Sample Company 4', 'Sample Position 4', '2022-02-10', '2023-08-01', 'This is a sample job experience description 4.', false, 4),
+    ('Sample Company 5', 'Sample Position 5', '2017-09-05', '2023-08-31', 'This is a sample job experience description 5.', false, 5);
 
 -- Dummy data for News table
-INSERT INTO news (title, description, publish_date) VALUES
-                                                       ('University Achievements', 'Our university ranked top in the country.', '2023-07-20'),
-                                                       ('Alumni Spotlight', 'Jane Smith recognized for her achievements.', '2023-07-25'),
-                                                       ('New Scholarship Program', 'Introducing a scholarship for exceptional students.', '2023-08-01'),
-                                                       ('Upcoming Campus Expansion', 'We are expanding our campus infrastructure.', '2023-08-10'),
-                                                       ('Faculty Research Award', 'Dr. John Doe receives research award.', '2023-08-18');
-
-
+INSERT INTO News (title, description, publish_date, is_deleted, publisher_id)
+VALUES
+    ('Sample News 1', 'This is a sample news description 1.', '2023-08-05', false, 1),
+    ('Sample News 2', 'This is a sample news description 2.', '2023-08-12', false, 2),
+    ('Sample News 3', 'This is a sample news description 3.', '2023-08-18', false, 3),
+    ('Sample News 4', 'This is a sample news description 4.', '2023-08-22', false, 4),
+    ('Sample News 5', 'This is a sample news description 5.', '2023-08-28', false, 5);
