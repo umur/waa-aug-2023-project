@@ -13,8 +13,10 @@ public class ProfessionalHistory {
     @Id @GeneratedValue
     private int id;
     private String position;
-    private LocalDate from;
+    @Column(name = "startDate")
+    private LocalDate from; //SQL keyword
+    @Column(name = "endDate") //SQL keyword
     private LocalDate to;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Company company;
 }

@@ -13,6 +13,6 @@ public class SurveryQuestion {
     @Id @GeneratedValue
     private int id;
     private String question;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     private List<SurveryAnswer> surveryAnswerList;
 }

@@ -30,13 +30,14 @@ public class AlumniServiceImpl implements AlumniService {
 
     @Override
     public AlumniProfile updateById(int alumniId, AlumniProfile alumniProfile) {
+        System.out.println("Update one alumni service reached");
         Alumni alumni = getAlumniById(alumniId);
 
         alumni.setIndustry(alumniProfile.getIndustry());
         alumni.setLocation(alumniProfile.getLocation());
         alumni.setEducationalHistory(alumniProfile.getEducationalHistory());
         alumni.setEduInOurUni(alumniProfile.getEduInOurUni());
-        alumni.setPhoneNum(alumni.getPhoneNum());
+        alumni.setPhoneNum(alumniProfile.getPhoneNum());
         alumni.setProfessionalHistories(alumniProfile.getProfessionalHistories());
         alumni.setFirstName(alumniProfile.getFirstName());
         alumni.setLastName(alumniProfile.getLastName());

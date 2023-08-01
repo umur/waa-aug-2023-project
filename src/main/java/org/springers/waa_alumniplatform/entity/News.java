@@ -13,8 +13,8 @@ public class News {
     @Id @GeneratedValue
     private int id;
     private String title;
-    private String desc;
-    @OneToOne(cascade = CascadeType.ALL)
+    private String description;
+    @OneToOne
     private Admin poster;
     private LocalDateTime postedAt;
 }

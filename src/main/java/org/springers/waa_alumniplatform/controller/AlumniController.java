@@ -19,6 +19,7 @@ public class AlumniController {
 
     @PutMapping
     public ResponseEntity<AlumniProfile> updateOne(@PathVariable int alumni_id, @RequestBody AlumniProfile alumniProfile){
+        System.out.println("Update one alumni controller reached");
         return ResponseEntity.ok(alumniService.updateById(alumni_id, alumniProfile));
     }
 }

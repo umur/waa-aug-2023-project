@@ -15,9 +15,9 @@ import java.util.List;
 public class Alumni extends User{
     private String profilePic;
     private String phoneNum;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Industry industry;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Location location;
     @OneToOne(cascade = CascadeType.ALL)
     private Education eduInOurUni;

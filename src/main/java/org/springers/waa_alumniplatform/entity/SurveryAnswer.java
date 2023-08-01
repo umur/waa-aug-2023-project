@@ -11,6 +11,6 @@ public class SurveryAnswer {
     @Id @GeneratedValue
     private int id;
     private String answer;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Alumni responder;
 }

@@ -12,6 +12,6 @@ import java.util.List;
 public class Survey {
     @Id @GeneratedValue
     private int id;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     private List<SurveryQuestion> questions;
 }

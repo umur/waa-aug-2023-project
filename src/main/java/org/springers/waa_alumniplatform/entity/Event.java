@@ -19,10 +19,10 @@ public class Event {
     private String venue;
     private LocalDate date;
     private LocalTime time;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Admin poster;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     private List<Alumni> rsvpList;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     private List<Alumni> attendees;
 }
