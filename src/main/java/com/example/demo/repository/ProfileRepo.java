@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface ProfileRepo extends ListCrudRepository<Profile,Long> {
     List<Profile> findByGraduationYear(Integer graduationYear);
+    List<Profile> findByCity(String city);
+    List<Profile> findByState(String state);
 }

@@ -51,8 +51,18 @@ public class ProfileController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/search")
-    public List<ProfileDto> searchByGraduationYear(@RequestParam Integer graduationYear) {
-        return profileService.getProfilesByGraduationYear(graduationYear);
+    @GetMapping("/search-by-year")
+    public ResponseEntity<List<ProfileDto>> searchByGraduationYear(@RequestParam Integer graduationYear) {
+        return ResponseEntity.ok(profileService.getProfilesByGraduationYear(graduationYear));
+    }
+
+    @GetMapping("/search-by-city")
+    public ResponseEntity<List<ProfileDto>> searchByCity(@RequestParam String city) {
+        return ResponseEntity.ok(profileService.searchByCity(city));
+    }
+
+    @GetMapping("/search-by-state")
+    public ResponseEntity<List<ProfileDto>> searchByState(@RequestParam String state) {
+        return ResponseEntity.ok(profileService.searchByState(state));
     }
 }
