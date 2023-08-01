@@ -1,13 +1,16 @@
 package com.waa.project.controller;
 
 import com.waa.project.aspect.annotation.LogMe;
+import com.waa.project.dto.requestDto.UpdatedProfileDto;
 import com.waa.project.dto.responseDto.UsersDto;
 import com.waa.project.entity.JobExperience;
 import com.waa.project.entity.User;
 import com.waa.project.entity.UserProfile;
 import com.waa.project.repository.UserRepository;
 import com.waa.project.service.UserProfileService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -55,23 +58,13 @@ public class UserProfileController {
         }
     }
     @LogMe
-    @PutMapping
-    public ResponseEntity<?> updateProfile(@RequestBody UserProfile updatedProfile, Authentication authentication) {
-        // Get the authenticated user's email (unique identifier)
-
-        // Find the user by email
-        User user = (User)authentication.getPrincipal();
-
-        user.getProfile().setFirstName(updatedProfile.getFirstName());
-        user.getProfile().setLastName(updatedProfile.getLastName());
-
-
-
-        // Perform the actual update here (you might need to add some validation or sanitation)
-
-        // Save the updated profile
-//        userService.saveUserProfile(updatedProfile);
-
-        return ResponseEntity.ok(UsersDto.fromUser( userRepository.save(user)));
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateProfile(@PathVariable Long id, @RequestBody UpdatedProfileDto updatedProfileDto, Authentication authentication) {
+        try {
+            userProfileService.updateUserProfile(id, updatedProfileDto);
+            return ResponseEntity.ok("User profile updated successfully");
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User profile not found with ID: " + id);
+        }
     }
 }
