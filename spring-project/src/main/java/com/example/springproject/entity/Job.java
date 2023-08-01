@@ -4,15 +4,23 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
 public class Job {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
+    private String companyName;
+    private String industry;
+    @ManyToOne
+    private Student student;
 
-    @OneToOne
-//    @JoinColumn(name = "job_id")
+    @ManyToMany
+    private List<Student> appliedStudents;
+
+    @Embedded
     private Address address;
 }

@@ -1,11 +1,10 @@
 package com.example.springproject.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -13,5 +12,11 @@ import lombok.Setter;
 public class Survey {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
+    private String name;
+    private String description;
+
+    @OneToMany
+    @JoinColumn(name = "survey_id")
+    private List<SurveyResponse> surveyResponses;
 }
