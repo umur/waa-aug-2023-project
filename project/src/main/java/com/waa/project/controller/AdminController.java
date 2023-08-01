@@ -1,13 +1,11 @@
 package com.waa.project.controller;
 
+import com.waa.project.dto.requestDto.NewPasswordDto;
 import com.waa.project.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,11 +19,16 @@ public class AdminController {
         userService.activeUser(userId);
         return ResponseEntity.ok("User activated successfully");
     }
-
     @PreAuthorize("hasRole(ADMIN)")
     @PostMapping("/deactivate/{userId}")
     public ResponseEntity<?> deactivateUser(@PathVariable Long userId) {
         userService.deactivateUser(userId);
         return ResponseEntity.ok("User deactivated successfully");
+    }
+    @PreAuthorize("hasRole(ADMIN)")
+    @PostMapping("/reset-password/{userId}")
+    public ResponseEntity<?> resetPassword(@PathVariable Long userId, @RequestBody NewPasswordDto newPasswordDto) {
+        userService.resetUserPassword(userId, newPasswordDto);
+        return ResponseEntity.ok("Password reset successfully");
     }
 }
