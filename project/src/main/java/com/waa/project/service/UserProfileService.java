@@ -1,5 +1,6 @@
 package com.waa.project.service;
 
+import com.waa.project.dto.requestDto.UpdatedProfileDto;
 import com.waa.project.entity.JobExperience;
 import com.waa.project.entity.UserProfile;
 
@@ -10,4 +11,5 @@ public interface UserProfileService {
     public UserProfile createUserProfile(UserProfile userProfile);
     UserProfile getUserProfile(long id);
     List<UserProfile> getAllUserProfile();
+    void updateUserProfile(Long id, UpdatedProfileDto updatedProfileDto);
 }
