@@ -55,4 +55,8 @@ public class ProfileController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/search")
+    public List<ProfileDto> searchByGraduationYear(@RequestParam Integer graduationYear) {
+        return profileService.getProfilesByGraduationYear(graduationYear);
+    }
 }
