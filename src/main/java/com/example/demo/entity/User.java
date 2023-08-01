@@ -21,6 +21,8 @@ public class User {
     private String firstName;
     private String lastName;
     private RoleType role = RoleType.STUDENT;
+    @Column(nullable = false)
+    private boolean isDeleted = false;
 
     @OneToMany(mappedBy = "surveyAuthor")
     @Cascade(CascadeType.ALL)
@@ -36,5 +38,10 @@ public class User {
     @Cascade(CascadeType.ALL)
     @OneToOne(mappedBy = "user")
     private Profile profile;
+
+    @JsonManagedReference
+    @Cascade(CascadeType.ALL)
+    @OneToOne(mappedBy = "user")
+    private Job job;
     
 }

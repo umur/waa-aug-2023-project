@@ -25,6 +25,8 @@ public class Profile {
     private String phone;
     private String email;
     private String profilePicture;
+    @Column(nullable = false)
+    private boolean isDeleted = false;
 
     @JsonManagedReference
     @Cascade(CascadeType.ALL)
