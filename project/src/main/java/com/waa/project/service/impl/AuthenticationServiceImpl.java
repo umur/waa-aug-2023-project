@@ -11,6 +11,7 @@ import com.waa.project.entity.UserRole;
 import com.waa.project.repository.UserRepository;
 import com.waa.project.service.AuthenticationService;
 import com.waa.project.service.JwtTokenService;
+import com.waa.project.util.LoggingUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -41,7 +42,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             return ResponseEntity.badRequest().body("Invalid password");
         }
         String token = jwtTokenService.generateToken(optionalUser.get());
-        return ResponseEntity.ok(new LoginResponseDto(token));
+        UserRole userRole = optionalUser.get().getUserRole();
+        return ResponseEntity.ok(new LoginResponseDto(token,userRole));
     }
 
     public ResponseEntity<?> registerStudent(RegistrationDto registrationDto) {
@@ -65,6 +67,15 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (authentication != null && authentication.getPrincipal() instanceof User) {
             User currentUser = (User) authentication.getPrincipal();
             return (long) currentUser.getId();
+        }
+        return null;
+    }
+
+    public UserRole getCurrentRoleId() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof User) {
+            User currentUser = (User) authentication.getPrincipal();
+            return currentUser.getUserRole();
         }
         return null;
     }

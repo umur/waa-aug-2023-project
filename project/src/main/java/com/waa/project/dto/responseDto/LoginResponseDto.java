@@ -1,5 +1,6 @@
 package com.waa.project.dto.responseDto;
 
+import com.waa.project.entity.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,4 +10,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class LoginResponseDto {
     private String accessToken;
+    private UserRole role;
 }
