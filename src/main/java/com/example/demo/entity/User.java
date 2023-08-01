@@ -30,5 +30,8 @@ public class User {
     @OneToMany(mappedBy = "questionAuthor")
     @Cascade(CascadeType.ALL)
     private List<SurveyQuestion> surveyQuestionList;
+
+    @OneToOne(mappedBy = "user")
+    private Profile profile;
     
 }

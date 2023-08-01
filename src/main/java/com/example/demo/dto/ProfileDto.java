@@ -1,8 +1,12 @@
 package com.example.demo.dto;
 
+import com.example.demo.entity.JobExperience;
+import com.example.demo.entity.User;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Setter
 @Getter
@@ -15,4 +19,6 @@ public class ProfileDto {
     private String phone;
     private String email;
     private String profilePicture;
+    private List<JobExperience> jobExperiences;
+    private User user;
 }
