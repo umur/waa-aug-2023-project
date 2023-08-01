@@ -1,4 +1,4 @@
-package org.springers.waa_alumniplatform.service;
+package org.springers.waa_alumniplatform.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springers.waa_alumniplatform.entity.User;

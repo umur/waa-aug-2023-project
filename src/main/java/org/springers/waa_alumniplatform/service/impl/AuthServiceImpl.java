@@ -11,7 +11,6 @@ import org.springers.waa_alumniplatform.enums.AccountStatus;
 import org.springers.waa_alumniplatform.enums.NewUserAccountType;
 import org.springers.waa_alumniplatform.enums.Role;
 import org.springers.waa_alumniplatform.service.AuthService;
-import org.springers.waa_alumniplatform.service.JwtService;
 import org.springers.waa_alumniplatform.service.UserService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -28,14 +27,13 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public Token register(NewUser newUser) {
-        User user;
-        if(newUser.getAccountType() == NewUserAccountType.ALUMNI) {
-            System.out.println("He is alumni");
-            user = createAlumni(newUser);
-        }
-        else user = createFaculty(newUser);
-        userService.persist(user);
-        return this.generateToken(user);
+        //TODO check if email is already in use and throw appropriate exception
+            User user;
+            if (newUser.getAccountType() == NewUserAccountType.ALUMNI) {
+                user = createAlumni(newUser);
+            } else user = createFaculty(newUser);
+            userService.persist(user);
+            return this.generateToken(user);
     }
 
     @Override

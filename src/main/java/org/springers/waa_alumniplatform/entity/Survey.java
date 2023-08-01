@@ -1,9 +1,6 @@
 package org.springers.waa_alumniplatform.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +12,6 @@ import java.util.List;
 public class Survey {
     @Id @GeneratedValue
     private int id;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<SurveryQuestion> questions;
 }

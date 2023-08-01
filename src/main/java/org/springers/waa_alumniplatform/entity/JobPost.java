@@ -16,13 +16,13 @@ public class JobPost {
     private String position;
     private String skills;
     private String otherReq;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Industry industry;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Company company;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Alumni poster;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Alumni> applicants;
     private LocalDateTime postedAt;
 }

@@ -1,9 +1,6 @@
 package org.springers.waa_alumniplatform.entity;
 
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -18,15 +15,15 @@ import java.util.List;
 public class Alumni extends User{
     private String profilePic;
     private String phoneNum;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Industry industry;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Location location;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Education eduInOurUni;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Education> educationalHistory;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<ProfessionalHistory> professionalHistories;
 
 }

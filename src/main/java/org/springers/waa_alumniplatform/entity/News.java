@@ -14,7 +14,7 @@ public class News {
     private int id;
     private String title;
     private String desc;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Admin poster;
     private LocalDateTime postedAt;
 }

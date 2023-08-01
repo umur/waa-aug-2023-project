@@ -17,7 +17,7 @@ public class Education {
     private String major;
     private LocalDate admissionYear;
     private LocalDate gradYear;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private University university;
     @Enumerated
     private EducationalLevel educationLevel;

@@ -5,7 +5,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springers.waa_alumniplatform.service.JwtService;
+import org.springers.waa_alumniplatform.service.impl.JwtService;
 import org.springframework.lang.NonNull;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,14 +33,18 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         final String token = this.extractToken(authHeader);
         final String userEmail;
         final boolean userNotAuthenticatedAlready = SecurityContextHolder.getContext().getAuthentication() == null;
-
+        System.out.println("Do Filter");
         if(token == null) {
+            System.out.println("Token found " + token);
             filterChain.doFilter(request, response);
             return;
         }
         userEmail = jwtService.getEmailFromToken(token);
         if(userEmail != null && userNotAuthenticatedAlready){
+            System.out.println("Email extracted from token " + userEmail);
+            System.out.println("Jwt validation asked");
             if(jwtService.isTokenValid(token)){
+                System.out.println("Jwt validated and user added to security context");
                 this.registerUserInAuthContext(userEmail);
             }
         }
