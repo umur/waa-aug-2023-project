@@ -1,5 +1,6 @@
 package com.waa.project.controller;
 
+import com.waa.project.aspect.annotation.LogMe;
 import com.waa.project.dto.responseDto.CustomResponseDto;
 import com.waa.project.dto.responseDto.UsersDto;
 import com.waa.project.service.UserService;
@@ -17,6 +18,7 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+    @LogMe
     @GetMapping
     public ResponseEntity<CustomResponseDto<List<UsersDto>>> getAllUsers() {
         List<UsersDto> users = userService.getUsers();

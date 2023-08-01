@@ -16,32 +16,23 @@ import java.util.List;
 @Service
 public class UserProfileServiceImpl implements UserProfileService {
     private final UserProfileRepository userProfileRepository;
-
     @Autowired
     private JobExperienceService jobExperienceService;
-
     public UserProfileServiceImpl(UserProfileRepository userProfileRepository) {
         this.userProfileRepository = userProfileRepository;
     }
-
     @Override
-    @LogMe
     public UserProfile createUserProfile(UserProfile userProfile) {
         return userProfileRepository.save(userProfile);
     }
-
-    @LogMe
     @Override
     public UserProfile getUserProfile(long id) {
         return userProfileRepository.findById(id).get();
     }
-
     @Override
     public List<UserProfile> getAllUserProfile() {
         return userProfileRepository.findAll();
     }
-
-    @LogMe
     @Override
     public void addJobExperienceToUserProfile(long userProfileId, JobExperience jobExperience) {
         UserProfile userProfile = userProfileRepository.findById(userProfileId)
