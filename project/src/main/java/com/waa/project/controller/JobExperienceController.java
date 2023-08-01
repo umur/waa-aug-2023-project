@@ -1,5 +1,6 @@
 package com.waa.project.controller;
 
+import com.waa.project.aspect.annotation.LogMe;
 import com.waa.project.entity.JobExperience;
 import com.waa.project.service.JobExperienceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,13 @@ public class JobExperienceController {
     public JobExperienceController(JobExperienceService jobExperienceService) {
         this.jobExperienceService = jobExperienceService;
     }
+    @LogMe
     @GetMapping
     public ResponseEntity<List<JobExperience>> getAllJobExperiences() {
         List<JobExperience> jobExperiences = jobExperienceService.getAllJobExperiences();
         return new ResponseEntity<>(jobExperiences, HttpStatus.OK);
     }
+    @LogMe
     @PostMapping
     public ResponseEntity<JobExperience> createJobExperience(@RequestBody JobExperience jobExperience) {
         JobExperience createdJobExperience = jobExperienceService.createJobExperience(jobExperience);

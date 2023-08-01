@@ -1,11 +1,13 @@
 package com.waa.project.controller;
 
+import com.waa.project.aspect.annotation.LogMe;
 import com.waa.project.dto.responseDto.CustomResponseDto;
 import com.waa.project.dto.responseDto.UsersDto;
 import com.waa.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +19,8 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+    @LogMe
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public ResponseEntity<CustomResponseDto<List<UsersDto>>> getAllUsers() {
         List<UsersDto> users = userService.getUsers();

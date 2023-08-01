@@ -1,23 +1,18 @@
 package com.waa.project.controller;
 
 import com.waa.project.dto.requestDto.LoginRequestDto;
-import com.waa.project.dto.responseDto.LoginResponseDto;
 import com.waa.project.dto.responseDto.RegistrationDto;
-import com.waa.project.dto.responseDto.UsersDto;
-import com.waa.project.service.impl.AuthenticationService;
+import com.waa.project.service.impl.AuthenticationServiceImpl;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthenticationController {
 
-    private final AuthenticationService authenticationService;
+    private final AuthenticationServiceImpl authenticationService;
 
-    public AuthenticationController(AuthenticationService authenticationService) {
+    public AuthenticationController(AuthenticationServiceImpl authenticationService) {
         this.authenticationService = authenticationService;
     }
 
