@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +19,7 @@ public class JobExperience {
     private String endDate;
     private String description;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "profile_id")
     private Profile profile;

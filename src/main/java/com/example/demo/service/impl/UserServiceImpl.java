@@ -66,10 +66,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean delete(long id) {
-        if(userRepo.existsById(id)){
-            userRepo.deleteById(id);
-            return true;
+        Optional<User> userOptional = userRepo.findById(id);
+        if(userOptional.isEmpty()){
+            return false;
         }
-        return false;
+        User user = userOptional.get();
+        user.setDeleted(true);
+        userRepo.save(user);
+        return true;
     }
 }

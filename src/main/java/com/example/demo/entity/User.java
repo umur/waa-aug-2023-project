@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,8 @@ public class User {
     private String firstName;
     private String lastName;
     private RoleType role = RoleType.STUDENT;
+    @Column(nullable = false)
+    private boolean isDeleted = false;
 
     @OneToMany(mappedBy = "surveyAuthor")
     @Cascade(CascadeType.ALL)
@@ -31,7 +34,14 @@ public class User {
     @Cascade(CascadeType.ALL)
     private List<SurveyQuestion> surveyQuestionList;
 
+    @JsonManagedReference
+    @Cascade(CascadeType.ALL)
     @OneToOne(mappedBy = "user")
     private Profile profile;
+
+    @JsonManagedReference
+    @Cascade(CascadeType.ALL)
+    @OneToOne(mappedBy = "user")
+    private Job job;
     
 }

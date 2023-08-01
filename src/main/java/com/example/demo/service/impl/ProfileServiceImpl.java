@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.dto.ProfileDto;
 import com.example.demo.entity.Profile;
+import com.example.demo.entity.User;
 import com.example.demo.repository.ProfileRepo;
 import com.example.demo.service.ProfileService;
 import lombok.RequiredArgsConstructor;
@@ -63,10 +64,14 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public boolean delete(long id) {
-        if(profileRepo.existsById(id)){
-            profileRepo.deleteById(id);
-            return true;
+
+        Optional<Profile> profileOptional = profileRepo.findById(id);
+        if(profileOptional.isEmpty()){
+            return false;
         }
-        return false;
+        Profile profile = profileOptional.get();
+        profile.setDeleted(true);
+        profileRepo.save(profile);
+        return true;
     }
 }

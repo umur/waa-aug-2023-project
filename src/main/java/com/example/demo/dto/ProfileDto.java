@@ -19,6 +19,7 @@ public class ProfileDto {
     private String phone;
     private String email;
     private String profilePicture;
+    private boolean isDeleted = false;
     private List<JobExperience> jobExperiences;
     private User user;
 }
