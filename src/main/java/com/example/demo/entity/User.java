@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,6 +32,8 @@ public class User {
     @Cascade(CascadeType.ALL)
     private List<SurveyQuestion> surveyQuestionList;
 
+    @JsonManagedReference
+    @Cascade(CascadeType.ALL)
     @OneToOne(mappedBy = "user")
     private Profile profile;
     
