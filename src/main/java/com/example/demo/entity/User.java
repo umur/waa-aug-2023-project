@@ -21,15 +21,18 @@ public class User {
     private String firstName;
     private String lastName;
     private RoleType role = RoleType.STUDENT;
+    
     @Column(nullable = false)
     private boolean isDeleted = false;
 
     @OneToMany(mappedBy = "surveyAuthor")
     @Cascade(CascadeType.ALL)
     private List<Survey> surveys;
+
     @OneToMany(mappedBy = "user")
     @Cascade(CascadeType.ALL)
     private List<SurveyAnswer> surveyAnswerList;
+
     @OneToMany(mappedBy = "questionAuthor")
     @Cascade(CascadeType.ALL)
     private List<SurveyQuestion> surveyQuestionList;
@@ -43,5 +46,15 @@ public class User {
     @Cascade(CascadeType.ALL)
     @OneToOne(mappedBy = "user")
     private Job job;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "organizer")
+    @Cascade(CascadeType.ALL)
+    private List<Event> events;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "publisher")
+    @Cascade(CascadeType.ALL)
+    private List<News> news;
     
 }

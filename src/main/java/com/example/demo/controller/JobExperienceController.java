@@ -2,35 +2,40 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.JobExpDto;
 import com.example.demo.service.JobExpService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/job-experiences")
-@RequiredArgsConstructor
+@Validated
 public class JobExperienceController {
+
     @Autowired
-    private final JobExpService jobExpService;
+    private  JobExpService jobExpService;
 
 
 
-    @PostMapping
-    public ResponseEntity<JobExpDto> createJobExperience(@RequestBody JobExpDto jobExpDto) {
-        JobExpDto createdJobExperience = jobExpService.createJobExperience(jobExpDto);
+    @PostMapping("/{profileId}")
+    public ResponseEntity<JobExpDto> createJobExperience(@Valid @PathVariable long profileId, @RequestBody JobExpDto jobExpDto) {
+        JobExpDto createdJobExperience = jobExpService.createJobExperience(profileId,jobExpDto);
         return new ResponseEntity<>(createdJobExperience, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{jobExperienceId}")
+    @PutMapping("/{profileId}/{jobExperienceId}")
     public ResponseEntity<JobExpDto> updateJobExperience(
-            @PathVariable Long jobExperienceId,
+            @Valid
+            @PathVariable long profileId,
+            @PathVariable long jobExperienceId,
             @RequestBody JobExpDto jobExperienceDto
-    ) {
-        JobExpDto updatedJobExperience = jobExpService.updateJobExperience(jobExperienceId, jobExperienceDto);
+    ) throws IllegalAccessException {
+        JobExpDto updatedJobExperience = jobExpService.updateJobExperience(profileId, jobExperienceId, jobExperienceDto);
         if (updatedJobExperience != null) {
             return new ResponseEntity<>(updatedJobExperience, HttpStatus.OK);
         } else {
@@ -39,7 +44,7 @@ public class JobExperienceController {
     }
 
     @DeleteMapping("/{jobExperienceId}")
-    public ResponseEntity<Void> deleteJobExperience(@PathVariable Long jobExperienceId) {
+    public ResponseEntity<Void> deleteJobExperience(@PathVariable long jobExperienceId) {
         jobExpService.deleteJobExperience(jobExperienceId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -51,7 +56,7 @@ public class JobExperienceController {
     }
 
     @GetMapping("/{jobExperienceId}")
-    public ResponseEntity<JobExpDto> getJobExperienceById(@PathVariable Long jobExperienceId) {
+    public ResponseEntity<JobExpDto> getJobExperienceById(@PathVariable long jobExperienceId) {
         JobExpDto jobExperience = jobExpService.getJobExperienceById(jobExperienceId);
         if (jobExperience != null) {
             return new ResponseEntity<>(jobExperience, HttpStatus.OK);

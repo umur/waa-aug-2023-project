@@ -5,13 +5,13 @@ import com.example.demo.dto.NewsDto;
 import java.util.List;
 
 public interface NewsService {
-    NewsDto createNews(NewsDto news);
+    NewsDto createNews(long userId,NewsDto news);
 
-    NewsDto updateNews(Long newsId, NewsDto news);
+    NewsDto updateNews(long userId, long newsId, NewsDto news) throws IllegalAccessException;
 
-    void deleteNews(Long newsId);
+    void deleteNews(long newsId);
 
     List<NewsDto> getAllNews();
 
-    NewsDto getNewsById(Long newsId);
+    NewsDto getNewsById(long newsId);
 }
