@@ -30,6 +30,7 @@ public class UserProfileServiceImpl implements UserProfileService {
         return userProfileRepository.save(userProfile);
     }
 
+    @LogMe
     @Override
     public UserProfile getUserProfile(long id) {
         return userProfileRepository.findById(id).get();
@@ -40,6 +41,7 @@ public class UserProfileServiceImpl implements UserProfileService {
         return userProfileRepository.findAll();
     }
 
+    @LogMe
     @Override
     public void addJobExperienceToUserProfile(long userProfileId, JobExperience jobExperience) {
         UserProfile userProfile = userProfileRepository.findById(userProfileId)
