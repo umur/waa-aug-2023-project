@@ -1,24 +1,36 @@
 package com.waa.project.dto.responseDto;
 
+import com.waa.project.entity.User;
 import com.waa.project.entity.UserProfile;
 import com.waa.project.entity.UserRole;
 import jakarta.persistence.OneToOne;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class UsersDto {
-    private int id;
+    private Long id;
     private String email;
     private String password;
     private UserRole userRole;
     private boolean isActive;
     private LocalDateTime lastLogin;
     private int loginAttempt;
-    @OneToOne
+
     private UserProfile profile;
+    public static UsersDto fromUser(User user){
+        return  new UsersDto(
+                user.getId(),
+                user.getEmail(),
+                user.getPassword(),
+                user.getUserRole(),
+                user.isActive(),
+                user.getLastLogin(),
+                user.getLoginAttempt(),
+                user.getProfile());
+    }
 }
