@@ -36,4 +36,8 @@ public class Profile {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "profile")
+    private List<Course> courses;
 }
