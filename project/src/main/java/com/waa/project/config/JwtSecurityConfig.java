@@ -41,8 +41,9 @@ public class JwtSecurityConfig {
         return http.cors(withDefaults())
                 .csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests((authorize) -> authorize
-                                .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/users/**").hasAuthority(getUserAuthority(UserRole.ADMIN))
+                        .requestMatchers("/admin/**").hasAuthority(getUserAuthority(UserRole.ADMIN))
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

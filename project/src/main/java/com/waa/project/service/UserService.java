@@ -11,4 +11,6 @@ public interface UserService {
     User findByEmail(String userEmail);
     void saveUserProfile(UserProfile updatedProfile);
     void createUser(User newUser);
+    void activeUser(Long userId);
+    void deactivateUser(Long userId);
 }
