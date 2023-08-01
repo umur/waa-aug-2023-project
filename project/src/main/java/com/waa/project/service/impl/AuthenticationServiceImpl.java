@@ -51,7 +51,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         User user = new User();
         user.setEmail(registrationDto.getEmail());
         user.setPassword(passwordEncoder.encode(registrationDto.getPassword()));
-        user.setUserRole(UserRole.ALUMNI);
+        if(registrationDto.getRole().toString().isEmpty()) {
+            user.setUserRole(UserRole.ALUMNI);
+        }
+        user.setUserRole(registrationDto.getRole());
         user.setProfile(registrationDto.getProfile());
         user = userRepository.save(user);
         return ResponseEntity.ok(UsersDto.fromUser(user));

@@ -24,7 +24,6 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class LoggingAspect {
-//    private final UserDetails userDetails;
     private final SystemLogService systemLogService;
     private final AuthenticationService authenticationService;
     @After("@annotation(com.waa.project.aspect.annotation.LogMe)")

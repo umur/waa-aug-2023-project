@@ -37,18 +37,20 @@ public class JwtSecurityConfig {
             final AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-
     @Bean
     public SecurityFilterChain configure(final HttpSecurity http) throws Exception {
         return http.cors(withDefaults())
                 .csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests((authorize) -> authorize
                                 .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/users/**").hasAuthority(getUserAuthority(UserRole.ADMIN))
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
-
+    private String getUserAuthority(UserRole userRole) {
+        return userRole.name();
+    }
 }

@@ -12,6 +12,7 @@ import com.waa.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +33,7 @@ public class UserProfileController {
         return ResponseEntity.ok(getUserprofile);
     }
     @LogMe
+    @PreAuthorize("hasRole('ALUMNI')")
     @GetMapping
     public ResponseEntity<List<UserProfile>> getAllUserProfile(){
         List<UserProfile> getUserprofile = userProfileService.getAllUserProfile();
