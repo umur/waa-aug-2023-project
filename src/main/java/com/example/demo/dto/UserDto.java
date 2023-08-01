@@ -1,5 +1,6 @@
 package com.example.demo.dto;
 
+import com.example.demo.entity.RoleType;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,5 +13,5 @@ public class UserDto {
     private String password;
     private String firstName;
     private String lastName;
-    private String role;
+    private RoleType role;
 }

@@ -19,7 +19,7 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
-    private String role;
+    private RoleType role;
 
     @OneToMany(mappedBy = "surveyAuthor")
     @Cascade(CascadeType.ALL)
