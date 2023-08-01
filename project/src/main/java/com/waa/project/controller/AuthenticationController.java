@@ -20,7 +20,7 @@ public class AuthenticationController {
     public ResponseEntity<?> login(@RequestBody LoginRequestDto loginRequestDto) {
         return authenticationService.login(loginRequestDto);
     }
-    @PostMapping("/register/student")
+    @PostMapping("/register")
     public ResponseEntity<?> registerStudent(@RequestBody RegistrationDto registrationDto) {
         return authenticationService.registerStudent(registrationDto);
     }

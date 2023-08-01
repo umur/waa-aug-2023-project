@@ -1,14 +1,17 @@
 package com.waa.project.service.impl;
 
+import com.waa.project.dto.requestDto.UpdatedProfileDto;
 import com.waa.project.entity.JobExperience;
 import com.waa.project.entity.UserProfile;
 import com.waa.project.repository.UserProfileRepository;
 import com.waa.project.service.JobExperienceService;
 import com.waa.project.service.UserProfileService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserProfileServiceImpl implements UserProfileService {
@@ -38,6 +41,23 @@ public class UserProfileServiceImpl implements UserProfileService {
         userProfile.addJobExperience(jobExperience1);
         userProfileRepository.save(userProfile);
     }
-
-
+    @Override
+    public void updateUserProfile(Long id,UpdatedProfileDto updatedProfileDto) {
+        Optional<UserProfile> userProfileOptional = userProfileRepository.findById(id);
+        if (userProfileOptional.isPresent()) {
+            UserProfile userProfile = userProfileOptional.get();
+            userProfile.setGender(updatedProfileDto.getGender());
+            userProfile.setFirstName(updatedProfileDto.getFirstName());
+            userProfile.setLastName(updatedProfileDto.getLastName());
+            userProfile.setDateOfBirth(updatedProfileDto.getDateOfBirth());
+            userProfile.setAddress(updatedProfileDto.getAddress());
+            userProfile.setPhoneNumber(updatedProfileDto.getPhoneNumber());
+            userProfile.setGraduationYear(updatedProfileDto.getGraduationYear());
+            userProfile.setNumberOfExperience(updatedProfileDto.getNumberOfExperience());
+            userProfile.setProfilePicture(updatedProfileDto.getProfilePicture());
+            userProfileRepository.save(userProfile);
+        } else {
+            throw new EntityNotFoundException("User profile not found with ID: " + id);
+        }
+    }
 }
