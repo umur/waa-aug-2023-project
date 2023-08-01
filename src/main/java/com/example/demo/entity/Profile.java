@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @Entity
 @Setter
@@ -20,7 +22,10 @@ public class Profile {
     private String profilePicture;
 
 
-    // relationship with job experience
+    @OneToMany(mappedBy = "profile")
+    private List<JobExperience> jobExperiences;
 
-    // create a relationship with user
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

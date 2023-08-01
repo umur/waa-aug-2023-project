@@ -1,9 +1,12 @@
 -- Dummy data for User table
 INSERT INTO user ( email, password, first_name, last_name, role)
 VALUES
-    ('user1@example.com', 'password123', 'John', 'Doe', 'ALUMNI'),
-    ( 'user2@example.com', 'securepass', 'Alice', 'Smith', 'ADMIN'),
-    ( 'user3@example.com', 'password456', 'Bob', 'Johnson', 'ALUMNI');
+    ('user1@example.com', 'password123', 'John', 'Doe', 1),
+    ( 'user2@example.com', 'securepass', 'Alice', 'Smith', 1),
+    ( 'user3@example.com', 'password456', 'Bob', 'Johnson', 0),
+    ( 'user4@example.com', 'securepass', 'Alicee', 'Smith', 1),
+    ( 'user5@example.com', 'password456', 'Bobs', 'Johnson', 0);
+
 -- Dummy data for Job table
 INSERT INTO job ( title, description, state, city, company_name)
 VALUES
@@ -12,11 +15,13 @@ VALUES
     ( 'Product Manager', 'Manage product development and strategy', 'Texas', 'Austin', 'Acme Corp');
 
 -- Dummy data for Profile table
-INSERT INTO profile ( state, city, graduation_year, phone, email, profile_picture)
+INSERT INTO profile ( state, city, graduation_year, phone, email, profile_picture, user_id)
 VALUES
-    ( 'California', 'San Francisco', 2022, '123-456-7890', 'john@example.com', 'profile_pic_1.jpg'),
-    ( 'New York', 'New York City', 2021, '987-654-3210', 'jane@example.com', 'profile_pic_2.jpg'),
-    ('Texas', 'Austin', 2023, '555-555-5555', 'bob@example.com', 'profile_pic_3.jpg');
+    ( 'California', 'San Francisco', 2022, '123-456-7890', 'john@example.com', 'profile_pic_1.jpg', 1),
+    ( 'New York', 'New York City', 2021, '987-654-3210', 'jane@example.com', 'profile_pic_2.jpg', 2),
+    ('Texas', 'Austin', 2023, '555-555-5555', 'bob@example.com', 'profile_pic_3.jpg', 3),
+    ( 'California', 'San Francisco', 2022, '123-456-7890', 'john@example.com', 'profile_pic_1.jpg', 4),
+    ( 'New York', 'New York City', 2021, '987-654-3210', 'jane@example.com', 'profile_pic_2.jpg', 5);
     
 -- Dummy data for Event table
 INSERT INTO event (title, description, date, location) VALUES
@@ -27,12 +32,12 @@ INSERT INTO event (title, description, date, location) VALUES
                                                            ('Leadership Summit', 'Enhance your leadership skills.', '2023-12-01', 'Grand Hotel');
 
 -- Dummy data for JobExperience table
-INSERT INTO job_experience (company_name, position, start_date, end_date, description) VALUES
-                                                                                        ('ABC Company', 'Software Engineer', '2010-05-15', '2015-08-30', 'Developed web applications.'),
-                                                                                        ('XYZ Corporation', 'Marketing Manager', '2015-09-01', '2020-12-31', 'Managed marketing campaigns.'),
-                                                                                        ('DEF Solutions', 'Data Analyst', '2018-02-20', '2022-06-30', 'Analyzed and visualized data.'),
-                                                                                        ('GHI Tech', 'Product Manager', '2020-10-10', '2023-03-15', 'Led product development efforts.'),
-                                                                                        ('JKL Innovations', 'Software Developer', '2022-01-05', '2023-06-30', 'Worked on mobile app development.');
+INSERT INTO job_experience (company_name, position, start_date, end_date, description, profile_id) VALUES
+                                                                                        ('ABC Company', 'Software Engineer', '2010-05-15', '2015-08-30', 'Developed web applications.', 1),
+                                                                                        ('XYZ Corporation', 'Marketing Manager', '2015-09-01', '2020-12-31', 'Managed marketing campaigns.',2),
+                                                                                        ('DEF Solutions', 'Data Analyst', '2018-02-20', '2022-06-30', 'Analyzed and visualized data.',3),
+                                                                                        ('GHI Tech', 'Product Manager', '2020-10-10', '2023-03-15', 'Led product development efforts.',4),
+                                                                                        ('JKL Innovations', 'Software Developer', '2022-01-05', '2023-06-30', 'Worked on mobile app development.',5);
 
 -- Dummy data for News table
 INSERT INTO news (title, description, publish_date) VALUES

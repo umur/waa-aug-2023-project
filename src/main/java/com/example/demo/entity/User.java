@@ -19,7 +19,7 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
-    private RoleType role;
+    private RoleType role = RoleType.STUDENT;
 
     @OneToMany(mappedBy = "surveyAuthor")
     @Cascade(CascadeType.ALL)
@@ -30,5 +30,8 @@ public class User {
     @OneToMany(mappedBy = "questionAuthor")
     @Cascade(CascadeType.ALL)
     private List<SurveyQuestion> surveyQuestionList;
+
+    @OneToOne(mappedBy = "user")
+    private Profile profile;
     
 }
