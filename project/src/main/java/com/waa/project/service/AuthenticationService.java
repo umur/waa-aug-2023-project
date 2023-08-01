@@ -8,4 +8,5 @@ public interface AuthenticationService {
     public Long getCurrentUserId();
     public ResponseEntity<?> registerStudent(RegistrationDto registrationDto);
     public ResponseEntity<?> login(LoginRequestDto loginRequestDto);
+    boolean getCurrentActiveStatus();
 }

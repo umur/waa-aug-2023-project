@@ -1,5 +1,6 @@
 package com.waa.project.controller;
 
+import com.waa.project.aspect.annotation.CheckUserActive;
 import com.waa.project.aspect.annotation.LogMe;
 import com.waa.project.dto.responseDto.CustomResponseDto;
 import com.waa.project.dto.responseDto.UsersDto;
@@ -20,7 +21,7 @@ public class UserController {
     @Autowired
     private UserService userService;
     @LogMe
-    @PreAuthorize("hasRole('ADMIN')")
+    @CheckUserActive
     @GetMapping
     public ResponseEntity<CustomResponseDto<List<UsersDto>>> getAllUsers() {
         List<UsersDto> users = userService.getUsers();

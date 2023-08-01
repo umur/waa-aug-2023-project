@@ -1,5 +1,6 @@
 package com.waa.project.controller;
 
+import com.waa.project.aspect.annotation.CheckUserActive;
 import com.waa.project.aspect.annotation.LogMe;
 import com.waa.project.dto.requestDto.UpdatedProfileDto;
 import com.waa.project.dto.responseDto.UsersDto;
@@ -12,7 +13,6 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,8 +24,6 @@ import java.util.List;
 public class UserProfileController {
     @Autowired
     private UserProfileService userProfileService;
-    @Autowired
-    private UserRepository userRepository;
     @LogMe
     @GetMapping("/{id}")
     public ResponseEntity<UserProfile> getUserProfile(@PathVariable long id){
@@ -33,7 +31,7 @@ public class UserProfileController {
         return ResponseEntity.ok(getUserprofile);
     }
     @LogMe
-    @PreAuthorize("hasRole('ALUMNI')")
+    @CheckUserActive
     @GetMapping
     public ResponseEntity<List<UserProfile>> getAllUserProfile(){
         List<UserProfile> getUserprofile = userProfileService.getAllUserProfile();

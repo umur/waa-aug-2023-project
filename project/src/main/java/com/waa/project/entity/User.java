@@ -25,8 +25,8 @@ public class User implements UserDetails {
     private String password;
     private UserRole userRole;
     private boolean isActive;
-    private LocalDateTime lastLogin;
-    private int loginAttempt;
+    private LocalDateTime lastLogin = LocalDateTime.now();
+    private int loginAttempt = 5;
     @OneToOne
     private UserProfile profile;
     public UserProfile getProfile() {

@@ -1,5 +1,6 @@
 package com.waa.project.service;
 
+import com.waa.project.dto.requestDto.NewPasswordDto;
 import com.waa.project.dto.responseDto.UsersDto;
 import com.waa.project.entity.User;
 import com.waa.project.entity.UserProfile;
@@ -13,4 +14,5 @@ public interface UserService {
     void createUser(User newUser);
     void activeUser(Long userId);
     void deactivateUser(Long userId);
+    void resetUserPassword(Long userId, NewPasswordDto newPasswordDto);
 }
