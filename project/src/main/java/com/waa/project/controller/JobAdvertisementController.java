@@ -58,4 +58,9 @@ public class JobAdvertisementController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
+    @GetMapping
+    public List<JobPostingDto> filter(@RequestParam(required = false) String state, @RequestParam(required = false) String city, @RequestParam(required = false) String companyName){
+        return jobAdvertisementService.filter(state,city,companyName);
+
+    }
 }
