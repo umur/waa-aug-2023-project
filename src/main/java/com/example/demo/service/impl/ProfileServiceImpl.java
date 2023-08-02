@@ -74,4 +74,25 @@ public class ProfileServiceImpl implements ProfileService {
         profileRepo.save(profile);
         return true;
     }
+
+    @Override
+    public List<ProfileDto> getProfilesByGraduationYear(Integer graduationYear) {
+        List<Profile> profileList = profileRepo.findByGraduationYear(graduationYear);
+        return profileList.stream().map(profile ->
+                modelMapper.map(profile, ProfileDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProfileDto> searchByCity(String city) {
+        List<Profile> profileList = profileRepo.findByCity(city);
+        return profileList.stream().map(profile ->
+                modelMapper.map(profile, ProfileDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProfileDto> searchByState(String state) {
+        List<Profile> profileList = profileRepo.findByState(state);
+        return profileList.stream().map(profile ->
+                modelMapper.map(profile, ProfileDto.class)).collect(Collectors.toList());
+    }
 }

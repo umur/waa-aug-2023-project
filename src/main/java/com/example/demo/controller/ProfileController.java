@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.ProfileDto;
 import com.example.demo.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -19,12 +20,7 @@ public class ProfileController {
     @PostMapping
     public ResponseEntity<ProfileDto> save(@RequestBody ProfileDto profileDto){
         ProfileDto createdProfile = profileService.save(profileDto);
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/login")
-                .buildAndExpand(createdProfile.getId())
-                .toUri();
-        return  ResponseEntity.created(location).body(createdProfile);
+        return new ResponseEntity<>(createdProfile, HttpStatus.CREATED);
     }
 
     @GetMapping
@@ -55,4 +51,18 @@ public class ProfileController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/search-by-year")
+    public ResponseEntity<List<ProfileDto>> searchByGraduationYear(@RequestParam Integer graduationYear) {
+        return ResponseEntity.ok(profileService.getProfilesByGraduationYear(graduationYear));
+    }
+
+    @GetMapping("/search-by-city")
+    public ResponseEntity<List<ProfileDto>> searchByCity(@RequestParam String city) {
+        return ResponseEntity.ok(profileService.searchByCity(city));
+    }
+
+    @GetMapping("/search-by-state")
+    public ResponseEntity<List<ProfileDto>> searchByState(@RequestParam String state) {
+        return ResponseEntity.ok(profileService.searchByState(state));
+    }
 }

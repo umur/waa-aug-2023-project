@@ -10,4 +10,8 @@ public interface ProfileService {
     ProfileDto getById(long id);
     ProfileDto update(ProfileDto profileDto, long id);
     boolean delete(long id);
+    List<ProfileDto> getProfilesByGraduationYear(Integer graduationYear);
+    List<ProfileDto> searchByCity(String city);
+    List<ProfileDto> searchByState(String state);
+
 }

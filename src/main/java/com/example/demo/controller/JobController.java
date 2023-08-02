@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.JobDto;
 import com.example.demo.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -19,12 +20,7 @@ public class JobController {
     @PostMapping
     public ResponseEntity<JobDto> save(@RequestBody JobDto jobDto){
         JobDto createdJob = jobService.save(jobDto);
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/login")
-                .buildAndExpand(createdJob.getId())
-                .toUri();
-        return  ResponseEntity.created(location).body(createdJob);
+        return new ResponseEntity<>(createdJob, HttpStatus.CREATED);
     }
 
     @GetMapping

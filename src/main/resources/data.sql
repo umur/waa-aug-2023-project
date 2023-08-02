@@ -22,7 +22,14 @@ VALUES
     ('Texas', 'Austin', 2023, '555-555-5555', 'bob@example.com', 'profile_pic_3.jpg', 3, false),
     ( 'California', 'San Francisco', 2022, '123-456-7890', 'john@example.com', 'profile_pic_1.jpg', 4, false),
     ( 'New York', 'New York City', 2021, '987-654-3210', 'jane@example.com', 'profile_pic_2.jpg', 5, false);
-    
+
+-- Dummy data for Course table
+INSERT INTO Course (name, profile_id) VALUES
+                                          ('Math 101', 1),
+                                          ('English 101', 1),
+                                          ('Science 101', 2),
+                                          ('History 101', 2);
+
 -- Dummy data for Event table
 INSERT INTO Event (title, description, date, location, is_deleted, organizer_id)
 VALUES
