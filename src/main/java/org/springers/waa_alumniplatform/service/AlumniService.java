@@ -1,10 +1,20 @@
 package org.springers.waa_alumniplatform.service;
 
 import org.springers.waa_alumniplatform.dto.userDto.AlumniProfile;
-import org.springframework.http.ResponseEntity;
+import org.springers.waa_alumniplatform.dto.userDto.AlumniPublic;
+import org.springers.waa_alumniplatform.entity.Alumni;
+
+import java.util.List;
 
 public interface AlumniService {
-    AlumniProfile getById(int alumniId);
+    Alumni getAlumniById(int id);
+    AlumniProfile getAlumniProfileById(int alumniId);
 
     AlumniProfile updateById(int alumniId, AlumniProfile alumniProfile);
+
+    List<AlumniPublic> getAlumnusByGradYear(int year);
+
+    List<AlumniPublic> getAlumnusByDept(String dept);
+
+    List<AlumniPublic> getAlumnusByIndustry(String industry);
 }

@@ -16,11 +16,11 @@ public class JobPost {
     private String position;
     private String skills;
     private String otherReq;
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Industry industry;
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Company company;
-    @OneToOne
+    @ManyToOne
     private Alumni poster;
     @OneToMany
     private List<Alumni> applicants;

@@ -15,9 +15,9 @@ public class Education {
     private int id;
     private String dept;
     private String major;
-    private LocalDate admissionYear;
-    private LocalDate gradYear;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    private int admissionYear;
+    private int gradYear;
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private University university;
     @Enumerated
     private EducationalLevel educationLevel;

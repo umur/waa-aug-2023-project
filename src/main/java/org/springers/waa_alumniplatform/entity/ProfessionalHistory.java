@@ -17,6 +17,6 @@ public class ProfessionalHistory {
     private LocalDate from; //SQL keyword
     @Column(name = "endDate") //SQL keyword
     private LocalDate to;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Company company;
 }
