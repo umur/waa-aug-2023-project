@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -60,7 +61,7 @@ public class User {
     @OneToMany(mappedBy = "postedBy")
     private List<Job> postedJobs;
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "applicant")
     private List<JobApplication> jobApplications;
     

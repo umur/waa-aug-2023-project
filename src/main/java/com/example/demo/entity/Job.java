@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -28,7 +29,7 @@ public class Job {
     @JoinColumn(name = "user_id")
     private User postedBy;
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "job")
     private List<JobApplication> jobApplications;
 }

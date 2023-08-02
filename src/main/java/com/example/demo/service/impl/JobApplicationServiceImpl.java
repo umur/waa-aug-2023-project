@@ -5,7 +5,6 @@ import com.example.demo.dto.JobApplicationDto;
 import com.example.demo.entity.JobApplication;
 import com.example.demo.repository.JobApplicationRepo;
 import com.example.demo.service.JobApplicationService;
-import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,11 +14,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class JobApplicationServiceImpl implements JobApplicationService {
     @Autowired
     private JobApplicationRepo jobApplicationRepo;
-    private final ModelMapper modelMapper;
+    @Autowired
+    private ModelMapper modelMapper;
     @Override
     public JobApplicationDto save(JobApplicationDto jobApplicationDto) {
         JobApplication jobApplication = modelMapper.map(jobApplicationDto, JobApplication.class);
