@@ -1,9 +1,12 @@
 package com.example.demo.controller;
 
 import com.example.demo.annotation.LogActivity;
+import com.example.demo.dto.UserAuthenticationRequestDTO;
+import com.example.demo.dto.UserAuthenticationResponseDTO;
 import com.example.demo.dto.UserDto;
 import com.example.demo.dto.UserLoginDto;
 import com.example.demo.service.UserService;
+import com.example.demo.service.impl.UserAuthenticationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +23,8 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserAuthenticationService service;
 
     @PostMapping
     @LogActivity(value = "Post user")
@@ -91,5 +96,16 @@ public class UserController {
     public ResponseEntity<String> logout(){
         return ResponseEntity.ok("Logout successful");
     }
+
+    @PostMapping("/register")
+    public ResponseEntity<UserAuthenticationResponseDTO> register(@RequestBody UserAuthenticationRequestDTO userAuthenticationRequestDTO) {
+        return ResponseEntity.ok(service.register(userAuthenticationRequestDTO));
+    }
+
+    @PostMapping("/authenticate")
+    public ResponseEntity<UserAuthenticationResponseDTO> authenticate(@RequestBody UserLoginDto userLoginDto) {
+        return ResponseEntity.ok(service.authenticate(userLoginDto));
+    }
+
 
 }
