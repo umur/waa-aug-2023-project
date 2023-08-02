@@ -4,9 +4,11 @@ import com.example.demo.dto.SurveyAnswerDto;
 import com.example.demo.dto.SurveyQuestionDto;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.service.ISurveyAnswerService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -14,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("surveys/surveyQuestions/{surveyQuestionId}/answers")
+@Validated
 public class SurveyAnswerController {
     @Autowired
     private ISurveyAnswerService surveyAnswerService;
@@ -37,12 +40,12 @@ public class SurveyAnswerController {
         }
     }
     @PostMapping
-    public ResponseEntity<SurveyAnswerDto> save(@PathVariable long surveyQuestionId,
+    public ResponseEntity<SurveyAnswerDto> save(@Valid  @PathVariable long surveyQuestionId,
                                                 @RequestBody SurveyAnswerDto surveyAnswerDto){
         return ResponseEntity.ok(surveyAnswerService.save(surveyQuestionId,surveyAnswerDto));
     }
     @PutMapping("/{surveyAnswerId}")
-    public ResponseEntity<SurveyAnswerDto> update(@PathVariable long surveyAnswerId,
+    public ResponseEntity<SurveyAnswerDto> update(@Valid @PathVariable long surveyAnswerId,
                                                   @RequestBody SurveyAnswerDto surveyAnswerDto){
         try{
             return ResponseEntity.ok(surveyAnswerService.update(surveyAnswerId, surveyAnswerDto));
