@@ -13,4 +13,6 @@ public interface JobAdvertisementService {
     JobAdvertisement findById(long id);
     JobPostingDto save(JobPostingDto jobPostingDto, Long id, UserRole userRole);
     ResponseEntity<String> updateJobAdvertisement(JobPostingDto jobPostingDto,Long id,UserRole userRole,String loggedInUserEmail);
+    public List<JobPostingDto> filter(String state, String city, String companyName);
+
 }

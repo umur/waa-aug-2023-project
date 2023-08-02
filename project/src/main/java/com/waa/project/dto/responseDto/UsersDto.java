@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class UsersDto {
     private Long id;
     private String email;
@@ -20,7 +21,6 @@ public class UsersDto {
     private boolean isActive;
     private LocalDateTime lastLogin;
     private int loginAttempt;
-
     private UserProfile profile;
     public static UsersDto fromUser(User user){
         return  new UsersDto(
