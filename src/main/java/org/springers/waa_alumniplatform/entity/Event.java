@@ -19,10 +19,11 @@ public class Event {
     private String venue;
     private LocalDate date;
     private LocalTime time;
-    @OneToOne
-    private Admin poster;
-    @OneToMany
+    @ManyToOne
+    private Alumni poster;
+    @ManyToMany
     private List<Alumni> rsvpList;
-    @OneToMany
+    @ManyToMany
     private List<Alumni> attendees;
 }
+
