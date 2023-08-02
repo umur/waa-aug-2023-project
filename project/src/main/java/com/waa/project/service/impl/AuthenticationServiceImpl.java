@@ -96,7 +96,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
         return null;
     }
-    public UserRole getCurrentRoleId() {
+    public UserRole getCurrentRole() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.getPrincipal() instanceof User) {
             User currentUser = (User) authentication.getPrincipal();

@@ -44,6 +44,7 @@ public class JwtSecurityConfig {
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/users/**").hasAuthority(getUserAuthority(UserRole.ADMIN))
                         .requestMatchers("/admin/**").hasAuthority(getUserAuthority(UserRole.ADMIN))
+                        .requestMatchers("/jobAdvertisements/**").hasAuthority(getUserAuthority(UserRole.ALUMNI))
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
