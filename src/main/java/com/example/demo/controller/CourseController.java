@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.CourseDto;
 import com.example.demo.service.CourseService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class CourseController {
     private CourseService courseService;
 
     @PostMapping
-    public ResponseEntity<CourseDto> save(@RequestBody CourseDto courseDto){
+    public ResponseEntity<CourseDto> save(@Valid  @RequestBody CourseDto courseDto){
         CourseDto createdCourse = courseService.save(courseDto);
         return new ResponseEntity<>(createdCourse, HttpStatus.CREATED);
     }
@@ -36,7 +37,7 @@ public class CourseController {
         return ResponseEntity.notFound().build();
     }
     @PutMapping("/{id}")
-    public ResponseEntity<CourseDto> update(@PathVariable int id, @RequestBody CourseDto courseDto){
+    public ResponseEntity<CourseDto> update(@Valid @PathVariable int id, @RequestBody CourseDto courseDto){
         CourseDto updatedCourse = courseService.update(courseDto, id);
         if(updatedCourse == null) {
             return ResponseEntity.notFound().build();

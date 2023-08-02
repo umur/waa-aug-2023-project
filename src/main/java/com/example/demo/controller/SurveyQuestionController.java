@@ -4,9 +4,11 @@ import com.example.demo.dto.SurveyDto;
 import com.example.demo.dto.SurveyQuestionDto;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.service.ISurveyQuestionService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -14,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/surveys/surveyQuestions")
+@Validated
 public class SurveyQuestionController {
     @Autowired
     private ISurveyQuestionService surveyQuestionService;
@@ -37,11 +40,11 @@ public class SurveyQuestionController {
         }
     }
     @PostMapping
-    public ResponseEntity<SurveyQuestionDto> save(@RequestBody SurveyQuestionDto surveyQuestionDto){
+    public ResponseEntity<SurveyQuestionDto> save(@Valid  @RequestBody SurveyQuestionDto surveyQuestionDto){
         return ResponseEntity.ok(surveyQuestionService.save(surveyQuestionDto));
     }
     @PutMapping("/{surveyQuestionId}")
-    public ResponseEntity<SurveyQuestionDto> update(@PathVariable long surveyQuestionId,
+    public ResponseEntity<SurveyQuestionDto> update(@Valid @PathVariable long surveyQuestionId,
                                                     @RequestBody SurveyQuestionDto surveyQuestionDto){
         try{
             return ResponseEntity.ok(surveyQuestionService.update(surveyQuestionId, surveyQuestionDto));
