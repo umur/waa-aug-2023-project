@@ -1,5 +1,6 @@
 package com.waa.project.controller;
 
+import com.waa.project.aspect.annotation.CheckUserActive;
 import com.waa.project.dto.requestDto.NewPasswordDto;
 import com.waa.project.service.AuthenticationService;
 import com.waa.project.service.UserService;
@@ -20,11 +21,13 @@ public class AdminController {
         userService.activeUser(userId);
         return ResponseEntity.ok("User activated successfully");
     }
+
     @PostMapping("/deactivate/{userId}")
     public ResponseEntity<?> deactivateUser(@PathVariable Long userId) {
         userService.deactivateUser(userId);
         return ResponseEntity.ok("User deactivated successfully");
     }
+
     @PostMapping("/reset-password/{userId}")
     public ResponseEntity<?> resetPassword(@PathVariable Long userId, @RequestBody NewPasswordDto newPasswordDto) {
         userService.resetUserPassword(userId, newPasswordDto);

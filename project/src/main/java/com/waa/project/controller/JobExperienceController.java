@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/job-experiences")
+@RequestMapping("/experiences")
 public class JobExperienceController {
     private final JobExperienceService jobExperienceService;
     @Autowired

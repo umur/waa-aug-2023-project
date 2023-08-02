@@ -20,7 +20,7 @@ import java.security.Principal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user-profile")
+@RequestMapping("/profile")
 public class UserProfileController {
     @Autowired
     private UserProfileService userProfileService;
@@ -44,9 +44,9 @@ public class UserProfileController {
         return ResponseEntity.ok(createdUserProfile);
     }
     @LogMe
-    @PostMapping("/{userProfileId}/job-experience")
+    @PostMapping("/{userProfileId}/experience")
     public ResponseEntity<String> addJobExperienceToUserProfile(
-            @PathVariable int userProfileId,
+            @PathVariable long userProfileId,
             @RequestBody JobExperience jobExperience) {
         try {
             userProfileService.addJobExperienceToUserProfile(userProfileId, jobExperience);
