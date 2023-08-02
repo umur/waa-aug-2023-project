@@ -22,9 +22,10 @@ public class User {
     private String lastName;
     @Enumerated(EnumType.STRING)
     private RoleType role;
-    
-    @Column(nullable = false)
+
+    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT false")
     private boolean isDeleted = false;
+
     @OneToMany
     @JoinColumn(name="user_id")
     @Cascade(CascadeType.ALL)

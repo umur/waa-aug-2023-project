@@ -1,11 +1,11 @@
 -- Dummy data for User table
 INSERT INTO user ( email, password, first_name, last_name, role, is_deleted)
 VALUES
-    ( 'user1@example.com', 'password123', 'John', 'Doe', 1, false),
-    ( 'user2@example.com', 'securepass', 'Alice', 'Smith', 1, false),
-    ( 'user3@example.com', 'password456', 'Bob', 'Johnson', 0, false),
-    ( 'user4@example.com', 'securepass', 'Alicee', 'Smith', 1, false),
-    ( 'user5@example.com', 'password456', 'Bobs', 'Johnson', 0, false);
+    ( 'user1@example.com', 'password123', 'John', 'Doe', 'ADMIN', false),
+    ( 'user2@example.com', 'securepass', 'Alice', 'Smith', 'ADMIN', false),
+    ( 'user3@example.com', 'password456', 'Bob', 'Johnson', 'ADMIN', false),
+    ( 'user4@example.com', 'securepass', 'Alicee', 'Smith', 'ADMIN', false),
+    ( 'user5@example.com', 'password456', 'Bobs', 'Johnson', 'ADMIN', false);
 
 -- Dummy data for Job table
 INSERT INTO job ( title, description, state, city, company_name, is_deleted, user_id)
