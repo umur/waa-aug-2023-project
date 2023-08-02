@@ -2,7 +2,8 @@ package org.springers.waa_alumniplatform.enums;
 
 public enum NewUserAccountType {
     ALUMNI("t1"),
-    FACULTY("t2");
+    FACULTY("t2"),
+    ADMIN("t3");
     private String type;
 
    private NewUserAccountType(String type) {

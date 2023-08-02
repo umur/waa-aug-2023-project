@@ -10,6 +10,7 @@ import org.springers.waa_alumniplatform.entity.User;
 import org.springers.waa_alumniplatform.enums.AccountStatus;
 import org.springers.waa_alumniplatform.enums.NewUserAccountType;
 import org.springers.waa_alumniplatform.enums.Role;
+import org.springers.waa_alumniplatform.exception.BadRequestException;
 import org.springers.waa_alumniplatform.service.AuthService;
 import org.springers.waa_alumniplatform.service.UserService;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,12 +29,12 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public Token register(NewUser newUser) {
         //TODO check if email is already in use and throw appropriate exception
-            User user;
-            if (newUser.getAccountType() == NewUserAccountType.ALUMNI) {
-                user = createAlumni(newUser);
-            } else user = createFaculty(newUser);
-            userService.persist(user);
-            return this.generateToken(user);
+        User user;
+        if (newUser.getAccountType() == NewUserAccountType.ALUMNI) user = createAlumni(newUser);
+        else if(newUser.getAccountType() == NewUserAccountType.FACULTY) user = createFaculty(newUser);
+        else throw new BadRequestException("Can't create account of type " + newUser.getAccountType().name());
+        userService.persist(user);
+        return this.generateToken(user);
     }
 
     @Override
@@ -47,13 +48,13 @@ public class AuthServiceImpl implements AuthService {
     }
 
 
-    private Token generateToken(User user) {
+    public Token generateToken(User user) {
         return Token.builder()
                 .token(jwtService.generateToken(user))
                 .build();
     }
 
-    private Alumni createAlumni(NewUser newUser) {
+    public Alumni createAlumni(NewUser newUser) {
         return Alumni.builder()
                 .firstName(newUser.getFirstName())
                 .lastName(newUser.getLastName())
@@ -64,7 +65,7 @@ public class AuthServiceImpl implements AuthService {
                 .build();
     }
 
-    private Faculty createFaculty(NewUser newUser){
+    public Faculty createFaculty(NewUser newUser){
         System.out.println("create Faculty called with password " + newUser.getPassword());
         return Faculty.builder()
                 .firstName(newUser.getFirstName())

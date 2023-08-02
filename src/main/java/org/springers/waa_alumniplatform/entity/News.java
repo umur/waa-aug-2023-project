@@ -14,7 +14,7 @@ public class News {
     private int id;
     private String title;
     private String description;
-    @OneToOne
-    private Admin poster;
     private LocalDateTime postedAt;
+    @ManyToOne
+    private Admin poster;
 }
