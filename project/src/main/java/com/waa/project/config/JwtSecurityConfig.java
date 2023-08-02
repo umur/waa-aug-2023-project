@@ -4,6 +4,7 @@ import com.waa.project.entity.UserRole;
 import com.waa.project.filter.JwtRequestFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -36,21 +37,27 @@ public class JwtSecurityConfig {
             final AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
+
     @Bean
     public SecurityFilterChain configure(final HttpSecurity http) throws Exception {
         return http.cors(withDefaults())
                 .csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/users/**").hasAuthority(getUserAuthority(UserRole.ADMIN))
-                        .requestMatchers("/admin/**").hasAuthority(getUserAuthority(UserRole.ADMIN))
-                        .requestMatchers("/jobAdvertisements/**").hasAuthority(getUserAuthority(UserRole.ALUMNI))
+                                .requestMatchers("/auth/**").permitAll()
+                                .requestMatchers("/users/**").hasAuthority(getUserAuthority(UserRole.ADMIN))
+                                .requestMatchers("/admin/**").hasAuthority(getUserAuthority(UserRole.ADMIN))
+                                .requestMatchers(HttpMethod.GET, "/jobAdvertisements").hasAnyAuthority(getUserAuthority(UserRole.ALUMNI), getUserAuthority(UserRole.FACULTY))
+                                .requestMatchers(HttpMethod.POST, "/jobAdvertisements").hasAuthority(getUserAuthority(UserRole.ALUMNI))
+                                .requestMatchers(HttpMethod.PUT, "/jobAdvertisements/*").hasAuthority(getUserAuthority(UserRole.ALUMNI))
                                 .anyRequest().authenticated()
+//                        .requestMatchers("/jobAdvertisements/**").hasAuthority(getUserAuthority(UserRole.ALUMNI))
+
                 )
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
+
     private String getUserAuthority(UserRole userRole) {
         return userRole.name();
     }
