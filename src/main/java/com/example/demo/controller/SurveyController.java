@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.annotation.LogActivity;
 import com.example.demo.dto.SurveyDto;
 import com.example.demo.entity.Survey;
 import com.example.demo.exception.ResourceNotFoundException;
@@ -24,6 +25,7 @@ public class SurveyController {
     private ISurveyService surveyService;
 
     @GetMapping
+    @LogActivity(value = "Get all surveys")
     public ResponseEntity<List<SurveyDto>> getAll(){
         try{
             return ResponseEntity.ok(surveyService.getAll());
@@ -33,6 +35,7 @@ public class SurveyController {
         }
     }
     @GetMapping("/{surveyId}")
+    @LogActivity(value = "Get survey by id")
     public ResponseEntity<SurveyDto> getById(@PathVariable long surveyId) {
         try{
             return ResponseEntity.ok(surveyService.getById(surveyId));
@@ -42,12 +45,13 @@ public class SurveyController {
         }
     }
     @PostMapping
+    @LogActivity(value = "Post survey")
     public ResponseEntity<SurveyDto> save(@Valid @RequestBody SurveyDto surveyDto){
         return ResponseEntity.ok(surveyService.save(surveyDto));
     }
     @PutMapping("/{surveyId}")
-    public ResponseEntity<SurveyDto> update(@Valid @PathVariable long surveyId,
-                                            @RequestBody SurveyDto surveyDto){
+    @LogActivity(value = "Updating survey")
+    public ResponseEntity<SurveyDto> update(@Valid @PathVariable long surveyId, @RequestBody SurveyDto surveyDto){
         try{
             return ResponseEntity.ok(surveyService.update(surveyId, surveyDto));
         }
@@ -56,6 +60,7 @@ public class SurveyController {
         }
     }
     @DeleteMapping("/{surveyId}")
+    @LogActivity(value = "Deleting survey")
     public ResponseEntity<Boolean> delete(@PathVariable long surveyId){
         try{
             return ResponseEntity.ok(surveyService.delete(surveyId));

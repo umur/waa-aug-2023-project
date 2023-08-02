@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.annotation.LogActivity;
 import com.example.demo.dto.JobExpDto;
 import com.example.demo.service.JobExpService;
 import jakarta.validation.Valid;
@@ -23,12 +24,14 @@ public class JobExperienceController {
 
 
     @PostMapping("/{profileId}")
+    @LogActivity(value = "Post job experience")
     public ResponseEntity<JobExpDto> createJobExperience(@Valid @PathVariable long profileId, @RequestBody JobExpDto jobExpDto) {
         JobExpDto createdJobExperience = jobExpService.createJobExperience(profileId,jobExpDto);
         return new ResponseEntity<>(createdJobExperience, HttpStatus.CREATED);
     }
 
     @PutMapping("/{profileId}/{jobExperienceId}")
+    @LogActivity(value = "Update job experience")
     public ResponseEntity<JobExpDto> updateJobExperience(
             @Valid
             @PathVariable long profileId,
@@ -44,18 +47,21 @@ public class JobExperienceController {
     }
 
     @DeleteMapping("/{jobExperienceId}")
+    @LogActivity(value = "Delete job experience")
     public ResponseEntity<Void> deleteJobExperience(@PathVariable long jobExperienceId) {
         jobExpService.deleteJobExperience(jobExperienceId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping
+    @LogActivity(value = "Get all job experiences")
     public ResponseEntity<List<JobExpDto>> getAllJobExperiences() {
         List<JobExpDto> jobExperienceList = jobExpService.getAllJobExperiences();
         return new ResponseEntity<>(jobExperienceList, HttpStatus.OK);
     }
 
     @GetMapping("/{jobExperienceId}")
+    @LogActivity(value = "Get job experience")
     public ResponseEntity<JobExpDto> getJobExperienceById(@PathVariable long jobExperienceId) {
         JobExpDto jobExperience = jobExpService.getJobExperienceById(jobExperienceId);
         if (jobExperience != null) {

@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.annotation.LogActivity;
 import com.example.demo.dto.UserDto;
 import com.example.demo.dto.UserLoginDto;
 import com.example.demo.service.UserService;
@@ -21,7 +22,8 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserDto> save(@Valid  @RequestBody UserDto userDto){
+    @LogActivity(value = "Post user")
+    public ResponseEntity<UserDto> save(@Valid @RequestBody UserDto userDto){
         UserDto createdUser = userService.save(userDto);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -32,18 +34,24 @@ public class UserController {
     }
 
     @GetMapping
+    @LogActivity(value = "Get users")
     public ResponseEntity<List<UserDto>> getAll(){
         List<UserDto> userDtoList = userService.getAll();
         return ResponseEntity.ok(userDtoList);
     }
 
     @GetMapping("/{id}")
+    @LogActivity(value = "Get user")
+
+    //TODO Id should be long
+
     public ResponseEntity<UserDto> getById(@PathVariable int id){
         UserDto userDto = userService.getById(id);
         if(userDto != null) return ResponseEntity.ok(userDto);
         return ResponseEntity.notFound().build();
     }
     @PutMapping("/{id}")
+    @LogActivity(value = "Update user")
     public ResponseEntity<UserDto> update(@Valid @PathVariable int id, @RequestBody UserDto userDto){
         UserDto updatedUser = userService.update(userDto, id);
         if(updatedUser == null) {
@@ -53,6 +61,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
+    @LogActivity(value = "Delete user")
     public ResponseEntity delete(@PathVariable int id){
         boolean deleted = userService.delete(id);
         if (deleted) return ResponseEntity.noContent().build();
@@ -60,6 +69,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
+    @LogActivity(value = "User loggedIn")
     public ResponseEntity<String> loginUser(@Valid  @RequestBody UserLoginDto userLoginDto) {
         String email = userLoginDto.getEmail();
         String password = userLoginDto.getPassword();
@@ -77,6 +87,7 @@ public class UserController {
         return ResponseEntity.ok("Login successful");
     }
     @GetMapping("/logout")
+    @LogActivity(value = "User loggedOut")
     public ResponseEntity<String> logout(){
         return ResponseEntity.ok("Logout successful");
     }

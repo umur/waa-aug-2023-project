@@ -30,7 +30,7 @@ public class SurveyService implements ISurveyService {
 
 
     @Override
-    public SurveyDto getById(long id) {
+    public SurveyDto getById(long id) throws ResourceNotFoundException{
         Optional<Survey> survey=surveyRepo.findById(id);
         if(survey.isPresent()&&!survey.get().isDeleted()){
             return modelMapper.map(survey,SurveyDto.class);

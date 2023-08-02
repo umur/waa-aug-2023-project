@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.annotation.LogActivity;
 import com.example.demo.dto.SurveyDto;
 import com.example.demo.dto.SurveyQuestionDto;
 import com.example.demo.exception.ResourceNotFoundException;
@@ -22,6 +23,7 @@ public class SurveyQuestionController {
     private ISurveyQuestionService surveyQuestionService;
 
     @GetMapping
+    @LogActivity(value = "Get all SurveyQuestions")
     public ResponseEntity<List<SurveyQuestionDto>> getAll(){
         try{
             return ResponseEntity.ok(surveyQuestionService.getAll());
@@ -31,6 +33,7 @@ public class SurveyQuestionController {
         }
     }
     @GetMapping("/{surveyQuestionId}")
+    @LogActivity(value = "Get SurveyQuestion")
     public ResponseEntity<SurveyQuestionDto> getById(@PathVariable long surveyQuestionId) {
         try{
             return ResponseEntity.ok(surveyQuestionService.getById(surveyQuestionId));
@@ -40,12 +43,13 @@ public class SurveyQuestionController {
         }
     }
     @PostMapping
-    public ResponseEntity<SurveyQuestionDto> save(@Valid  @RequestBody SurveyQuestionDto surveyQuestionDto){
+    @LogActivity(value = "Post SurveyQuestion")
+    public ResponseEntity<SurveyQuestionDto> save(@Valid @RequestBody SurveyQuestionDto surveyQuestionDto){
         return ResponseEntity.ok(surveyQuestionService.save(surveyQuestionDto));
     }
     @PutMapping("/{surveyQuestionId}")
-    public ResponseEntity<SurveyQuestionDto> update(@Valid @PathVariable long surveyQuestionId,
-                                                    @RequestBody SurveyQuestionDto surveyQuestionDto){
+    @LogActivity(value = "Update SurveyQuestion")
+    public ResponseEntity<SurveyQuestionDto> update(@Valid @PathVariable long surveyQuestionId, @RequestBody SurveyQuestionDto surveyQuestionDto){
         try{
             return ResponseEntity.ok(surveyQuestionService.update(surveyQuestionId, surveyQuestionDto));
         }
@@ -54,6 +58,7 @@ public class SurveyQuestionController {
         }
     }
     @DeleteMapping("/{surveyQuestionId}")
+    @LogActivity(value = "Delete SurveyQuestion")
     public ResponseEntity<Boolean> delete(@PathVariable long surveyQuestionId){
         /*
         * delete should be enabled only for admin
