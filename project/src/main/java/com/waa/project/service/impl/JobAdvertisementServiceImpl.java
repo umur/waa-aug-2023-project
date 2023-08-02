@@ -1,6 +1,9 @@
 package com.waa.project.service.impl;
 
+import com.waa.project.dto.requestDto.JobPostingDto;
 import com.waa.project.entity.JobAdvertisement;
+import com.waa.project.entity.User;
+import com.waa.project.entity.UserRole;
 import com.waa.project.repository.JobAdvertisementRepository;
 import com.waa.project.service.JobAdvertisementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +25,25 @@ public class JobAdvertisementServiceImpl implements JobAdvertisementService {
         return jobAdvertisementRepository.findById(id).orElse(null);
     }
 
-    public JobAdvertisement save(JobAdvertisement jobAdvertisement) {
+    @Override
+    public JobAdvertisement save(JobPostingDto jobPostingDto, Long id, UserRole userRole) {
+        User user = new User();
+        JobAdvertisement jobAdvertisement = new JobAdvertisement();
+        jobAdvertisement.setTitle(jobPostingDto.getTitle());
+        jobAdvertisement.setDescription(jobPostingDto.getDescription());
+        jobAdvertisement.setState(jobPostingDto.getState());
+        jobAdvertisement.setCity(jobPostingDto.getCity());
+        jobAdvertisement.setCompanyName(jobPostingDto.getCompanyName());
+        if (user != null) {
+            user.setId(id);
+            user.setUserRole(userRole);
+            jobAdvertisement.setStudent(user);
+        } else {
+            throw new RuntimeException("error");
+        }
         return jobAdvertisementRepository.save(jobAdvertisement);
     }
+
 
     @Override
     public ResponseEntity<String> updateJobAdvertisement(JobAdvertisement jobAdvertisement, String loggedInUserEmail) {

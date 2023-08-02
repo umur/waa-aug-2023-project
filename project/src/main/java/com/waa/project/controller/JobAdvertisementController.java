@@ -1,6 +1,8 @@
 package com.waa.project.controller;
 
+import com.waa.project.dto.requestDto.JobPostingDto;
 import com.waa.project.entity.JobAdvertisement;
+import com.waa.project.entity.User;
 import com.waa.project.entity.UserRole;
 import com.waa.project.service.AuthenticationService;
 import com.waa.project.service.JobAdvertisementService;
@@ -16,8 +18,8 @@ import org.springframework.web.bind.annotation.*;
 public class JobAdvertisementController {
 
     private final AuthenticationService authenticationService;
-
     private final JobAdvertisementService jobAdvertisementService;
+
 
     @Autowired
     public JobAdvertisementController(AuthenticationService authenticationService, JobAdvertisementService jobAdvertisementService) {
@@ -26,10 +28,10 @@ public class JobAdvertisementController {
     }
 
     @PostMapping
-    public ResponseEntity<JobAdvertisement> createJobAdvertisement(@RequestBody JobAdvertisement jobAdvertisement) {
-
-        JobAdvertisement createdJobAdvertisement = jobAdvertisementService.save(jobAdvertisement);
-
+    public ResponseEntity<JobAdvertisement> createJobAdvertisement(@RequestBody JobPostingDto jobPostingDto) {
+        Long id = authenticationService.getCurrentUserId();
+        UserRole role = authenticationService.getCurrentRole();
+        JobAdvertisement createdJobAdvertisement = jobAdvertisementService.save(jobPostingDto, id, role);
         if (createdJobAdvertisement != null) {
             return ResponseEntity.status(HttpStatus.CREATED).body(createdJobAdvertisement);
         } else {

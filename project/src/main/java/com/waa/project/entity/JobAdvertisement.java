@@ -26,9 +26,5 @@ public class JobAdvertisement {
     private String companyName;
 
     @ManyToOne
-    @JoinColumn(name = "student_id", nullable = false)
     private User student;
-
-
-
 }
