@@ -29,9 +29,6 @@ public class User implements UserDetails {
     private int loginAttempt = 5;
     @OneToOne
     private UserProfile profile;
-    public UserProfile getProfile() {
-        return profile;
-    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorityList = new ArrayList<>();
