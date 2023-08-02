@@ -1,5 +1,6 @@
 package com.example.demo.dto;
 
+import com.example.demo.entity.User;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +15,6 @@ public class JobDto {
     private String state;
     private String city;
     private String companyName;
-
-    //TODO Add relationship with alumni or user with alumni_id
+    private User user;
+    private boolean isDeleted = false;
 }

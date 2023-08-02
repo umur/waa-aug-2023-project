@@ -1,11 +1,10 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
 
 @Entity
 @Getter
@@ -19,5 +18,10 @@ public class JobExperience {
     private String startDate;
     private String endDate;
     private String description;
+    private boolean isDeleted;
 
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "profile_id")
+    private Profile profile;
 }

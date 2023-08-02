@@ -1,9 +1,7 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,6 +17,11 @@ public class Job {
     private String state;
     private String city;
     private String companyName;
+    @Column(nullable = false)
+    private boolean isDeleted = false;
 
-    //TODO Add relationship with alumni or user with alumni_id
+    @JsonBackReference
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

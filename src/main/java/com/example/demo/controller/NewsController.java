@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.NewsDto;
 import com.example.demo.service.NewsService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,25 +14,26 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/news")
-@RequiredArgsConstructor
+@Validated
 public class NewsController {
 
     @Autowired
-    private final NewsService newsService;
+    private  NewsService newsService;
 
-    @PostMapping
-    public ResponseEntity<NewsDto> createNews(@RequestBody NewsDto newsDto) {
-        NewsDto createdNews = newsService.createNews(newsDto);
+    @PostMapping("/user/{userId}")
+    public ResponseEntity<NewsDto> createNews(@Valid  @PathVariable long userId, @RequestBody NewsDto newsDto) {
+        NewsDto createdNews = newsService.createNews(userId, newsDto);
         return new ResponseEntity<>(createdNews, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{newsId}")
+    @PutMapping("/{newsId}/user/{userId}")
     public ResponseEntity<NewsDto> updateNews(
+            @Valid
+            @PathVariable long userId,
             @PathVariable Long newsId,
              @RequestBody NewsDto newsDto
-    )
-    {
-        NewsDto updatedNews = newsService.updateNews(newsId, newsDto);
+    ) throws IllegalAccessException {
+        NewsDto updatedNews = newsService.updateNews(userId, newsId, newsDto);
         if (updatedNews != null) {
             return new ResponseEntity<>(updatedNews, HttpStatus.OK);
         } else {

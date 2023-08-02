@@ -4,10 +4,10 @@ import com.example.demo.dto.UserDto;
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepo;
 import com.example.demo.service.UserService;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,10 +20,14 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepo userRepo;
     private final ModelMapper modelMapper;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public UserDto save(UserDto userDto) {
         User user = modelMapper.map(userDto, User.class);
         User newUser = userRepo.save(user);
+        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
         return modelMapper.map(newUser, UserDto.class);
     }
 
@@ -62,10 +66,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean delete(long id) {
-        if(userRepo.existsById(id)){
-            userRepo.deleteById(id);
-            return true;
+        Optional<User> userOptional = userRepo.findById(id);
+        if(userOptional.isEmpty()){
+            return false;
         }
-        return false;
+        User user = userOptional.get();
+        user.setDeleted(true);
+        userRepo.save(user);
+        return true;
     }
 }

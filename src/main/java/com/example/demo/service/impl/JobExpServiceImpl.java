@@ -3,7 +3,11 @@ package com.example.demo.service.impl;
 import com.example.demo.dto.JobExpDto;
 import com.example.demo.entity.Event;
 import com.example.demo.entity.JobExperience;
+import com.example.demo.entity.Profile;
+import com.example.demo.entity.User;
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.JobExpRepo;
+import com.example.demo.repository.ProfileRepo;
 import com.example.demo.service.JobExpService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -15,25 +19,35 @@ import java.util.stream.Collectors;
 
 
 @Service
-@RequiredArgsConstructor
 public class JobExpServiceImpl implements JobExpService {
 
     @Autowired
-    private final JobExpRepo jobExpRepo;
-    private final ModelMapper modelMapper;
+    private  JobExpRepo jobExpRepo;
+    @Autowired
+    private  ModelMapper modelMapper;
+    @Autowired
+    private ProfileRepo profileRepo;
 
     @Override
-    public JobExpDto createJobExperience(JobExpDto jobExpDto) {
+    public JobExpDto createJobExperience(long profileId, JobExpDto jobExpDto) {
+        Profile profile =profileRepo.findById(profileId).orElse(null);
+        if (profile == null) {
+            throw new ResourceNotFoundException("Profile not found with ID: " + profileId);
+        }
         JobExperience jobExperience = modelMapper.map(jobExpDto, JobExperience.class);
+        jobExperience.setProfile(profile);
         JobExperience savedJobExperience = jobExpRepo.save(jobExperience);
         return modelMapper.map(savedJobExperience, JobExpDto.class);
     }
 
     @Override
-    public JobExpDto updateJobExperience(Long jobExperienceId, JobExpDto jobExpDto) {
+    public JobExpDto updateJobExperience(long profileId, long jobExperienceId, JobExpDto jobExpDto) throws IllegalAccessException {
         JobExperience existingJobExperience = jobExpRepo.findById(jobExperienceId).orElse(null);
         if (existingJobExperience == null) {
             return null;
+        }
+        if (existingJobExperience.getProfile().getId() != profileId) {
+            throw new IllegalAccessException("You are not authorized to update this Job Experiance.");
         }
 
         // Update the properties of the existing job experience
@@ -42,35 +56,34 @@ public class JobExpServiceImpl implements JobExpService {
         existingJobExperience.setStartDate(jobExpDto.getStartDate());
         existingJobExperience.setEndDate(jobExpDto.getEndDate());
         existingJobExperience.setDescription(jobExpDto.getDescription());
-//        existingJobExperience.setUserId(jobExpDto.getUserId());
 
         JobExperience updatedJobExperience = jobExpRepo.save(existingJobExperience);
         return modelMapper.map(updatedJobExperience, JobExpDto.class);
     }
 
     @Override
-    public void deleteJobExperience(Long jobExperienceId) {
+    public void deleteJobExperience(long jobExperienceId) {
         JobExperience existingJobExp = jobExpRepo.findById(jobExperienceId).orElse(null);
         if (existingJobExp == null) {
-//            throw new NotFoundException("Event not found with ID: " + eventId);
-            return;
+            throw new ResourceNotFoundException("Job Experience not found with ID: " + jobExperienceId);
         }
 
-        jobExpRepo.delete(existingJobExp);
+        existingJobExp.setDeleted(true); // Soft delete by setting the flag to true
+        jobExpRepo.save(existingJobExp);
     }
 
 
     @Override
     public List<JobExpDto> getAllJobExperiences() {
-        List<JobExperience> jobExperienceList = jobExpRepo.findAll();
+        List<JobExperience> jobExperienceList = jobExpRepo.findAllByIsDeletedFalse(); // Filter out deleted job experiences
         return jobExperienceList.stream()
                 .map(jobExperience -> modelMapper.map(jobExperience, JobExpDto.class))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public JobExpDto getJobExperienceById(Long jobExperienceId) {
-        JobExperience jobExperience = jobExpRepo.findById(jobExperienceId).orElse(null);
+    public JobExpDto getJobExperienceById(long jobExperienceId) {
+        JobExperience jobExperience = jobExpRepo.findByIdAndIsDeletedFalse(jobExperienceId); // Find by ID and ensure it's not deleted
         if (jobExperience == null) {
             return null;
         }

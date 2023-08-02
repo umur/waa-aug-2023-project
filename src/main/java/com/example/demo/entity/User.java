@@ -22,18 +22,42 @@ public class User {
     private String lastName;
     @Enumerated(EnumType.STRING)
     private RoleType role;
-
+    
+    @Column(nullable = false)
+    private boolean isDeleted = false;
     @OneToMany
     @JoinColumn(name="user_id")
     @Cascade(CascadeType.ALL)
     private List<Survey> surveys;
+
     @OneToMany
     @Cascade(CascadeType.ALL)
     @JoinColumn(name="user_id")
     private List<SurveyAnswer> surveyAnswerList;
+
     @OneToMany
     @Cascade(CascadeType.ALL)
     @JoinColumn(name="user_id")
     private List<SurveyQuestion> surveyQuestionList;
+
+    @JsonManagedReference
+    @Cascade(CascadeType.ALL)
+    @OneToOne(mappedBy = "user")
+    private Profile profile;
+
+    @JsonManagedReference
+    @Cascade(CascadeType.ALL)
+    @OneToOne(mappedBy = "user")
+    private Job job;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "organizer")
+    @Cascade(CascadeType.ALL)
+    private List<Event> events;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "publisher")
+    @Cascade(CascadeType.ALL)
+    private List<News> news;
     
 }

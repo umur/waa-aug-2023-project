@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.dto.JobDto;
 import com.example.demo.entity.Job;
+import com.example.demo.entity.User;
 import com.example.demo.repository.JobRepo;
 import com.example.demo.service.JobService;
 import lombok.RequiredArgsConstructor;
@@ -61,10 +62,13 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public boolean delete(long id) {
-        if(jobRepo.existsById(id)){
-            jobRepo.deleteById(id);
-            return true;
+        Optional<Job> jobOptional = jobRepo.findById(id);
+        if(jobOptional.isEmpty()){
+            return false;
         }
-        return false;
+        Job job = jobOptional.get();
+        job.setDeleted(true);
+        jobRepo.save(job);
+        return true;
     }
 }
