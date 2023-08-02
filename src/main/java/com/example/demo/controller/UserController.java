@@ -4,8 +4,10 @@ import com.example.demo.annotation.LogActivity;
 import com.example.demo.dto.UserDto;
 import com.example.demo.dto.UserLoginDto;
 import com.example.demo.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -14,13 +16,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
+@Validated
 public class UserController {
     @Autowired
     private UserService userService;
 
     @PostMapping
     @LogActivity(value = "Post user")
-    public ResponseEntity<UserDto> save(@RequestBody UserDto userDto){
+    public ResponseEntity<UserDto> save(@Valid @RequestBody UserDto userDto){
         UserDto createdUser = userService.save(userDto);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -49,7 +52,7 @@ public class UserController {
     }
     @PutMapping("/{id}")
     @LogActivity(value = "Update user")
-    public ResponseEntity<UserDto> update(@PathVariable int id, @RequestBody UserDto userDto){
+    public ResponseEntity<UserDto> update(@Valid @PathVariable int id, @RequestBody UserDto userDto){
         UserDto updatedUser = userService.update(userDto, id);
         if(updatedUser == null) {
             return ResponseEntity.notFound().build();
@@ -67,7 +70,7 @@ public class UserController {
 
     @PostMapping("/login")
     @LogActivity(value = "User loggedIn")
-    public ResponseEntity<String> loginUser(@RequestBody UserLoginDto userLoginDto) {
+    public ResponseEntity<String> loginUser(@Valid  @RequestBody UserLoginDto userLoginDto) {
         String email = userLoginDto.getEmail();
         String password = userLoginDto.getPassword();
 

@@ -3,9 +3,11 @@ package com.example.demo.controller;
 import com.example.demo.annotation.LogActivity;
 import com.example.demo.dto.JobDto;
 import com.example.demo.service.JobService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -14,13 +16,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/jobs")
+@Validated
 public class JobController {
     @Autowired
     private JobService jobService;
 
     @PostMapping
     @LogActivity(value = "Post job")
-    public ResponseEntity<JobDto> save(@RequestBody JobDto jobDto){
+    public ResponseEntity<JobDto> save(@Valid @RequestBody JobDto jobDto){
         JobDto createdJob = jobService.save(jobDto);
         return new ResponseEntity<>(createdJob, HttpStatus.CREATED);
     }
@@ -41,7 +44,7 @@ public class JobController {
     }
     @PutMapping("/{id}")
     @LogActivity(value = "Update job")
-    public ResponseEntity<JobDto> update(@PathVariable int id, @RequestBody JobDto jobDto){
+    public ResponseEntity<JobDto> update(@Valid @PathVariable int id, @RequestBody JobDto jobDto){
         JobDto updatedJob = jobService.update(jobDto, id);
         if(updatedJob == null) {
             return ResponseEntity.notFound().build();

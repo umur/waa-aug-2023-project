@@ -6,9 +6,11 @@ import com.example.demo.entity.Survey;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.ISurveyRepo;
 import com.example.demo.service.ISurveyService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -17,6 +19,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/surveys")
+@Validated
 public class SurveyController {
     @Autowired
     private ISurveyService surveyService;
@@ -43,13 +46,12 @@ public class SurveyController {
     }
     @PostMapping
     @LogActivity(value = "Post survey")
-    public ResponseEntity<SurveyDto> save(@RequestBody SurveyDto surveyDto){
+    public ResponseEntity<SurveyDto> save(@Valid @RequestBody SurveyDto surveyDto){
         return ResponseEntity.ok(surveyService.save(surveyDto));
     }
     @PutMapping("/{surveyId}")
     @LogActivity(value = "Updating survey")
-    public ResponseEntity<SurveyDto> update(@PathVariable long surveyId,
-                                            @RequestBody SurveyDto surveyDto){
+    public ResponseEntity<SurveyDto> update(@Valid @PathVariable long surveyId, @RequestBody SurveyDto surveyDto){
         try{
             return ResponseEntity.ok(surveyService.update(surveyId, surveyDto));
         }

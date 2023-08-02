@@ -3,9 +3,11 @@ package com.example.demo.controller;
 import com.example.demo.annotation.LogActivity;
 import com.example.demo.dto.ProfileDto;
 import com.example.demo.service.ProfileService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -14,13 +16,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/profiles")
+@Validated
 public class ProfileController {
     @Autowired
     private ProfileService profileService;
 
     @PostMapping
     @LogActivity(value = "Post profile")
-    public ResponseEntity<ProfileDto> save(@RequestBody ProfileDto profileDto){
+    public ResponseEntity<ProfileDto> save(@Valid @RequestBody ProfileDto profileDto){
         ProfileDto createdProfile = profileService.save(profileDto);
         return new ResponseEntity<>(createdProfile, HttpStatus.CREATED);
     }
@@ -41,7 +44,7 @@ public class ProfileController {
     }
     @PutMapping("/{id}")
     @LogActivity(value = "Update profile")
-    public ResponseEntity<ProfileDto> update(@PathVariable int id, @RequestBody ProfileDto profileDto){
+    public ResponseEntity<ProfileDto> update(@Valid @PathVariable int id, @RequestBody ProfileDto profileDto){
         ProfileDto updatedProfile = profileService.update(profileDto, id);
         if(updatedProfile == null) {
             return ResponseEntity.notFound().build();
