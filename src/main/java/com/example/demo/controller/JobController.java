@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.annotation.LogActivity;
 import com.example.demo.dto.JobDto;
 import com.example.demo.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,24 +19,28 @@ public class JobController {
     private JobService jobService;
 
     @PostMapping
+    @LogActivity(value = "Post job")
     public ResponseEntity<JobDto> save(@RequestBody JobDto jobDto){
         JobDto createdJob = jobService.save(jobDto);
         return new ResponseEntity<>(createdJob, HttpStatus.CREATED);
     }
 
     @GetMapping
+    @LogActivity(value = "Get all jobs")
     public ResponseEntity<List<JobDto>> getAll(){
         List<JobDto> jobDtoList = jobService.getAll();
         return ResponseEntity.ok(jobDtoList);
     }
 
     @GetMapping("/{id}")
+    @LogActivity(value = "Get job")
     public ResponseEntity<JobDto> getById(@PathVariable int id){
         JobDto jobDto = jobService.getById(id);
         if(jobDto != null) return ResponseEntity.ok(jobDto);
         return ResponseEntity.notFound().build();
     }
     @PutMapping("/{id}")
+    @LogActivity(value = "Update job")
     public ResponseEntity<JobDto> update(@PathVariable int id, @RequestBody JobDto jobDto){
         JobDto updatedJob = jobService.update(jobDto, id);
         if(updatedJob == null) {
@@ -45,6 +50,7 @@ public class JobController {
     }
 
     @DeleteMapping("/{id}")
+    @LogActivity(value = "Delete job")
     public ResponseEntity delete(@PathVariable int id){
         boolean deleted = jobService.delete(id);
         if (deleted) return ResponseEntity.noContent().build();

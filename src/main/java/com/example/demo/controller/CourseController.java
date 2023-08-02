@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.annotation.LogActivity;
 import com.example.demo.dto.CourseDto;
 import com.example.demo.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,24 +19,28 @@ public class CourseController {
     private CourseService courseService;
 
     @PostMapping
+    @LogActivity(value = "Post course")
     public ResponseEntity<CourseDto> save(@RequestBody CourseDto courseDto){
         CourseDto createdCourse = courseService.save(courseDto);
         return new ResponseEntity<>(createdCourse, HttpStatus.CREATED);
     }
 
     @GetMapping
+    @LogActivity(value = "Get all courses")
     public ResponseEntity<List<CourseDto>> getAll(){
         List<CourseDto> courseDtoList = courseService.getAll();
         return ResponseEntity.ok(courseDtoList);
     }
 
     @GetMapping("/{id}")
+    @LogActivity(value = "Get course")
     public ResponseEntity<CourseDto> getById(@PathVariable int id){
         CourseDto courseDto = courseService.getById(id);
         if(courseDto != null) return ResponseEntity.ok(courseDto);
         return ResponseEntity.notFound().build();
     }
     @PutMapping("/{id}")
+    @LogActivity(value = "Update course")
     public ResponseEntity<CourseDto> update(@PathVariable int id, @RequestBody CourseDto courseDto){
         CourseDto updatedCourse = courseService.update(courseDto, id);
         if(updatedCourse == null) {
@@ -45,6 +50,7 @@ public class CourseController {
     }
 
     @DeleteMapping("/{id}")
+    @LogActivity(value = "Delete course")
     public ResponseEntity delete(@PathVariable int id){
         boolean deleted = courseService.delete(id);
         if (deleted) return ResponseEntity.noContent().build();

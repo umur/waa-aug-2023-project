@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.annotation.LogActivity;
 import com.example.demo.dto.NewsDto;
 import com.example.demo.service.NewsService;
 import jakarta.validation.Valid;
@@ -21,12 +22,14 @@ public class NewsController {
     private  NewsService newsService;
 
     @PostMapping("/user/{userId}")
+    @LogActivity(value = "Post news")
     public ResponseEntity<NewsDto> createNews(@Valid  @PathVariable long userId, @RequestBody NewsDto newsDto) {
         NewsDto createdNews = newsService.createNews(userId, newsDto);
         return new ResponseEntity<>(createdNews, HttpStatus.CREATED);
     }
 
     @PutMapping("/{newsId}/user/{userId}")
+    @LogActivity(value = "Update news")
     public ResponseEntity<NewsDto> updateNews(
             @Valid
             @PathVariable long userId,
@@ -42,18 +45,21 @@ public class NewsController {
     }
 
     @DeleteMapping("/{newsId}")
+    @LogActivity(value = "Delete news")
     public ResponseEntity<Void> deleteNews(@PathVariable Long newsId) {
         newsService.deleteNews(newsId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping
+    @LogActivity(value = "Get all news")
     public ResponseEntity<List<NewsDto>> getAllNews() {
         List<NewsDto> newsList = newsService.getAllNews();
         return new ResponseEntity<>(newsList, HttpStatus.OK);
     }
 
     @GetMapping("/{newsId}")
+    @LogActivity(value = "Get news")
     public ResponseEntity<NewsDto> getNewsById(@PathVariable Long newsId) {
         NewsDto news = newsService.getNewsById(newsId);
         if (news != null) {
