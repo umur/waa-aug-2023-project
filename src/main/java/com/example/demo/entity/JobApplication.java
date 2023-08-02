@@ -2,34 +2,31 @@ package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+import java.time.LocalDate;
 
 @Entity
 @Setter
 @Getter
-public class Job {
+public class JobApplication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String title;
-    private String description;
-    private String state;
-    private String city;
-    private String companyName;
+    private LocalDate applicationDate;
     @Column(nullable = false)
     private boolean isDeleted = false;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User postedBy;
+    @JoinColumn(name = "job_id")
+    private Job job;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "job")
-    private List<JobApplication> jobApplications;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User applicant;
+
 }
