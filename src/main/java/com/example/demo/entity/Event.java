@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,5 +24,11 @@ public class Event {
     @JsonBackReference
     @ManyToOne
     private User organizer;
+
+    @OneToMany(mappedBy = "event")
+    private List<User> participants;
+
+    @OneToMany(mappedBy = "event")
+    private List<EventParticipant> participantsList;
 
 }
