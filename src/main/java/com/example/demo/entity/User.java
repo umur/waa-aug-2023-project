@@ -47,11 +47,6 @@ public class User {
     private Profile profile;
 
     @JsonManagedReference
-    @Cascade(CascadeType.ALL)
-    @OneToOne(mappedBy = "user")
-    private Job job;
-
-    @JsonManagedReference
     @OneToMany(mappedBy = "organizer")
     @Cascade(CascadeType.ALL)
     private List<Event> events;
@@ -60,5 +55,13 @@ public class User {
     @OneToMany(mappedBy = "publisher")
     @Cascade(CascadeType.ALL)
     private List<News> news;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "postedBy")
+    private List<Job> postedJobs;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "applicant")
+    private List<JobApplication> jobApplications;
     
 }

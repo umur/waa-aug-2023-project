@@ -14,6 +14,12 @@ VALUES
     ( 'Data Analyst', 'Analyze and interpret data for business insights', 'New York', 'New York City', 'XYZ Inc', false, 2),
     ( 'Product Manager', 'Manage product development and strategy', 'Texas', 'Austin', 'Acme Corp', false, 3);
 
+-- Dummy data for Job application
+INSERT INTO job_application (job_id, user_id, application_date, is_deleted)
+VALUES (1, 2, '2023-08-01', false),
+       (2, 1, '2023-08-02', false);
+
+
 -- Dummy data for Profile table
 INSERT INTO profile ( state, city, graduation_year, phone, email, profile_picture, user_id, is_deleted)
 VALUES
