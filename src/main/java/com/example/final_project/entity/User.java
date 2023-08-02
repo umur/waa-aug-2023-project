@@ -17,11 +17,11 @@ public class User {
     private String email;
     private String password;
     private String phoneNumber;
-    private Role role;
-    @ManyToOne
-    private Address address;
-    @Embedded
-    private Profile profile;
+    private String role;
+//    @ManyToOne
+//    private Address address;
+//    @Embedded
+//    private Profile profile;
     @Column(name = "deleted", nullable = false)
     private boolean deleted = false;
 }

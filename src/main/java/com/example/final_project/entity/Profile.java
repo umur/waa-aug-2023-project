@@ -20,6 +20,4 @@ public class Profile {
     private String achievement;
     @OneToMany
     private List<Experience> experienceList;
-    @Column(name = "deleted", nullable = false)
-    private boolean deleted = false;
 }
