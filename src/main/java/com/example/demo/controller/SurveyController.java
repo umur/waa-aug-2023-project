@@ -38,32 +38,27 @@ public class SurveyController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,ex.getMessage());
         }
     }
-    @PostMapping("/user/{userId}")
-    public ResponseEntity<SurveyDto> save(@PathVariable long userId, @RequestBody SurveyDto surveyDto){
-        return ResponseEntity.ok(surveyService.save(userId,surveyDto));
+    @PostMapping
+    public ResponseEntity<SurveyDto> save(@RequestBody SurveyDto surveyDto){
+        return ResponseEntity.ok(surveyService.save(surveyDto));
     }
-    @PutMapping("/{surveyId}/user/{userId}")
-    public ResponseEntity<SurveyDto> update(@PathVariable long userId,@PathVariable long surveyId,@RequestBody SurveyDto surveyDto){
+    @PutMapping("/{surveyId}")
+    public ResponseEntity<SurveyDto> update(@PathVariable long surveyId,
+                                            @RequestBody SurveyDto surveyDto){
         try{
-            return ResponseEntity.ok(surveyService.update(userId, surveyId, surveyDto));
-        }
-        catch(IllegalAccessException ex){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,ex.getMessage());
+            return ResponseEntity.ok(surveyService.update(surveyId, surveyDto));
         }
         catch(ResourceNotFoundException ex){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,ex.getResourceName());
         }
     }
-    @DeleteMapping("{surveyId}/user/{userId}")
-    public ResponseEntity<Boolean> delete(@PathVariable long userId,@PathVariable long surveyId){
-        /*
-         * delete should be enabled for admin
-         * */
+    @DeleteMapping("/{surveyId}")
+    public ResponseEntity<Boolean> delete(@PathVariable long surveyId){
         try{
-            return ResponseEntity.ok(surveyService.delete(userId,surveyId));
+            return ResponseEntity.ok(surveyService.delete(surveyId));
         }
-        catch(IllegalAccessException ex){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,ex.getMessage());
+        catch(ResourceNotFoundException ex){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,ex.getResourceName());
         }
     }
 

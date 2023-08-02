@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,11 +16,10 @@ public class SurveyAnswer {
     private long id;
     private String answer;
     private LocalDateTime createdAt;
+    private boolean isDeleted=false;
     @ManyToOne
+    @JsonBackReference
     private SurveyQuestion surveyQuestion;
-    @ManyToOne
-    private User user;
-    @ManyToOne
-    private Survey answerSurvey;
+//    private User user;
 
 }

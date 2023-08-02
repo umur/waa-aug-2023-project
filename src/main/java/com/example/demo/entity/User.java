@@ -20,21 +20,25 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
-    private RoleType role = RoleType.STUDENT;
-    
-    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private RoleType role;
+
+    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT false")
     private boolean isDeleted = false;
 
-    @OneToMany(mappedBy = "surveyAuthor")
+    @OneToMany
+    @JoinColumn(name="user_id")
     @Cascade(CascadeType.ALL)
     private List<Survey> surveys;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany
     @Cascade(CascadeType.ALL)
+    @JoinColumn(name="user_id")
     private List<SurveyAnswer> surveyAnswerList;
 
-    @OneToMany(mappedBy = "questionAuthor")
+    @OneToMany
     @Cascade(CascadeType.ALL)
+    @JoinColumn(name="user_id")
     private List<SurveyQuestion> surveyQuestionList;
 
     @JsonManagedReference

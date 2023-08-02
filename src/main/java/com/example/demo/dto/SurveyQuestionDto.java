@@ -3,6 +3,7 @@ package com.example.demo.dto;
 import com.example.demo.entity.Choice;
 import com.example.demo.entity.QuestionType;
 import com.example.demo.entity.User;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,10 +25,12 @@ public class SurveyQuestionDto {
     private String question;
     private QuestionType questionType;
     private boolean isRequired;
-    private List<Choice> choiceList;
+    private List<ChoiceDto> choiceList;
     private LocalDateTime createdAt;
     private LocalDateTime updateAt;
-    private SurveyDto questionSurvey;
+    private boolean isDeleted=false;
+    @JsonManagedReference
     private List<SurveyAnswerDto> surveyAnswerList;
-    private User questionAuthor;
+
+
 }

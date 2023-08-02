@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,22 +26,13 @@ public class Survey {
     private boolean isActive;
     private LocalDateTime createdAt;
     private LocalDateTime updateAt;
-    @ManyToOne
-    private User surveyAuthor;
-    @OneToMany(mappedBy = "questionSurvey")
+    private boolean isDeleted=false;
+
+//    private User surveyAuthor;
+
+    @OneToMany
     @Cascade(CascadeType.ALL)
+    @JoinColumn(name="survey_id")
     private List<SurveyQuestion> surveyQuestionList;
-    @OneToMany(mappedBy = "answerSurvey")
-    @Cascade(CascadeType.ALL)
-    private List<SurveyAnswer> surveyAnswerList;
-
-//    @OneToMany
-//    private List<SurveyAnswer> surveyAnswerList;
-
-//    private Map<Integer, List<SurveyAnswer>> questionIdToAnswersMap;
-//    private List<SurveyAnswer> surveyAnswerList;
-
-
-
 
 }
