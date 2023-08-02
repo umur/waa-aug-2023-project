@@ -14,7 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/jobAdvertisements")
+@RequestMapping("/job")
 public class JobAdvertisementController {
 
     private final AuthenticationService authenticationService;
