@@ -26,9 +26,6 @@ public class Event {
     private User organizer;
 
     @OneToMany(mappedBy = "event")
-    private List<User> participants;
-
-    @OneToMany(mappedBy = "event")
     private List<EventParticipant> participantsList;
 
 }
