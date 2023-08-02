@@ -1,9 +1,18 @@
 package com.example.demo.dto;
 
 import com.example.demo.entity.RoleType;
+import com.example.demo.entity.Survey;
+import com.example.demo.entity.SurveyAnswer;
+import com.example.demo.entity.SurveyQuestion;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
+import java.util.List;
 
 @Setter
 @Getter
@@ -14,4 +23,9 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private RoleType role;
+
+    private List<Survey> surveys;
+    private List<SurveyAnswer> surveyAnswerList;
+    private List<SurveyQuestion> surveyQuestionList;
+
 }

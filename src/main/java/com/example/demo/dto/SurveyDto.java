@@ -26,9 +26,6 @@ public class SurveyDto {
     private boolean isActive;
     private LocalDateTime createdAt;
     private LocalDateTime updateAt;
-    private User surveyAuthor;
+    private boolean isDeleted=false;
     private List<SurveyQuestionDto> surveyQuestionList;
-
-
-
 }

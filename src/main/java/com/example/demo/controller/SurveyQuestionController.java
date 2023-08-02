@@ -13,7 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/surveyQuestion")
+@RequestMapping("/surveys/surveyQuestions")
 public class SurveyQuestionController {
     @Autowired
     private ISurveyQuestionService surveyQuestionService;
@@ -36,31 +36,29 @@ public class SurveyQuestionController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,ex.getMessage());
         }
     }
-    @PostMapping("/user/{userId}")
-    public ResponseEntity<SurveyQuestionDto> save(@PathVariable long userId, @RequestBody SurveyQuestionDto surveyQuestionDto){
-        return ResponseEntity.ok(surveyQuestionService.save(userId,surveyQuestionDto));
+    @PostMapping
+    public ResponseEntity<SurveyQuestionDto> save(@RequestBody SurveyQuestionDto surveyQuestionDto){
+        return ResponseEntity.ok(surveyQuestionService.save(surveyQuestionDto));
     }
-    @PutMapping("/{surveyQuestionId}/user/{userId}")
-    public ResponseEntity<SurveyQuestionDto> update(@PathVariable long userId,@PathVariable long surveyQuestionId,@RequestBody SurveyQuestionDto surveyQuestionDto){
+    @PutMapping("/{surveyQuestionId}")
+    public ResponseEntity<SurveyQuestionDto> update(@PathVariable long surveyQuestionId,
+                                                    @RequestBody SurveyQuestionDto surveyQuestionDto){
         try{
-            return ResponseEntity.ok(surveyQuestionService.update(userId, surveyQuestionId, surveyQuestionDto));
-        }
-        catch(IllegalAccessException ex){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,ex.getMessage());
+            return ResponseEntity.ok(surveyQuestionService.update(surveyQuestionId, surveyQuestionDto));
         }
         catch(ResourceNotFoundException ex){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,ex.getResourceName());
         }
     }
-    @DeleteMapping("{surveyQuestionId}/user/{userId}")
-    public ResponseEntity<Boolean> delete(@PathVariable long userId,@PathVariable long surveyQuestionId){
+    @DeleteMapping("/{surveyQuestionId}")
+    public ResponseEntity<Boolean> delete(@PathVariable long surveyQuestionId){
         /*
-        * delete should be enabled for admin
+        * delete should be enabled only for admin
         * */
         try{
-            return ResponseEntity.ok(surveyQuestionService.delete(userId,surveyQuestionId));
+            return ResponseEntity.ok(surveyQuestionService.delete(surveyQuestionId));
         }
-        catch(IllegalAccessException ex){
+        catch(ResourceNotFoundException ex){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,ex.getMessage());
         }
     }

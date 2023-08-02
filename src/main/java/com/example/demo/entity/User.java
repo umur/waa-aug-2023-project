@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,16 +20,20 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
+    @Enumerated(EnumType.STRING)
     private RoleType role;
 
-    @OneToMany(mappedBy = "surveyAuthor")
+    @OneToMany
+    @JoinColumn(name="user_id")
     @Cascade(CascadeType.ALL)
     private List<Survey> surveys;
-    @OneToMany(mappedBy = "user")
+    @OneToMany
     @Cascade(CascadeType.ALL)
+    @JoinColumn(name="user_id")
     private List<SurveyAnswer> surveyAnswerList;
-    @OneToMany(mappedBy = "questionAuthor")
+    @OneToMany
     @Cascade(CascadeType.ALL)
+    @JoinColumn(name="user_id")
     private List<SurveyQuestion> surveyQuestionList;
     
 }

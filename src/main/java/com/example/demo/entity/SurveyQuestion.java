@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,21 +19,31 @@ public class SurveyQuestion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String question;
+    @Enumerated(EnumType.STRING)
     private QuestionType questionType;
     private boolean isRequired;
-//    @Embedded
-//    @ElementCollection
-//    @CollectionTable(name = "question_choices", joinColumns = @JoinColumn(name = "question_id"))
-    @OneToMany(mappedBy = "surveyQuestion")
+    private boolean isDeleted=false;
+    @OneToMany//(fetch = FetchType.EAGER)
+    @JoinColumn(name="survey_Question_id")
     @Cascade(CascadeType.ALL)
     private List<Choice> choiceList;
     private LocalDateTime createdAt;
     private LocalDateTime updateAt;
-    @ManyToOne
-    private Survey questionSurvey;
+
     @OneToMany(mappedBy = "surveyQuestion")
     @Cascade(CascadeType.ALL)
+    @JsonManagedReference
     private List<SurveyAnswer> surveyAnswerList;
-    @ManyToOne
-    private User questionAuthor;
+
+//    private User questionAuthor;
+
+    public void addChoice(Choice choice) {
+        choiceList.add(choice);
+    }
+    public void removeChoice(Choice choice) {
+        choiceList.remove(choice);
+    }
+    public void updateChoice(Choice existingChoice, String newChoiceText) {
+        existingChoice.setContent(newChoiceText);
+    }
 }

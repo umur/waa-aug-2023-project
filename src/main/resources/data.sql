@@ -1,9 +1,9 @@
 -- Dummy data for User table
-INSERT INTO user ( email, password, first_name, last_name, role)
-VALUES
-    ('user1@example.com', 'password123', 'John', 'Doe', 'ALUMNI'),
-    ( 'user2@example.com', 'securepass', 'Alice', 'Smith', 'ADMIN'),
-    ( 'user3@example.com', 'password456', 'Bob', 'Johnson', 'ALUMNI');
+-- INSERT INTO user ( email, password, first_name, last_name, role)
+-- VALUES
+--     ('user1@example.com', 'password123', 'John', 'Doe', 'ADMIN'),
+--     ( 'user2@example.com', 'securepass', 'Alice', 'Smith', 'FACULTY'),
+--     ( 'user3@example.com', 'password456', 'Bob', 'Johnson', 'STUDENT');
 -- Dummy data for Job table
 INSERT INTO job ( title, description, state, city, company_name)
 VALUES
@@ -42,4 +42,36 @@ INSERT INTO news (title, description, publish_date) VALUES
                                                        ('Upcoming Campus Expansion', 'We are expanding our campus infrastructure.', '2023-08-10'),
                                                        ('Faculty Research Award', 'Dr. John Doe receives research award.', '2023-08-18');
 
+-- Insert dummy users
+INSERT INTO User (email, password, first_Name, last_Name, role)
+VALUES
+    ('john.doe@example.com', 'password123', 'John', 'Doe', 'ADMIN'),
+    ('jane.smith@example.com', 'password456', 'Jane', 'Smith', 'STUDENT');
 
+-- Insert dummy surveys
+INSERT INTO Survey (title, description, start_Date, end_Date, is_Active, created_At, update_At, is_deleted, user_id)
+VALUES
+    ('Customer Satisfaction Survey', 'Please provide your feedback.', '2023-08-01 12:00:00', '2023-08-15 12:00:00', true, '2023-08-01 12:00:00', '2023-08-01 12:00:00', false, 1),
+    ('Employee Engagement Survey', 'We value your opinion.', '2023-08-05 12:00:00', '2023-08-20 12:00:00', true, '2023-08-05 12:00:00', '2023-08-05 12:00:00', false, 2);
+
+-- Insert dummy survey questions
+INSERT INTO Survey_Question (question, question_Type, is_Required, created_At, update_At, is_deleted, survey_id, user_id)
+VALUES
+    ('How satisfied are you with our services?', 'RADIO_BUTTON', true, '2023-08-02 12:00:00', '2023-08-02 12:00:00', false, 1, 1),
+    ('What is your age?', 'TEXT_FIELD', true, '2023-08-03 12:00:00', '2023-08-03 12:00:00', false, 1, 1);
+
+-- Insert dummy choices for the first survey question
+INSERT INTO Choice (content, survey_Question_id)
+VALUES
+    ('Very Satisfied', 1),
+    ('Satisfied', 1),
+    ('Neutral', 1),
+    ('Dissatisfied', 1),
+    ('Very Dissatisfied', 1);
+
+-- Insert dummy survey answers for the first survey question
+INSERT INTO Survey_Answer (answer, created_At, is_deleted, survey_Question_id, user_id)
+VALUES
+    ('Very Satisfied', '2023-08-04 12:00:00', false, 1, 1),
+    ('Satisfied', '2023-08-04 12:00:00', false, 1, 1),
+    ('Neutral', '2023-08-04 12:00:00', false, 1, 1);

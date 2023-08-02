@@ -11,8 +11,8 @@ import java.util.Optional;
 public interface ISurveyQuestionService {
 
     SurveyQuestionDto getById(long id);
-    SurveyQuestionDto save(long userId, SurveyQuestionDto surveyQuestionDto);
+    SurveyQuestionDto save(SurveyQuestionDto surveyQuestionDto);
     List<SurveyQuestionDto> getAll();
-    SurveyQuestionDto update(long userId,long questionId,SurveyQuestionDto surveyQuestionDto) throws IllegalAccessException;
-    boolean delete(long userId,long surveyQuestionId) throws IllegalAccessException;
+    SurveyQuestionDto update(long questionId,SurveyQuestionDto surveyQuestionDto);
+    boolean delete(long surveyQuestionId);
 }
