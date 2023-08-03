@@ -5,16 +5,17 @@ import lombok.*;
 
 import java.util.List;
 
-@Entity
+
 @Getter
 @Setter
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class Survey {
+@AllArgsConstructor
+@Entity
+public class SurveyQuestion {
     @Id @GeneratedValue
     private int id;
-    private String title;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<SurveyQuestion> questions;
+    private String question;
+    @OneToMany(mappedBy = "surveyQuestion", cascade = CascadeType.ALL)
+    private List<SurveyAnswer> surveyAnswerList;
 }

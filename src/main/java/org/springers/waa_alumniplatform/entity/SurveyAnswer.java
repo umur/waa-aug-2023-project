@@ -4,15 +4,16 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
 
-@Entity
 @Getter
 @Setter
-public class SurveryQuestion {
+@Entity
+public class SurveyAnswer {
     @Id @GeneratedValue
     private int id;
-    private String question;
-    @OneToMany
-    private List<SurveryAnswer> surveryAnswerList;
+    private String answer;
+    @ManyToOne
+    private SurveyQuestion surveyQuestion;
+    @ManyToOne
+    private Alumni responder;
 }
