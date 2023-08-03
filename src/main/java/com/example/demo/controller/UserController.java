@@ -73,24 +73,6 @@ public class UserController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/login")
-    @LogActivity(value = "User loggedIn")
-    public ResponseEntity<String> loginUser(@Valid  @RequestBody UserLoginDto userLoginDto) {
-        String email = userLoginDto.getEmail();
-        String password = userLoginDto.getPassword();
-
-        //TODO Check for null or empty values, and valid email format
-
-        //TODO Call the UserService to perform authentication
-//        boolean isAuthenticated = userService.authenticateUser(email, password);
-//
-//        if (isAuthenticated) {
-//            return ResponseEntity.ok("Login successful");
-//        } else {
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
-//        }
-        return ResponseEntity.ok("Login successful");
-    }
     @GetMapping("/logout")
     @LogActivity(value = "User loggedOut")
     public ResponseEntity<String> logout(){
@@ -102,7 +84,7 @@ public class UserController {
         return ResponseEntity.ok(service.register(userAuthenticationRequestDTO));
     }
 
-    @PostMapping("/authenticate")
+    @PostMapping("/login")
     public ResponseEntity<UserAuthenticationResponseDTO> authenticate(@RequestBody UserLoginDto userLoginDto) {
         return ResponseEntity.ok(service.authenticate(userLoginDto));
     }

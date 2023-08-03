@@ -16,7 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("surveys/surveyQuestions/{surveyQuestionId}/answers")
+@RequestMapping("surveys/answers/{surveyQuestionId}")
 @Validated
 public class SurveyAnswerController {
     @Autowired
