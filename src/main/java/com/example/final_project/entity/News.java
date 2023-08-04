@@ -1,5 +1,6 @@
 package com.example.final_project.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +17,7 @@ public class News {
     private String title;
     private String description;
     private LocalDate postedOn;
+    @JsonIgnore
     @ManyToOne
     private User newsPoster;
     @Column(name = "deleted", nullable = false)
