@@ -26,7 +26,7 @@ public class ApplicantService implements IApplicantService {
     @Override
     public void add(Applicant applicant) {
         var applicantP = userRepo.findById(applicant.getApplicant().getId()).get();
-        var jobP = jobRepo.findById(applicant.getJob().getId()).get();
+        var jobP = jobRepo.findPresentById(applicant.getJob().getId()).get();
         applicant.setApplicant(applicantP);
         applicant.setJob(jobP);
         applicantRepo.save(applicant);
