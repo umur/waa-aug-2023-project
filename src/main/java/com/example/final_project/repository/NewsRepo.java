@@ -1,9 +1,9 @@
 package com.example.final_project.repository;
 
-import com.example.final_project.entity.User;
+import com.example.final_project.entity.News;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepo extends ListCrudRepository<User,Long> {
+public interface NewsRepo extends ListCrudRepository<News,Long> {
 }
