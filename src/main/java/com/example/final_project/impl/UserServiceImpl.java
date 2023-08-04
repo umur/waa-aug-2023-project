@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
     public AuthenticationResponse register(RegisterRequest registerRequest) {
         User user = modelMapper.map(registerRequest, User.class);
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
-        user.setRole(Role.ADMIN);
+        user.setRole(Role.ALUMNI);
         userRepository.save(user);
         CustomUserDetails userDetails = new CustomUserDetails(user);
         var jwtToken = jwtUtil.generateToken(userDetails);
@@ -86,9 +86,9 @@ public class UserServiceImpl implements UserService {
             loginAttempt.setLastAttempt(LocalDateTime.now());
             loginAttempt.setEmail(email);
             userLoginAttemptRepository.save(loginAttempt);
-
-            User user = userRepository.findUserByEmail(email).orElseThrow(() ->
-                    new RuntimeException("User not found"));
+            // TODO decide what a deactivated user means
+            User user = userRepository.findUserByEmailAndDeletedEquals(email, false).orElseThrow(() ->
+                    new UserNotFoundException("User not found"));
             CustomUserDetails userDetails = new CustomUserDetails(user);
             var jwtToken = jwtUtil.generateToken(userDetails);
             return AuthenticationResponse.builder()
@@ -138,7 +138,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void update(UserUpdate userUpdate, HttpServletRequest httpServletRequest) {
-        String email = (String) httpServletRequest.getAttribute("claims");
+        String email = (String) httpServletRequest.getAttribute("email");
         User user = userRepository.findUserByEmail(email).get();
         System.out.println("***user****");
         user.setFirstName(userUpdate.getFirstName());
@@ -150,24 +150,32 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void changePassword(PasswordChangeDto pwdDto, HttpServletRequest request) {
-        String email = (String) request.getAttribute("claims");
+        String email = (String) request.getAttribute("email");
         User user = userRepository.findUserByEmail(email).get();
         if (pwdDto.getPassword().equals(pwdDto.getConfirmPassword())) {
             user.setPassword(passwordEncoder.encode(pwdDto.getNewPassword()));
             userRepository.save(user);
         } else {
-            throw new IllegalArgumentException("Invalid Password");
+            throw new InvalidCredentialsException("Invalid Password");
         }
     }
 
     @Override
     public void deActivate(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() ->
-                new UserNotFoundException("user not found")
+        User user = userRepository.findUserByIdAndDeleted(id, false).orElseThrow(() ->
+                new UserNotFoundException("user is already deactivated")
         );
-        if (user.isDeleted() == false) {
-            user.setDeleted(true);
-        }
-        user.setDeleted(false);
+        user.setDeleted(true);
+
+        userRepository.save(user);
+    }
+
+    @Override
+    public void resetPassword(Long id, ResetPassword resetPassword) {
+        User user = userRepository.findUserByIdAndDeleted(id, false).orElseThrow(
+                () -> new UserNotFoundException("user does not exist")
+        );
+        user.setPassword(passwordEncoder.encode(resetPassword.getNewPassword()));
+        userRepository.save(user);
     }
 }

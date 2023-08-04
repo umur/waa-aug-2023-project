@@ -18,7 +18,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtUtil jwtUtil;
-    private final UserDetailsService userDetailsService;
+    private final CustomUserDetailsService userDetailsService;
     @Override
     protected void doFilterInternal(
             HttpServletRequest request,
@@ -46,7 +46,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 );
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-                request.setAttribute("claims", jwtUtil.extractUsername(token));
+                request.setAttribute("email", email);
             }
               filterChain.doFilter(request, response);
 

@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SuccessResponse {
-    private String status;
-    private String message;
+public class ResetPassword {
+    private String newPassword;
 }

@@ -15,7 +15,7 @@ public class ExceptionHandler {
    @org.springframework.web.bind.annotation.ExceptionHandler(value= UserNotFoundException.class)
     public ResponseEntity<?> handleUserNotFoundException(UserNotFoundException e){
           return new ResponseEntity(
-                  new ErrorResponse("failed", "user not found", LocalDateTime.now()),
+                  new ErrorResponse("failed", "user not found in system", LocalDateTime.now()),
                   HttpStatus.BAD_REQUEST);
     }
     @org.springframework.web.bind.annotation.ExceptionHandler(InvalidCredentialsException.class)
@@ -28,7 +28,7 @@ public class ExceptionHandler {
     @org.springframework.web.bind.annotation.ExceptionHandler(AccountLockedException.class)
     public ResponseEntity<?> handleAccountLockedException(AccountLockedException ex) {
         return new ResponseEntity<>(
-                new ErrorResponse("login failed", "Account Locked try again later",
+                new ErrorResponse("login failed", ex.getMessage(),
                         LocalDateTime.now()), HttpStatus.BAD_REQUEST);
 
     }

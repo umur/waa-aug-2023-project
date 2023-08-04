@@ -42,18 +42,24 @@ public class UserController {
     @PutMapping
     public ResponseEntity<?> update(@RequestBody UserUpdate userUpdate, HttpServletRequest request){
           userService.update(userUpdate, request);
-          SuccessResponse successResponse= new SuccessResponse(true, "update successful");
+          SuccessResponse successResponse= new SuccessResponse("Success", "update successful");
           return ResponseEntity.ok(successResponse);
     }
     @PutMapping("/password")
     public ResponseEntity<?> changePassword(@RequestBody PasswordChangeDto pwdDto, HttpServletRequest request){
         userService.changePassword(pwdDto, request);
-        return ResponseEntity.ok(new SuccessResponse(true, "password changed successfully"));
+        return ResponseEntity.ok(new SuccessResponse("Success", "password changed successfully"));
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deActivate(@PathVariable Long id){
         userService.deActivate(id);
-        return ResponseEntity.ok(new SuccessResponse(true, "user deactivated"));
+        return ResponseEntity.ok(new SuccessResponse("Success", "user deactivated"));
+    }
+    @PutMapping("/reset/{id}")
+    public ResponseEntity<?> resetPassword(@PathVariable Long id, @RequestBody ResetPassword resetPassword){
+        userService.resetPassword(id, resetPassword);
+      return  ResponseEntity.ok(
+              new SuccessResponse("Success", "password reset successfully"));
     }
 
 

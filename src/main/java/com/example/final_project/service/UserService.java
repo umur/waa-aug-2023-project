@@ -20,4 +20,6 @@ public interface UserService {
   void changePassword(PasswordChangeDto pwdDto, HttpServletRequest request);
 
   void deActivate(Long id);
+
+    void resetPassword(Long id, ResetPassword resetPassword);
 }

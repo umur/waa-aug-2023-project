@@ -4,11 +4,14 @@ import com.example.final_project.enums.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
 import org.springframework.stereotype.Service;
 
 @Entity
 @Setter
 @Getter
+@Service
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
