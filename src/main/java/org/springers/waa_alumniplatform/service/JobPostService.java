@@ -13,4 +13,9 @@ public interface JobPostService {
     JobPost apply(int jobPostId, int alumniId);
 
     JobPost getJobPostById(int jobPostId);
+
+    List<JobPost> getJobPostByState(String state);
+    List<JobPost> getJobPostByCity(String state);
+
+    List<JobPost> getJobPostByCompanyName(String companyName);
 }

@@ -32,12 +32,22 @@ public class SpringSecAuthFiltersConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeHttpRequests(authroize -> {
-                    authroize.anyRequest().permitAll();
-//                    requestMatchers("/auth/**").permitAll()
-//                            .requestMatchers("/alumni/**").permitAll()
-//                            .requestMatchers(HttpMethod.GET,"/alumni/**").hasAuthority(Role.ALUMNI.name())
-//                            .requestMatchers(HttpMethod.POST,"/alumni/**").hasAuthority(Role.ALUMNI.name())
-//                            .anyRequest().authenticated();
+//                    authroize.anyRequest().permitAll();
+                   authroize.requestMatchers("/auth/**").permitAll()
+                            .requestMatchers("/news/**").permitAll()
+
+                            .requestMatchers(HttpMethod.GET,"/alumnus/**").hasAuthority(Role.ALUMNI.name())
+                            .requestMatchers(HttpMethod.PUT,"/alumnus/**").hasAuthority(Role.ALUMNI.name())
+
+                            .requestMatchers(HttpMethod.PUT,"/admins/**").hasAuthority(Role.ADMIN.name())
+                            .requestMatchers(HttpMethod.GET,"/admins/**").hasAuthority(Role.ADMIN.name())
+                            .requestMatchers(HttpMethod.PATCH,"/admins/**").hasAuthority(Role.ADMIN.name())
+                            .requestMatchers(HttpMethod.POST,"/admins/**").hasAuthority(Role.ADMIN.name())
+
+                            .requestMatchers(HttpMethod.DELETE, "/users/**")
+                                .hasAnyAuthority(Role.ALUMNI.name(), Role.FACULTY.name(), Role.ADMIN.name())
+
+                            .anyRequest().authenticated();
                 })
                 .sessionManagement(sessionManager -> {
                     sessionManager.sessionCreationPolicy(SessionCreationPolicy.STATELESS);

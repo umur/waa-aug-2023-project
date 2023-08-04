@@ -28,6 +28,7 @@ public class EventController {
     public ResponseEntity<Event> getOne(@PathVariable int event_id){
         return ResponseEntity.ok(eventService.getById(event_id));
     }
+
     @PostMapping
     public ResponseEntity<Event> addOne(@RequestBody Event event, @PathVariable int alumni_Id){
         return ResponseEntity

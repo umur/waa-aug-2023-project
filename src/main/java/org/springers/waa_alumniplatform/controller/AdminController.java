@@ -1,11 +1,13 @@
 package org.springers.waa_alumniplatform.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springers.waa_alumniplatform.dto.authDto.Password;
 import org.springers.waa_alumniplatform.dto.authDto.Token;
 import org.springers.waa_alumniplatform.dto.userDto.NewUser;
 import org.springers.waa_alumniplatform.entity.Admin;
 import org.springers.waa_alumniplatform.entity.News;
 import org.springers.waa_alumniplatform.entity.Survey;
+import org.springers.waa_alumniplatform.entity.User;
 import org.springers.waa_alumniplatform.service.AdminService;
 import org.springers.waa_alumniplatform.service.NewsService;
 import org.springers.waa_alumniplatform.service.SurveyService;
@@ -30,6 +32,16 @@ public class AdminController {
     public ResponseEntity<Survey> updateSurvey(@RequestBody Survey survey, @PathVariable int survey_id)
     {
         return ResponseEntity.ok(surveyService.updateOne(survey, survey_id));
+    }
+
+    @PatchMapping("/{admin_Id}/users/{user_Id}/activateDeactivate")
+    public ResponseEntity<User> activateDeactivateUser(@PathVariable int user_Id){
+        return ResponseEntity.ok(adminService.activateDeactivateUser(user_Id));
+    }
+
+    @PatchMapping("/{admin_Id}/users/{user_Id}/resetPassword")
+    public ResponseEntity<User> resetUserPassword(@RequestBody Password password, @PathVariable int user_Id){
+        return ResponseEntity.ok(adminService.resetUserPassword(password, user_Id));
     }
 
     @PostMapping("/{admin_id}/news")

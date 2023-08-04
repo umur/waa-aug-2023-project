@@ -7,6 +7,7 @@ import org.springers.waa_alumniplatform.dto.userDto.AlumniProfile;
 import org.springers.waa_alumniplatform.dto.userDto.AlumniPublic;
 import org.springers.waa_alumniplatform.entity.Alumni;
 import org.springers.waa_alumniplatform.entity.User;
+import org.springers.waa_alumniplatform.exception.UnauthorizedException;
 import org.springers.waa_alumniplatform.repository.AlumniRepo;
 import org.springers.waa_alumniplatform.repository.UserRepo;
 import org.springers.waa_alumniplatform.service.AlumniService;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +34,7 @@ public class AlumniServiceImpl implements AlumniService {
     }
 
     @Override
-    public AlumniProfile updateById(int alumniId, AlumniProfile alumniProfile) {
+    public AlumniProfile updateById(Principal principal, int alumniId, AlumniProfile alumniProfile) {
         System.out.println("Update one alumni service reached");
         Alumni alumni = getAlumniById(alumniId);
 

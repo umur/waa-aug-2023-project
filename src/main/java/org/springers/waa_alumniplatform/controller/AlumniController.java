@@ -7,6 +7,7 @@ import org.springers.waa_alumniplatform.service.AlumniService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -33,9 +34,9 @@ public class AlumniController {
     }
 
     @PutMapping("/{alumni_id}")
-    public ResponseEntity<AlumniProfile> updateOne(@PathVariable int alumni_id, @RequestBody AlumniProfile alumniProfile){
+    public ResponseEntity<AlumniProfile> updateOne(@PathVariable int alumni_id, @RequestBody AlumniProfile alumniProfile, Principal principal){
         System.out.println("Update one alumni controller reached");
-        return ResponseEntity.ok(alumniService.updateById(alumni_id, alumniProfile));
+        return ResponseEntity.ok(alumniService.updateById(principal, alumni_id, alumniProfile));
     }
 
 

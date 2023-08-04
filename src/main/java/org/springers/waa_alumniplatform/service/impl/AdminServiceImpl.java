@@ -1,6 +1,7 @@
 package org.springers.waa_alumniplatform.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springers.waa_alumniplatform.dto.authDto.Password;
 import org.springers.waa_alumniplatform.dto.authDto.Token;
 import org.springers.waa_alumniplatform.dto.userDto.NewUser;
 import org.springers.waa_alumniplatform.entity.Admin;
@@ -41,6 +42,23 @@ public class AdminServiceImpl implements AdminService {
                 .findById(adminId)
                 .orElseThrow(() -> new UsernameNotFoundException("Admin doesn't exist"));
         return admin;
+    }
+
+    @Override
+    public User activateDeactivateUser(int userId) {
+        User user = userService.getUserById(userId);
+        if(user.getAccountStatus() == AccountStatus.ACTIVE) user.setAccountStatus(AccountStatus.DEACTIVATED);
+        else user.setAccountStatus(AccountStatus.ACTIVE);
+        return userService.persist(user);
+    }
+
+    @Override
+    public User resetUserPassword(Password password, int userId) {
+        User user = userService.getUserById(userId);
+        user.setPassword(
+                bCryptPasswordEncoder.encode(password.getPassword())
+        );
+        return userService.persist(user);
     }
 
     private Admin createAdmin(NewUser newUser) {

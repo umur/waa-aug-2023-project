@@ -48,4 +48,19 @@ public class JobPostServiceImpl implements JobPostService {
                 .orElseThrow(()-> new EntityNotFound("Job post not found"));
         return jobPost;
     }
+
+    @Override
+    public List<JobPost> getJobPostByState(String state) {
+        return jobPostRepo.findJobPostsByCompanyLocationState(state);
+    }
+
+    @Override
+    public List<JobPost> getJobPostByCity(String city) {
+        return jobPostRepo.findJobPostsByCompanyLocationCity(city);
+    }
+
+    @Override
+    public List<JobPost> getJobPostByCompanyName(String companyName) {
+        return jobPostRepo.findJobPostsByCompanyName(companyName);
+    }
 }

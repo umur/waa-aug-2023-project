@@ -16,6 +16,21 @@ import java.util.List;
 public class JobPostController {
     private final JobPostService jobPostService;
 
+    @GetMapping("/filterByState")
+    public ResponseEntity<List<JobPost>> getJobPostByState(@RequestParam String state){
+        return ResponseEntity.ok(jobPostService.getJobPostByState(state));
+    }
+
+    @GetMapping("/filterByCity")
+    public ResponseEntity<List<JobPost>> getJobPostByCity(@RequestParam String city){
+        return ResponseEntity.ok(jobPostService.getJobPostByCity(city));
+    }
+
+    @GetMapping("/filterByCompanyName")
+    public ResponseEntity<List<JobPost>> getJobPostByCompanyName(@RequestParam String companyName){
+        return ResponseEntity.ok(jobPostService.getJobPostByCompanyName(companyName));
+    }
+
     @GetMapping("/{jobPost_id}")
     public ResponseEntity<JobPost> getOne(@PathVariable int jobPost_id){
         return ResponseEntity.ok(jobPostService.getJobPostById(jobPost_id));
