@@ -18,6 +18,7 @@ public class Applicant {
     @ManyToOne
     private Job job;
     private LocalDate appliedDate;
+
     @Column(name = "deleted", nullable = false)
     private boolean deleted = false;
 }
