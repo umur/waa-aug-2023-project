@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @org.aspectj.lang.annotation.Aspect
 public class Aspect {
     private static final Logger logger = LogManager.getLogger(User.class.getName());
-    @AfterThrowing(pointcut = "execution(* com.example.final_project.impl.UserServiceImpl.*(..))", throwing = "ex")
+    @AfterThrowing(pointcut = "execution(* com.example.final_project.service.imp.UserServiceImpl.*(..))", throwing = "ex")
     public void log(JoinPoint joinPoint, Exception ex){
         LocalDateTime time = LocalDateTime.now();
         String className = joinPoint.getTarget().getClass().getName();

@@ -15,6 +15,8 @@ public class Address {
     private String street;
     private String city;
     private String state;
+    @OneToOne(mappedBy = "address")
+    private User user;
     @Column(name = "deleted", nullable = false)
     private boolean deleted = false;
 }

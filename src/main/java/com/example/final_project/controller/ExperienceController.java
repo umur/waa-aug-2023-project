@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping ("/experience")
+@RequestMapping ("user/experience")
 public class ExperienceController {
     @Autowired
     private ExperienceService experienceService;

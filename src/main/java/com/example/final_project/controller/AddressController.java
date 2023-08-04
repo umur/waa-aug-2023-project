@@ -9,14 +9,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping ("/address")
+@RequestMapping ("user/address")
 public class AddressController {
     @Autowired
     private AddressService addressService;
 
     @PostMapping
     public ResponseEntity<ResponseMessage> add(@RequestBody AddressDto address){
-        System.out.println("address");
         addressService.add(address);
         return ResponseEntity.ok(new ResponseMessage(true,"successfully added address"));
     }

@@ -1,4 +1,4 @@
-package com.example.final_project.impl;
+package com.example.final_project.service.imp;
 
 import com.example.final_project.dto.*;
 import com.example.final_project.entity.User;
@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
     public AuthenticationResponse register(RegisterRequest registerRequest) {
         User user = modelMapper.map(registerRequest, User.class);
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
-        user.setRole(Role.ALUMNI);
+        user.setRole(Role.ADMIN);
         userRepository.save(user);
         CustomUserDetails userDetails = new CustomUserDetails(user);
         var jwtToken = jwtUtil.generateToken(userDetails);
