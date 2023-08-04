@@ -8,10 +8,11 @@ import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Entity
 @Setter
 @Getter
-@Service
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +24,12 @@ public class User {
     private String phoneNumber;
     @Enumerated(EnumType.STRING)
     private Role role;
-    @ManyToOne
+    @OneToOne
     private Address address;
     @OneToOne
     private Profile profile;
+    @OneToMany
+    private List<Experience> experienceList;
     @Column(name = "deleted", nullable = true)
     private boolean deleted = false;
 }

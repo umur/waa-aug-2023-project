@@ -19,7 +19,7 @@ public class Profile {
     private String major;
     private int numExperience;
     private String achievement;
-    @OneToMany
-    private List<Experience> experienceList;
+    @OneToOne(mappedBy = "profile")
+    private User user;
     //@Column(name = "deleted", nullable = false)
 }

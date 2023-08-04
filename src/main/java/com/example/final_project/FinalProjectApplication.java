@@ -17,5 +17,6 @@ public class FinalProjectApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FinalProjectApplication.class, args);
 	}
+	@Bean
 	public ModelMapper modelMapper(){return new ModelMapper();}
 }

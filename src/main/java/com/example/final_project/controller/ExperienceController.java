@@ -1,6 +1,7 @@
 package com.example.final_project.controller;
 import com.example.final_project.dto.ExperienceDto;
 import com.example.final_project.service.imp.ExperienceService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import com.example.final_project.dto.ResponseMessage;
@@ -19,7 +20,7 @@ public class ExperienceController {
         return ResponseEntity.ok(new ResponseMessage(true,"successfully added experience"));
     }
     @GetMapping
-    public ResponseEntity<Object> get(){
+    public ResponseEntity<Object> get(HttpServletRequest request){
         return ResponseEntity.ok(experienceService.findAll());
     }
     @PutMapping("/{id}")

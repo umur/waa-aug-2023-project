@@ -1,6 +1,7 @@
 package com.example.final_project.dto;
 
 import com.example.final_project.entity.Experience;
+import com.example.final_project.entity.User;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,5 +21,5 @@ public class ProfileDto {
     private String major;
     private int numExperience;
     private String achievement;
-    private List<Experience> experienceList;
+    private User user;
 }
