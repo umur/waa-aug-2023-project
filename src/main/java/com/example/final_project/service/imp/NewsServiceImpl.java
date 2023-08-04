@@ -1,4 +1,4 @@
-package com.example.final_project.service.impl;
+package com.example.final_project.service.imp;
 
 import com.example.final_project.dto.NewsDto;
 import com.example.final_project.dto.NewsDto;
