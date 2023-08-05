@@ -37,9 +37,10 @@ public class UserDto {
     @NotBlank(message = "Last name is required")
     private String lastName;
     private RoleType role;
-    private List<Survey> surveys;
-    private List<SurveyAnswer> surveyAnswerList;
-    private List<SurveyQuestion> surveyQuestionList;
+    private List<SurveyDto> surveys;
+    @JsonManagedReference(value="userReference")
+    private List<SurveyAnswerDto> surveyAnswerList;
+    private List<SurveyQuestionDto> surveyQuestionList;
     private boolean isDeleted = false;
     private List<Event> events;
     private List<News> news;

@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface ISurveyService {
     SurveyDto getById(long id);
 
-    SurveyDto save(SurveyDto surveyDto);
+    SurveyDto save(long userId,SurveyDto surveyDto);
 
     List<SurveyDto> getAll();
     SurveyDto update(long surveyId,SurveyDto surveyDto);

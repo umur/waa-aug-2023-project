@@ -1,17 +1,13 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dto.SurveyAnswerDto;
-import com.example.demo.dto.SurveyDto;
 import com.example.demo.dto.SurveyQuestionDto;
 import com.example.demo.dto.UserDto;
-import com.example.demo.entity.Survey;
 import com.example.demo.entity.SurveyAnswer;
-import com.example.demo.entity.SurveyQuestion;
 import com.example.demo.entity.User;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.ISurveyAnswerRepo;
 import com.example.demo.repository.ISurveyQuestionRepo;
-import com.example.demo.repository.ISurveyRepo;
 import com.example.demo.repository.UserRepo;
 import com.example.demo.service.ISurveyAnswerService;
 import jakarta.transaction.Transactional;
@@ -45,16 +41,19 @@ public class SurveyAnswerService implements ISurveyAnswerService {
     }
 
     @Override
-    public SurveyAnswerDto save(long surveyQuestionId,SurveyAnswerDto surveyAnswerDto) {
-//        User user =userRepo.findById(userId).orElse(null);
-
-        SurveyQuestionDto surveyQuestionDto=modelMapper.map(surveyQuestionRepo.findById(surveyQuestionId).orElse(null),SurveyQuestionDto.class);
-//        surveyAnswerDto.setUser(modelMapper.map(user, UserDto.class));
-        surveyAnswerDto.setSurveyQuestion(surveyQuestionDto);
-        surveyAnswerDto.setCreatedAt(LocalDateTime.now());
-        SurveyAnswer surveyAnswer= modelMapper.map(surveyAnswerDto,SurveyAnswer.class);
-        surveyAnswerRepo.save(surveyAnswer);
-        return surveyAnswerDto;
+    public SurveyAnswerDto save(long userId,long surveyQuestionId,SurveyAnswerDto surveyAnswerDto) {
+        User user =userRepo.findById(userId).orElse(null);
+        var question=surveyQuestionRepo.findById(surveyQuestionId);
+        if(question.isPresent()&&!question.get().isDeleted()){
+            SurveyQuestionDto surveyQuestionDto=modelMapper.map(question.orElse(null),SurveyQuestionDto.class);
+            surveyAnswerDto.setUser(modelMapper.map(user, UserDto.class));
+            surveyAnswerDto.setSurveyQuestion(surveyQuestionDto);
+            surveyAnswerDto.setCreatedAt(LocalDateTime.now());
+            SurveyAnswer surveyAnswer= modelMapper.map(surveyAnswerDto,SurveyAnswer.class);
+            surveyAnswerRepo.save(surveyAnswer);
+            return surveyAnswerDto;
+        }
+        throw new ResourceNotFoundException("Survey question not found");
 
     }
 
@@ -64,7 +63,7 @@ public class SurveyAnswerService implements ISurveyAnswerService {
                 .stream().filter(surveyAnswer -> !surveyAnswer.isDeleted())
                 .map(answer->modelMapper.map(answer,SurveyAnswerDto.class))
                 .toList();
-        if(dtoList.isEmpty()) throw new ResourceNotFoundException("No survey question found");
+        if(dtoList.isEmpty()) throw new ResourceNotFoundException("No survey answer found");
         return dtoList;
     }
 
@@ -83,7 +82,7 @@ public class SurveyAnswerService implements ISurveyAnswerService {
 
     @Override
     public boolean delete(long surveyAnswerId)  {
-        Optional <SurveyAnswer> surveyAnswer= surveyAnswerRepo.findById(surveyAnswerId);//.orElseThrow(()->new ResourceNotFoundException("Survey question not found"));
+        Optional <SurveyAnswer> surveyAnswer= surveyAnswerRepo.findById(surveyAnswerId);
         if(surveyAnswer.isPresent()){
             var entity=surveyAnswer.get();
             entity.setDeleted(true);
