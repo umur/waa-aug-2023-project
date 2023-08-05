@@ -36,9 +36,9 @@ public class User implements UserDetails {
     @Cascade(CascadeType.ALL)
     private List<Survey> surveys;
 
-    @OneToMany
+    @JsonManagedReference(value="userReference")
+    @OneToMany(mappedBy = "user")
     @Cascade(CascadeType.ALL)
-    @JoinColumn(name="user_id")
     private List<SurveyAnswer> surveyAnswerList;
 
     @OneToMany
@@ -97,5 +97,13 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void addSurveyQuestion(SurveyQuestion surveyQuestion) {
+        surveyQuestionList.add(surveyQuestion);
+    }
+
+    public void addSurvey(Survey survey) {
+        surveys.add(survey);
     }
 }

@@ -1,18 +1,14 @@
 package com.example.demo.dto;
 
-import com.example.demo.entity.Choice;
 import com.example.demo.entity.QuestionType;
-import com.example.demo.entity.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -34,8 +30,10 @@ public class SurveyQuestionDto {
     private LocalDateTime createdAt;
     private LocalDateTime updateAt;
     private boolean isDeleted=false;
-    @JsonManagedReference
+    @JsonManagedReference(value = "surveyAnswerListManagedReference")
     private List<SurveyAnswerDto> surveyAnswerList;
+    @JsonBackReference(value = "questionSurveyBackReference")
+    private SurveyDto questionSurvey;
 
 
 }

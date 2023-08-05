@@ -8,7 +8,7 @@ import java.util.List;
 public interface ISurveyAnswerService {
 
     SurveyAnswerDto getById(long id);
-    SurveyAnswerDto save(long surveyQuestionId,SurveyAnswerDto surveyAnswerDto);
+    SurveyAnswerDto save(long userId,long surveyQuestionId,SurveyAnswerDto surveyAnswerDto);
     List<SurveyAnswerDto> getAll();
     SurveyAnswerDto update(long surveyAnswerId,SurveyAnswerDto surveyAnswerDto) throws IllegalAccessException;
     boolean delete(long surveyAnswerId);

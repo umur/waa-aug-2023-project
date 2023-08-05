@@ -44,10 +44,10 @@ public class SurveyController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,ex.getMessage());
         }
     }
-    @PostMapping
+    @PostMapping("/{userId}")
     @LogActivity(value = "Post survey")
-    public ResponseEntity<SurveyDto> save(@Valid @RequestBody SurveyDto surveyDto){
-        return ResponseEntity.ok(surveyService.save(surveyDto));
+    public ResponseEntity<SurveyDto> save(@Valid @PathVariable long userId,@RequestBody SurveyDto surveyDto){
+        return ResponseEntity.ok(surveyService.save(userId,surveyDto));
     }
     @PutMapping("/{surveyId}")
     @LogActivity(value = "Updating survey")

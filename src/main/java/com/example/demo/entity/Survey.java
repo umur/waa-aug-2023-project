@@ -28,11 +28,9 @@ public class Survey {
     private LocalDateTime updateAt;
     private boolean isDeleted=false;
 
-//    private User surveyAuthor;
-
-    @OneToMany
+    @OneToMany(mappedBy = "survey")
     @Cascade(CascadeType.ALL)
-    @JoinColumn(name="survey_id")
+    @JsonManagedReference(value = "questionSurveyBackReference")
     private List<SurveyQuestion> surveyQuestionList;
 
 }

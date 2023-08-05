@@ -23,7 +23,7 @@ public class SurveyQuestion {
     private QuestionType questionType;
     private boolean isRequired;
     private boolean isDeleted=false;
-    @OneToMany//(fetch = FetchType.EAGER)
+    @OneToMany
     @JoinColumn(name="survey_Question_id")
     @Cascade(CascadeType.ALL)
     private List<Choice> choiceList;
@@ -32,18 +32,13 @@ public class SurveyQuestion {
 
     @OneToMany(mappedBy = "surveyQuestion")
     @Cascade(CascadeType.ALL)
-    @JsonManagedReference
+    @JsonManagedReference(value = "surveyAnswerListManagedReference")
     private List<SurveyAnswer> surveyAnswerList;
-
-//    private User questionAuthor;
+    @ManyToOne
+    @JsonBackReference(value = "questionSurveyBackReference")
+    private Survey survey;
 
     public void addChoice(Choice choice) {
         choiceList.add(choice);
-    }
-    public void removeChoice(Choice choice) {
-        choiceList.remove(choice);
-    }
-    public void updateChoice(Choice existingChoice, String newChoiceText) {
-        existingChoice.setContent(newChoiceText);
     }
 }

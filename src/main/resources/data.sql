@@ -54,39 +54,6 @@ VALUES
     ('Sample Company 4', 'Sample Position 4', '2022-02-10', '2023-08-01', 'This is a sample job experience description 4.', false, 4),
     ('Sample Company 5', 'Sample Position 5', '2017-09-05', '2023-08-31', 'This is a sample job experience description 5.', false, 5);
 
--- Insert dummy users
-INSERT INTO User (email, password, first_Name, last_Name, role)
-VALUES
-    ('john.doe@example.com', 'password123', 'John', 'Doe', 'ADMIN'),
-    ('jane.smith@example.com', 'password456', 'Jane', 'Smith', 'STUDENT');
-
--- Insert dummy surveys
-INSERT INTO Survey (title, description, start_Date, end_Date, is_Active, created_At, update_At, is_deleted, user_id)
-VALUES
-    ('Customer Satisfaction Survey', 'Please provide your feedback.', '2023-08-01 12:00:00', '2023-08-15 12:00:00', true, '2023-08-01 12:00:00', '2023-08-01 12:00:00', false, 1),
-    ('Employee Engagement Survey', 'We value your opinion.', '2023-08-05 12:00:00', '2023-08-20 12:00:00', true, '2023-08-05 12:00:00', '2023-08-05 12:00:00', false, 2);
-
--- Insert dummy survey questions
-INSERT INTO Survey_Question (question, question_Type, is_Required, created_At, update_At, is_deleted, survey_id, user_id)
-VALUES
-    ('How satisfied are you with our services?', 'RADIO_BUTTON', true, '2023-08-02 12:00:00', '2023-08-02 12:00:00', false, 1, 1),
-    ('What is your age?', 'TEXT_FIELD', true, '2023-08-03 12:00:00', '2023-08-03 12:00:00', false, 1, 1);
-
--- Insert dummy choices for the first survey question
-INSERT INTO Choice (content, survey_Question_id)
-VALUES
-    ('Very Satisfied', 1),
-    ('Satisfied', 1),
-    ('Neutral', 1),
-    ('Dissatisfied', 1),
-    ('Very Dissatisfied', 1);
-
--- Insert dummy survey answers for the first survey question
-INSERT INTO Survey_Answer (answer, created_At, is_deleted, survey_Question_id, user_id)
-VALUES
-    ('Very Satisfied', '2023-08-04 12:00:00', false, 1, 1),
-    ('Satisfied', '2023-08-04 12:00:00', false, 1, 1),
-    ('Neutral', '2023-08-04 12:00:00', false, 1, 1);
 
 -- Insert dummy New 
 INSERT INTO News (title, description, publish_date, is_deleted, publisher_id)
@@ -97,3 +64,45 @@ VALUES
     ('Sample News 4', 'This is a sample news description 4.', '2023-08-22', false, 4),
     ('Sample News 5', 'This is a sample news description 5.', '2023-08-28', false, 5);
 
+-- Dummy Users
+INSERT INTO user (email, password, first_name, last_name, role, is_deleted) VALUES
+                                                                                ('john.doe@example.com', 'password123', 'John', 'Doe', 'STUDENT', false),
+                                                                                ('jane.smith@example.com', '12345', 'Jane', 'Smith', 'ADMIN', false),
+                                                                                ('michael.johnson@example.com', 'hello123', 'Michael', 'Johnson', 'FACULTY', false);
+
+
+
+-- Dummy Surveys
+INSERT INTO survey (title, description, start_date, end_date, is_active, created_at, update_at, is_deleted, user_id) VALUES
+                                                                                                                         ('Survey 1', 'This is survey 1 description', '2023-08-02 12:00:00', '2023-08-10 12:00:00', true, '2023-08-02 08:00:00', '2023-08-02 08:00:00', false, 1),
+                                                                                                                         ('Survey 2', 'Survey 2 description goes here', '2023-08-03 10:00:00', '2023-08-15 10:00:00', true, '2023-08-03 08:00:00', '2023-08-03 08:00:00', false, 2);
+
+-- Dummy SurveyQuestions
+INSERT INTO survey_question (question, question_type, is_required, is_deleted, created_at, update_at, survey_id) VALUES
+                                                                                                                     ('What is your name?', 'TEXT_FIELD', true, false, '2023-08-02 10:00:00', '2023-08-02 10:00:00', 1),
+                                                                                                                     ('Which programming language do you prefer?', 'RADIO_BUTTON', true, false, '2023-08-02 10:00:00', '2023-08-02 10:00:00', 1),
+                                                                                                                     ('Select your favorite colors.', 'CHECK_BOX', true, false, '2023-08-02 10:00:00', '2023-08-02 10:00:00', 2);
+
+-- Dummy SurveyAnswers
+INSERT INTO survey_answer (answer, created_at, is_deleted, survey_question_id, user_id) VALUES
+                                                                                            ('John Doe', '2023-08-02 11:00:00', false, 1, 1),
+                                                                                            ('Java', '2023-08-02 11:00:00', false, 2, 1),
+                                                                                            ('Choice A, Choice C', '2023-08-02 11:00:00', false, 3, 1),
+                                                                                            ('Jane Smith', '2023-08-02 11:00:00', false, 1, 2),
+                                                                                            ('Python', '2023-08-02 11:00:00', false, 2, 2),
+                                                                                            ('Choice B', '2023-08-02 11:00:00', false, 3, 2),
+                                                                                            ('Michael Johnson', '2023-08-02 11:00:00', false, 1, 3),
+                                                                                            ('JavaScript', '2023-08-02 11:00:00', false, 2, 3),
+                                                                                            ('Choice A, Choice B', '2023-08-02 11:00:00', false, 3, 3);
+
+-- Dummy Choices
+INSERT INTO choice (content, survey_question_id) VALUES
+                                                     ('Choice A', 1),
+                                                     ('Choice B', 1),
+                                                     ('Choice C', 1),
+                                                     ('Choice X', 2),
+                                                     ('Choice Y', 2),
+                                                     ('Choice Z', 2),
+                                                     ('Choice Red', 3),
+                                                     ('Choice Blue', 3),
+                                                     ('Choice Green', 3);
