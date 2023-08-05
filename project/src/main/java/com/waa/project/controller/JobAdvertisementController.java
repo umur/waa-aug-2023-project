@@ -1,5 +1,7 @@
 package com.waa.project.controller;
 
+import com.waa.project.aspect.annotation.CheckUserActive;
+import com.waa.project.aspect.annotation.LogMe;
 import com.waa.project.dto.requestDto.ApiResponse;
 import com.waa.project.dto.requestDto.JobPostingDto;
 import com.waa.project.dto.responseDto.CustomResponseDto;
@@ -25,13 +27,13 @@ public class JobAdvertisementController {
     private final AuthenticationService authenticationService;
     private final JobAdvertisementService jobAdvertisementService;
 
-
     @Autowired
     public JobAdvertisementController(AuthenticationService authenticationService, JobAdvertisementService jobAdvertisementService) {
         this.authenticationService = authenticationService;
         this.jobAdvertisementService = jobAdvertisementService;
     }
-
+    @LogMe
+    @CheckUserActive
     @PostMapping
     public ResponseEntity<JobPostingDto> createJobAdvertisement(@RequestBody JobPostingDto jobPostingDto) {
         Long id = authenticationService.getCurrentUserId();
@@ -43,7 +45,8 @@ public class JobAdvertisementController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
+    @LogMe
+    @CheckUserActive
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<String>> updateJobAdvertisement(@RequestBody JobPostingDto jobPostingDto, @PathVariable Long id) {
         UserRole role = authenticationService.getCurrentRole();
@@ -58,6 +61,8 @@ public class JobAdvertisementController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
+    @LogMe
+    @CheckUserActive
     @GetMapping
     public List<JobPostingDto> filter(@RequestParam(required = false) String state, @RequestParam(required = false) String city, @RequestParam(required = false) String companyName){
         return jobAdvertisementService.filter(state,city,companyName);

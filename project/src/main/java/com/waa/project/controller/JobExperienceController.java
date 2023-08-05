@@ -1,5 +1,6 @@
 package com.waa.project.controller;
 
+import com.waa.project.aspect.annotation.CheckUserActive;
 import com.waa.project.aspect.annotation.LogMe;
 import com.waa.project.entity.JobExperience;
 import com.waa.project.service.JobExperienceService;
@@ -19,12 +20,14 @@ public class JobExperienceController {
         this.jobExperienceService = jobExperienceService;
     }
     @LogMe
+    @CheckUserActive
     @GetMapping
     public ResponseEntity<List<JobExperience>> getAllJobExperiences() {
         List<JobExperience> jobExperiences = jobExperienceService.getAllJobExperiences();
         return new ResponseEntity<>(jobExperiences, HttpStatus.OK);
     }
     @LogMe
+    @CheckUserActive
     @PostMapping
     public ResponseEntity<JobExperience> createJobExperience(@RequestBody JobExperience jobExperience) {
         JobExperience createdJobExperience = jobExperienceService.createJobExperience(jobExperience);

@@ -25,6 +25,7 @@ public class UserProfileController {
     @Autowired
     private UserProfileService userProfileService;
     @LogMe
+    @CheckUserActive
     @GetMapping("/{id}")
     public ResponseEntity<UserProfile> getUserProfile(@PathVariable long id){
         UserProfile getUserprofile = userProfileService.getUserProfile(id);
@@ -38,12 +39,14 @@ public class UserProfileController {
         return ResponseEntity.ok(getUserprofile);
     }
     @LogMe
+    @CheckUserActive
     @PostMapping
     public ResponseEntity<UserProfile> createUserProfile(@RequestBody UserProfile userProfile) {
         UserProfile createdUserProfile = userProfileService.createUserProfile(userProfile);
         return ResponseEntity.ok(createdUserProfile);
     }
     @LogMe
+    @CheckUserActive
     @PostMapping("/{userProfileId}/experience")
     public ResponseEntity<String> addJobExperienceToUserProfile(
             @PathVariable long userProfileId,
@@ -56,6 +59,7 @@ public class UserProfileController {
         }
     }
     @LogMe
+    @CheckUserActive
     @PutMapping("/{id}")
     public ResponseEntity<String> updateProfile(@PathVariable Long id, @RequestBody UpdatedProfileDto updatedProfileDto, Authentication authentication) {
         try {
