@@ -2,6 +2,7 @@ package com.example.final_project.controller;
 import com.example.final_project.dto.AddressDto;
 import com.example.final_project.dto.ResponseMessage;
 import com.example.final_project.service.imp.AddressService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +16,8 @@ public class AddressController {
     private AddressService addressService;
 
     @PostMapping
-    public ResponseEntity<ResponseMessage> add(@RequestBody AddressDto address){
-        addressService.add(address);
+    public ResponseEntity<ResponseMessage> add(@RequestBody AddressDto address, HttpServletRequest request){
+        addressService.add(address,request);
         return ResponseEntity.ok(new ResponseMessage(true,"successfully added address"));
     }
     @PutMapping("/{id}")

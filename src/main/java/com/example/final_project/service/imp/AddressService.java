@@ -2,8 +2,11 @@ package com.example.final_project.service.imp;
 
 import com.example.final_project.dto.AddressDto;
 import com.example.final_project.entity.Address;
+import com.example.final_project.entity.User;
 import com.example.final_project.repository.AddressRepo;
+import com.example.final_project.repository.UserRepository;
 import com.example.final_project.service.IAddressService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.hibernate.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +21,14 @@ public class AddressService implements IAddressService {
     @Autowired
     private AddressRepo addressRepo;
     @Autowired
+    private UserRepository userRepo;
+    @Autowired
     private ModelMapper modelMapper;
-    public void add(AddressDto address) {
+    public void add(AddressDto address, HttpServletRequest request) {
+        String email = (String) request.getAttribute("email");
+        User user = userRepo.findUserByEmail(email).get();
         var addressVal = modelMapper.map(address, Address.class);
+        addressVal.setUser(user);
         addressRepo.save(addressVal);
     }
     public List<AddressDto> findAll() {
