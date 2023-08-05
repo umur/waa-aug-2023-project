@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -26,6 +27,9 @@ public abstract class User implements UserDetails {
     private String password;
     private String firstName;
     private String lastName;
+    private boolean isAccountNonLocked ;
+    private int failedAttempts;
+    private LocalDateTime lockTime;
     @Enumerated
     private AccountStatus accountStatus;
     @Enumerated
@@ -53,7 +57,7 @@ public abstract class User implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return isAccountNonLocked;
     }
 
     @Override

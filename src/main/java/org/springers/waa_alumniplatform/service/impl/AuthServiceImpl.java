@@ -33,6 +33,7 @@ public class AuthServiceImpl implements AuthService {
         if (newUser.getAccountType() == NewUserAccountType.ALUMNI) user = createAlumni(newUser);
         else if(newUser.getAccountType() == NewUserAccountType.FACULTY) user = createFaculty(newUser);
         else throw new BadRequestException("Can't create account of type " + newUser.getAccountType().name());
+        user.setAccountNonLocked(true);
         userService.persist(user);
         return this.generateToken(user);
     }

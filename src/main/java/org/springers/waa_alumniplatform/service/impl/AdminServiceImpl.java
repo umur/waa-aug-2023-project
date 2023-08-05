@@ -32,6 +32,7 @@ public class AdminServiceImpl implements AdminService {
         else if(newUser.getAccountType() == NewUserAccountType.FACULTY) user = authService.createFaculty(newUser);
         else if(newUser.getAccountType() == NewUserAccountType.ADMIN) user = createAdmin(newUser);
         else throw new BadRequestException("Can't create account of type " + newUser.getAccountType().name());
+        user.setAccountNonLocked(true);
         userService.persist(user);
         return authService.generateToken(user);
     }
