@@ -1,7 +1,6 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dto.SurveyDto;
-import com.example.demo.dto.UserDto;
 import com.example.demo.entity.Survey;
 import com.example.demo.entity.User;
 import com.example.demo.exception.ResourceNotFoundException;
@@ -39,17 +38,18 @@ public class SurveyService implements ISurveyService {
     }
 
     @Override
-    public SurveyDto save(SurveyDto surveyDto) {
-//        User user=userRepo.findById(userId)
-//                .orElseThrow(()->new ResourceNotFoundException("User not found","id",userId));
-//        User user =userRepo.findById(userId).orElse(null);
-        surveyDto.setActive(surveyDto.getStartDate().isBefore(LocalDateTime.now()) && surveyDto.getEndDate().isAfter(LocalDateTime.now()));
-//        surveyDto.setSurveyAuthor(modelMapper.map(user, UserDto.class));
-        surveyDto.setCreatedAt(LocalDateTime.now());
-        surveyDto.setUpdateAt(LocalDateTime.now());
-        Survey survey=modelMapper.map(surveyDto,Survey.class);
-        surveyRepo.save(survey);
-        return surveyDto;
+    public SurveyDto save(long userId,SurveyDto surveyDto) {
+        User user = userRepo.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        if(!user.isDeleted()){
+            surveyDto.setActive(surveyDto.getStartDate().isBefore(LocalDateTime.now()) && surveyDto.getEndDate().isAfter(LocalDateTime.now()));
+            surveyDto.setCreatedAt(LocalDateTime.now());
+            surveyDto.setUpdateAt(LocalDateTime.now());
+            Survey survey=modelMapper.map(surveyDto,Survey.class);
+            surveyRepo.save(survey);
+            return surveyDto;
+        }
+        else throw new ResourceNotFoundException("User not found");
     }
 
     @Override
@@ -67,20 +67,15 @@ public class SurveyService implements ISurveyService {
         Optional<Survey> survey= surveyRepo.findById(surveyId);
         if(survey.isPresent()&&!survey.get().isDeleted()){
             Survey surveyEntity=survey.get();
-//            if(surveyEntity.getSurveyAuthor().getId()==userId){
-                modelMapper.map(surveyDto,surveyEntity);
-                surveyEntity.setUpdateAt(LocalDateTime.now());
-                surveyEntity.setActive(surveyDto.getStartDate().isBefore(LocalDateTime.now()) && surveyDto.getEndDate().isAfter(LocalDateTime.now()));
-                surveyRepo.save(surveyEntity);
-                modelMapper.map(surveyEntity,surveyDto);
+            modelMapper.map(surveyDto,surveyEntity);
+            surveyEntity.setUpdateAt(LocalDateTime.now());
+            surveyEntity.setActive(surveyDto.getStartDate().isBefore(LocalDateTime.now()) && surveyDto.getEndDate().isAfter(LocalDateTime.now()));
+            surveyRepo.save(surveyEntity);
+            modelMapper.map(surveyEntity,surveyDto);
 
-                return surveyDto;
-
-//            }
-//            else throw new IllegalAccessException("User does not have permission to update the survey.");
+            return surveyDto;
         }
         else throw new ResourceNotFoundException("Survey not found for ","id: ",surveyId);
-
     }
 
     @Override

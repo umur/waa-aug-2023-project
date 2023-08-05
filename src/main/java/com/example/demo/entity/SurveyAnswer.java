@@ -18,8 +18,10 @@ public class SurveyAnswer {
     private LocalDateTime createdAt;
     private boolean isDeleted=false;
     @ManyToOne
-    @JsonBackReference
+    @JsonBackReference(value = "surveyAnswerListManagedReference")
     private SurveyQuestion surveyQuestion;
-//    private User user;
+    @ManyToOne
+    @JsonBackReference(value="userReference")
+    private User user;
 
 }

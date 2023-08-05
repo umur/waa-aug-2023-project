@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import com.example.demo.annotation.LogActivity;
 import com.example.demo.dto.SurveyAnswerDto;
-import com.example.demo.dto.SurveyQuestionDto;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.service.ISurveyAnswerService;
 import jakarta.validation.Valid;
@@ -16,7 +15,8 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("surveys/answers/{surveyQuestionId}")
+@RequestMapping("surveys/questions/{questionId}/answers")
+
 @Validated
 public class SurveyAnswerController {
     @Autowired
@@ -32,26 +32,32 @@ public class SurveyAnswerController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,ex.getMessage());
         }
     }
-    @GetMapping("/{surveyAnswerId}")
+    @GetMapping("/{answerId}")
     @LogActivity(value = "Get SurveyAnswer")
-    public ResponseEntity<SurveyAnswerDto> getById(@PathVariable long surveyAnswerId) {
+    public ResponseEntity<SurveyAnswerDto> getById(@PathVariable long answerId) {
         try{
-            return ResponseEntity.ok(surveyAnswerService.getById(surveyAnswerId));
+            return ResponseEntity.ok(surveyAnswerService.getById(answerId));
         }
         catch(ResourceNotFoundException ex){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,ex.getMessage());
         }
     }
-    @PostMapping
+    @PostMapping("/{userId}")
     @LogActivity(value = "Post SurveyAnswer")
-    public ResponseEntity<SurveyAnswerDto> save(@Valid  @PathVariable long surveyQuestionId, @RequestBody SurveyAnswerDto surveyAnswerDto){
-        return ResponseEntity.ok(surveyAnswerService.save(surveyQuestionId,surveyAnswerDto));
-    }
-    @PutMapping("/{surveyAnswerId}")
-    @LogActivity(value = "Update SurveyAnswer")
-    public ResponseEntity<SurveyAnswerDto> update(@Valid @PathVariable long surveyAnswerId, @RequestBody SurveyAnswerDto surveyAnswerDto){
+    public ResponseEntity<SurveyAnswerDto> save(@Valid @PathVariable long userId, @PathVariable long questionId, @RequestBody SurveyAnswerDto surveyAnswerDto){
         try{
-            return ResponseEntity.ok(surveyAnswerService.update(surveyAnswerId, surveyAnswerDto));
+            return ResponseEntity.ok(surveyAnswerService.save(userId, questionId,surveyAnswerDto));
+        }
+        catch(ResourceNotFoundException ex){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,ex.getResourceName());
+        }
+
+    }
+    @PutMapping("/{answerId}")
+    @LogActivity(value = "Update SurveyAnswer")
+    public ResponseEntity<SurveyAnswerDto> update(@Valid @PathVariable long answerId, @RequestBody SurveyAnswerDto surveyAnswerDto){
+        try{
+            return ResponseEntity.ok(surveyAnswerService.update(answerId, surveyAnswerDto));
         }
         catch(IllegalAccessException ex){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,ex.getMessage());
@@ -60,14 +66,11 @@ public class SurveyAnswerController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,ex.getResourceName());
         }
     }
-    @DeleteMapping("/{surveyAnswerId}")
+    @DeleteMapping("/{answerId}")
     @LogActivity(value = "Delete SurveyAnswer")
-    public ResponseEntity<Boolean> delete(@PathVariable long surveyAnswerId){
-        /*
-         * delete should be enabled only for admin
-         * */
+    public ResponseEntity<Boolean> delete(@PathVariable long answerId){
         try{
-            return ResponseEntity.ok(surveyAnswerService.delete(surveyAnswerId));
+            return ResponseEntity.ok(surveyAnswerService.delete(answerId));
         }
         catch(ResourceNotFoundException ex){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,ex.getMessage());

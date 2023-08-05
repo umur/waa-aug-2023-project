@@ -1,8 +1,6 @@
 package com.example.demo.dto;
 
-import com.example.demo.entity.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +20,9 @@ public class SurveyAnswerDto {
     private String answer;
     private LocalDateTime createdAt;
     private boolean isDeleted=false;
-    @JsonBackReference
+    @JsonBackReference(value = "surveyAnswerListManagedReference")
     private SurveyQuestionDto surveyQuestion;
+    @JsonBackReference(value="userReference")
+    private UserDto user;
 
 }
