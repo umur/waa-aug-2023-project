@@ -37,14 +37,14 @@ public class ProfileController {
 
     @GetMapping("/{id}")
     @LogActivity(value = "Get profile")
-    public ResponseEntity<ProfileDto> getById(@PathVariable int id){
+    public ResponseEntity<ProfileDto> getById(@PathVariable Long id){
         ProfileDto profileDto = profileService.getById(id);
         if(profileDto != null) return ResponseEntity.ok(profileDto);
         return ResponseEntity.notFound().build();
     }
     @PutMapping("/{id}")
     @LogActivity(value = "Update profile")
-    public ResponseEntity<ProfileDto> update(@Valid @PathVariable int id, @RequestBody ProfileDto profileDto){
+    public ResponseEntity<ProfileDto> update(@Valid @PathVariable Long id, @RequestBody ProfileDto profileDto){
         ProfileDto updatedProfile = profileService.update(profileDto, id);
         if(updatedProfile == null) {
             return ResponseEntity.notFound().build();
@@ -53,7 +53,7 @@ public class ProfileController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable int id){
+    public ResponseEntity delete(@PathVariable Long id){
         boolean deleted = profileService.delete(id);
         if (deleted) return ResponseEntity.noContent().build();
         return ResponseEntity.notFound().build();

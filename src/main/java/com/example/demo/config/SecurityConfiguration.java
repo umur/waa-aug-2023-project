@@ -20,32 +20,22 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http.csrf().disable().cors()
-//                // Allow all requests without authentication
-//                .and().authorizeRequests().anyRequest().permitAll()
-//                // Disable session creation (we'll use stateless tokens instead)
-//                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//
-//        http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-
-//        return http.build();
          http
                  .csrf()
                  .disable()
                  .authorizeHttpRequests()
-                 .requestMatchers("/user/login/**","/user/register/**")
+                 .requestMatchers("/users/login/**","/users/register/**")
                  .permitAll()
                  .requestMatchers(HttpMethod.DELETE,"/users/{userId}").hasAuthority("ADMIN")
                  .requestMatchers(HttpMethod.DELETE,"/posts/{postId}").hasAnyAuthority("STUDENT","ADMIN", "FACULTY")
-                 .requestMatchers("/users").hasAnyAuthority("STUDENT","ADMIN", "FACULTY")
-                 .requestMatchers("/jobs").hasAnyAuthority("STUDENT","ADMIN", "FACULTY")
-                 .requestMatchers("/courses").hasAnyAuthority("STUDENT","ADMIN", "FACULTY")
-                 .requestMatchers("/job-applications").hasAnyAuthority("STUDENT","ADMIN", "FACULTY")
                  .requestMatchers("/profiles").hasAnyAuthority("STUDENT","ADMIN", "FACULTY")
                  .requestMatchers("/events").hasAnyAuthority("STUDENT","ADMIN", "FACULTY")
                  .requestMatchers("/job-experiences").hasAnyAuthority("STUDENT","ADMIN", "FACULTY")
                  .requestMatchers("/news").hasAnyAuthority("STUDENT","ADMIN", "FACULTY")
-                 .requestMatchers("/surveys/questions").hasAnyAuthority("STUDENT","ADMIN", "FACULTY")
+                 .requestMatchers(HttpMethod.GET, "/surveys").hasAnyAuthority("ADMIN","STUDENT", "FACULTY")
+                 .requestMatchers("/surveys").hasAuthority("ADMIN")
+                 .requestMatchers(HttpMethod.GET, "/surveys/questions").hasAnyAuthority("STUDENT","ADMIN", "FACULTY")
+                 .requestMatchers("/surveys/questions").hasAuthority("ADMIN")
                  .requestMatchers("/surveys/answers").hasAnyAuthority("STUDENT","ADMIN", "FACULTY")
                  .anyRequest()
                  .authenticated()

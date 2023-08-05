@@ -20,9 +20,9 @@ import java.util.stream.Collectors;
 @Component
 public class JwtUtil {
 
-//    @Autowired
-//    UserDetailsService userDetailsService;
-    private final String secret = "top-secret";
+    @Autowired
+    UserDetailsService userDetailsService;
+    private final String secret = "4B6150645367566B597033733676397924423F4528482B4D6251655468576D5A";
     private final long expiration = 5 * 60 * 60 * 60;
     //     private final long expiration = 5;
     private final long refreshExpiration = 5 * 60 * 60 * 60 * 60;
@@ -123,7 +123,7 @@ public class JwtUtil {
     }
 
     public Authentication getAuthentication(String token) {
-        Claims claims = getAllClaimsFromToken(token);
+//        Claims claims = getAllClaimsFromToken(token);
 //        String username = claims.getSubject();
 //        var roles = (List<? extends GrantedAuthority>) claims.get("roles");
 //
@@ -135,7 +135,7 @@ public class JwtUtil {
 //            authorities.add(new SimpleGrantedAuthority(role.getName()));
 //        }
 //        UserDetails userDetails = new User(username, "", roles);
-
+//
 //        UserDetails userDetails = userDetailsService.loadUserByUsername(claims.getSubject()); // LEFT THIS HERE ON PURPOSE
 //        var authentication = new UsernamePasswordAuthenticationToken(
 //                userDetails, null, userDetails.getAuthorities());
