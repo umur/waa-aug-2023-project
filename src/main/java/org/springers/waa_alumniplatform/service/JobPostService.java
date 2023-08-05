@@ -3,6 +3,7 @@ package org.springers.waa_alumniplatform.service;
 import org.springers.waa_alumniplatform.dto.jobPost.NewJobPost;
 import org.springers.waa_alumniplatform.entity.JobPost;
 
+import java.security.Principal;
 import java.util.List;
 
 public interface JobPostService {
@@ -18,4 +19,7 @@ public interface JobPostService {
     List<JobPost> getJobPostByCity(String state);
 
     List<JobPost> getJobPostByCompanyName(String companyName);
+
+    JobPost updateOne(Principal principal, int alumniId, int jobPostId, JobPost jobPost);
+
 }

@@ -13,4 +13,6 @@ public interface UserService extends UserDetailsService {
     User getUserById(int userId);
 
     User deleteUser(Principal principal, int userId);
+
+    boolean isEmailAreadyInUse(String email);
 }

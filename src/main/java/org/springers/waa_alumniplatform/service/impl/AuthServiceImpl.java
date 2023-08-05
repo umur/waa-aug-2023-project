@@ -14,6 +14,7 @@ import org.springers.waa_alumniplatform.exception.BadRequestException;
 import org.springers.waa_alumniplatform.service.AuthService;
 import org.springers.waa_alumniplatform.service.UserService;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public Token register(NewUser newUser) {
         //TODO check if email is already in use and throw appropriate exception
+        ensureEmailIsUnique(newUser.getEmail());
         User user;
         if (newUser.getAccountType() == NewUserAccountType.ALUMNI) user = createAlumni(newUser);
         else if(newUser.getAccountType() == NewUserAccountType.FACULTY) user = createFaculty(newUser);
@@ -46,6 +48,10 @@ public class AuthServiceImpl implements AuthService {
         ));
         User user = userService.getUserByEmail(loginCredential.getEmail());
         return generateToken(user);
+    }
+
+    public void ensureEmailIsUnique(String email){
+        if(userService.isEmailAreadyInUse(email)) throw new BadCredentialsException("Email already in use");
     }
 
 
@@ -77,4 +83,6 @@ public class AuthServiceImpl implements AuthService {
                 .role(Role.FACULTY)
                 .build();
     }
+
+
 }

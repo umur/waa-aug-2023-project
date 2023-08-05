@@ -15,7 +15,7 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class AuthorizationChecker {
     private final UserService userService;
-    @Around("execution(* org.springers.waa_alumniplatform.service.impl.*.*(java.security.Principal, int, ..))")
+    @Around("execution(public * org.springers.waa_alumniplatform.service.impl.*.*(java.security.Principal, int, ..))")
     public Object verifyAuthorization(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         System.out.println("Authorized checker aspect reached");
         Principal principal = (Principal) proceedingJoinPoint.getArgs()[0];

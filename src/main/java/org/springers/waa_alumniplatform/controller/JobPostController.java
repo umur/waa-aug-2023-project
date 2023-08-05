@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -38,6 +39,19 @@ public class JobPostController {
     @PatchMapping("/{jobPost_id}")
     public ResponseEntity<JobPost> apply(@PathVariable int jobPost_id, @PathVariable int alumni_Id){
         return ResponseEntity.ok(jobPostService.apply(jobPost_id, alumni_Id));
+    }
+
+    @PutMapping("/{jobPost_Id}")
+    public ResponseEntity<JobPost> updateOne(
+            Principal principal,
+            @PathVariable int jobPost_Id,
+            @RequestBody JobPost jobPost
+    ){
+        JobPost jobPostInDB = jobPostService.getJobPostById(jobPost_Id);
+        int posterId = jobPostInDB.getPoster().getId(); // needed for the authorization checker
+        return ResponseEntity.ok(
+                jobPostService.updateOne(principal, posterId, jobPost_Id, jobPost)
+        );
     }
     @PostMapping
     public ResponseEntity<NewJobPost> addOne(@RequestBody NewJobPost jobPost, @PathVariable int alumni_Id ){

@@ -14,4 +14,5 @@ public interface AuthService {
     Token generateToken(User user);
 
     Token authenticate(LoginCredential loginCredential);
+    void ensureEmailIsUnique(String email);
 }

@@ -27,6 +27,7 @@ public class AdminServiceImpl implements AdminService {
     private final AdminRepo adminRepo;
     @Override
     public Token createUser(NewUser newUser) {
+        authService.ensureEmailIsUnique(newUser.getEmail());
         User user;
         if (newUser.getAccountType() == NewUserAccountType.ALUMNI) user = authService.createAlumni(newUser);
         else if(newUser.getAccountType() == NewUserAccountType.FACULTY) user = authService.createFaculty(newUser);

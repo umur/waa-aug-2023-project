@@ -44,4 +44,10 @@ public class UserServiceImpl implements UserService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return getUserByEmail(username);
     }
+
+    @Override
+    public boolean isEmailAreadyInUse(String email) {
+        User user = userRepo.findUserByEmail(email).orElse(null);
+        return user != null;
+    }
 }

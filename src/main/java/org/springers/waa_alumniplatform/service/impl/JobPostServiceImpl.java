@@ -11,6 +11,7 @@ import org.springers.waa_alumniplatform.service.AlumniService;
 import org.springers.waa_alumniplatform.service.JobPostService;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 
 @Service
@@ -63,4 +64,21 @@ public class JobPostServiceImpl implements JobPostService {
     public List<JobPost> getJobPostByCompanyName(String companyName) {
         return jobPostRepo.findJobPostsByCompanyName(companyName);
     }
+
+    @Override
+    public JobPost updateOne(Principal principal, int alumniId, int jobPostId, JobPost jobPost) {
+        JobPost jobPostInDB = getJobPostById(jobPostId);
+
+        jobPostInDB.setPostedAt(jobPost.getPostedAt());
+        jobPostInDB.setIndustry(jobPost.getIndustry());
+        jobPostInDB.setCompany(jobPost.getCompany());
+        jobPostInDB.setOtherReq(jobPost.getOtherReq());
+        jobPostInDB.setPosition(jobPost.getPosition());
+        jobPostInDB.setSkills(jobPost.getSkills());
+
+
+        return jobPostRepo.save(jobPostInDB);
+
+    }
+
 }
