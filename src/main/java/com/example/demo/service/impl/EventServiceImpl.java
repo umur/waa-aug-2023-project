@@ -26,8 +26,6 @@ public class EventServiceImpl implements EventService {
     @Autowired
     private UserRepo userRepo;
 
-
-
     @Override
     public EventDto createEvent(long userId, EventDto eventDto) {
         User user =userRepo.findById(userId).orElse(null);

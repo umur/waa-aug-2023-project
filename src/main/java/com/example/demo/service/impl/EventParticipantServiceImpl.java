@@ -36,26 +36,6 @@ public class EventParticipantServiceImpl implements EventParticipantService {
         return modelMapper.map(savedEventParticipant, EventParticipantDto.class);
     }
 
-//    @Override
-//    public EventParticipantDto updateEvent(long userId, long eventId, EventParticipantDto eventParticipantDto) throws IllegalAccessException {
-//        User user = userRepository.findById(userId)
-//                .orElseThrow(() -> new IllegalArgumentException("User with ID " + userId + " not found."));
-//
-//        EventParticipant eventParticipant = eventParticipantRepository.findById(eventId)
-//                .orElseThrow(() -> new IllegalArgumentException("Event Participant with ID " + eventId + " not found."));
-//
-//        if (eventParticipant.getUser().getId() != userId) {
-//            throw new IllegalAccessException("User does not have permission to update this event participant.");
-//        }
-//
-//        eventParticipant.setEvent(eventParticipantDto.getEvent());
-//        // Update other fields as needed
-//
-//        EventParticipant updatedEventParticipant = eventParticipantRepository.save(eventParticipant);
-//
-//        return modelMapper.map(updatedEventParticipant, EventParticipantDto.class);
-//    }
-
     @Override
     public void deleteEventParticipant(long userId, long eventId) {
         EventParticipant eventParticipant = eventParticipantRepository.findByUserIdAndEventId(userId, eventId)

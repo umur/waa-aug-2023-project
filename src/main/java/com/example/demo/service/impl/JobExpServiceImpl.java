@@ -49,8 +49,6 @@ public class JobExpServiceImpl implements JobExpService {
         if (existingJobExperience.getProfile().getId() != profileId) {
             throw new IllegalAccessException("You are not authorized to update this Job Experiance.");
         }
-
-        // Update the properties of the existing job experience
         existingJobExperience.setCompanyName(jobExpDto.getCompanyName());
         existingJobExperience.setPosition(jobExpDto.getPosition());
         existingJobExperience.setStartDate(jobExpDto.getStartDate());
@@ -68,14 +66,14 @@ public class JobExpServiceImpl implements JobExpService {
             throw new ResourceNotFoundException("Job Experience not found with ID: " + jobExperienceId);
         }
 
-        existingJobExp.setDeleted(true); // Soft delete by setting the flag to true
+        existingJobExp.setDeleted(true);
         jobExpRepo.save(existingJobExp);
     }
 
 
     @Override
     public List<JobExpDto> getAllJobExperiences() {
-        List<JobExperience> jobExperienceList = jobExpRepo.findAllByIsDeletedFalse(); // Filter out deleted job experiences
+        List<JobExperience> jobExperienceList = jobExpRepo.findAllByIsDeletedFalse();
         return jobExperienceList.stream()
                 .map(jobExperience -> modelMapper.map(jobExperience, JobExpDto.class))
                 .collect(Collectors.toList());
