@@ -50,14 +50,14 @@ public class UserController {
 
     //TODO Id should be long
 
-    public ResponseEntity<UserDto> getById(@PathVariable int id){
+    public ResponseEntity<UserDto> getById(@PathVariable Long id){
         UserDto userDto = userService.getById(id);
         if(userDto != null) return ResponseEntity.ok(userDto);
         return ResponseEntity.notFound().build();
     }
     @PutMapping("/{id}")
     @LogActivity(value = "Update user")
-    public ResponseEntity<UserDto> update(@Valid @PathVariable int id, @RequestBody UserDto userDto){
+    public ResponseEntity<UserDto> update(@Valid @PathVariable Long id, @RequestBody UserDto userDto){
         UserDto updatedUser = userService.update(userDto, id);
         if(updatedUser == null) {
             return ResponseEntity.notFound().build();
@@ -67,7 +67,7 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     @LogActivity(value = "Delete user")
-    public ResponseEntity delete(@PathVariable int id){
+    public ResponseEntity delete(@PathVariable Long id){
         boolean deleted = userService.delete(id);
         if (deleted) return ResponseEntity.noContent().build();
         return ResponseEntity.notFound().build();

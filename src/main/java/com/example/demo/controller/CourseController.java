@@ -35,14 +35,14 @@ public class CourseController {
 
     @GetMapping("/{id}")
     @LogActivity(value = "Get course")
-    public ResponseEntity<CourseDto> getById(@PathVariable int id){
+    public ResponseEntity<CourseDto> getById(@PathVariable Long id){
         CourseDto courseDto = courseService.getById(id);
         if(courseDto != null) return ResponseEntity.ok(courseDto);
         return ResponseEntity.notFound().build();
     }
     @PutMapping("/{id}")
     @LogActivity(value = "Update course")
-    public ResponseEntity<CourseDto> update(@Valid @PathVariable int id, @RequestBody CourseDto courseDto){
+    public ResponseEntity<CourseDto> update(@Valid @PathVariable Long id, @RequestBody CourseDto courseDto){
         CourseDto updatedCourse = courseService.update(courseDto, id);
         if(updatedCourse == null) {
             return ResponseEntity.notFound().build();
@@ -52,7 +52,7 @@ public class CourseController {
 
     @DeleteMapping("/{id}")
     @LogActivity(value = "Delete course")
-    public ResponseEntity delete(@PathVariable int id){
+    public ResponseEntity delete(@PathVariable Long id){
         boolean deleted = courseService.delete(id);
         if (deleted) return ResponseEntity.noContent().build();
         return ResponseEntity.notFound().build();

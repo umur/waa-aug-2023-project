@@ -21,11 +21,8 @@ public class JwtFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
 
-//    private final UserDetailsService userDetailsService;
-
     public JwtFilter(JwtUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
-//        this.userDetailsService = userDetailsService;
     }
 
     @Override

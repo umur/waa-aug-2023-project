@@ -13,7 +13,6 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "profile_id")

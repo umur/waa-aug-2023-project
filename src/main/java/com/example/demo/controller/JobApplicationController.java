@@ -30,13 +30,13 @@ public class JobApplicationController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<JobApplicationDto> getById(@PathVariable int id){
+    public ResponseEntity<JobApplicationDto> getById(@PathVariable Long id){
         JobApplicationDto jobApplicationDto = jobApplicationService.getById(id);
         if(jobApplicationDto != null) return ResponseEntity.ok(jobApplicationDto);
         return ResponseEntity.notFound().build();
     }
     @PutMapping("/{id}")
-    public ResponseEntity<JobApplicationDto> update(@PathVariable int id, @RequestBody JobApplicationDto jobApplicationDto){
+    public ResponseEntity<JobApplicationDto> update(@PathVariable Long id, @RequestBody JobApplicationDto jobApplicationDto){
         JobApplicationDto updatedJobApplication = jobApplicationService.update(jobApplicationDto, id);
         if(updatedJobApplication == null) {
             return ResponseEntity.notFound().build();
@@ -45,7 +45,7 @@ public class JobApplicationController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable int id){
+    public ResponseEntity delete(@PathVariable Long id){
         boolean deleted = jobApplicationService.delete(id);
         if (deleted) return ResponseEntity.noContent().build();
         return ResponseEntity.notFound().build();
