@@ -1,45 +1,65 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from '../button/Button'
+import Button from '../button/Button';
 import Input from '../input/input';
 import Loading from '../loading/loading';
 
-import { handleLoginApi } from '../services/loginService';
+import { handleLoginApi } from '../../services/loginService';
 
 const LoginForm = () => {
     const navigate = useNavigate();
-    const [username, setUserName] = useState(null);
-    const [password, setPassword] = useState(null);
-    const [isLoading, setIsLoading] = useState(false)
+    const [handleLoginInput, setHandleLoginInput] = useState({
+        username: '',
+        password: '',
+    });
+    const [isLoading, setIsLoading] = useState(false);
 
-    const handleClick = async () => {
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setHandleLoginInput((prevInput) => ({
+            ...prevInput,
+            [name]: value,
+        }));
+    };
+
+    const handleLogin = async () => {
         try {
             setIsLoading(true);
-            console.log('Button clicked');
-            const apiResponse = await handleLoginApi('auth',{username: username,password: password});
-            console.log(apiResponse);
-            console.log('Button clicked end');
+            const apiResponse = await handleLoginApi('auth', handleLoginInput);
             setIsLoading(false);
-            navigate("/")
-        } catch (error) {
-            if(error) {
-                setIsLoading(false);
-                console.error('API request error:', error);
-                navigate("/500")
+            if (apiResponse.token) {
+                navigate('/');
+            } else {
+                alert('Bad credentials, try again');
             }
+        } catch (error) {
+            setIsLoading(false);
+            console.error('API request error:', error);
+            navigate('/500');
         }
     };
 
     return (
         <div>
-            <Input type="email" value={setUserName}/>
-            <Input type="password" value={setPassword}/>
-            <Button color="primary" onClick={handleClick}>
+            <Input
+                name="username"
+                type="email"
+                value={handleLoginInput.username}
+                onChange={handleInputChange}
+            />
+            <Input
+                name="password"
+                type="password"
+                value={handleLoginInput.password}
+                onChange={handleInputChange}
+            />
+            <Button color="primary" onClick={handleLogin}>
                 Login
             </Button>
-            <a href="/#/">Link to home page</a>
-            {isLoading && <Loading/>}
+            <a href="/">Link to home page</a>
+            {isLoading && <Loading />}
         </div>
     );
 };
+
 export default LoginForm;

@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Input = ({ color, type, onClick, disabled, value }) => {
+const Input = ({ color, type, onChange, disabled, value }) => {
   return (
     <input
-      className={`custom-input ${color}`} // Adjust the class name if needed
+      className={`custom-input ${color}`}
       type={type}
-      onClick={onClick}
+      onChange={onChange}
       disabled={disabled}
       value={value}
     />
@@ -16,9 +16,9 @@ const Input = ({ color, type, onClick, disabled, value }) => {
 Input.propTypes = {
   color: PropTypes.string,
   type: PropTypes.string.isRequired,
-  onClick: PropTypes.func,
+  onChange: PropTypes.func,
   disabled: PropTypes.bool,
-  value: PropTypes.node,
+  value: PropTypes.string,
 };
 
 export default Input;
