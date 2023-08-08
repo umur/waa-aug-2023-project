@@ -41,13 +41,13 @@ const LoginForm = () => {
 
     return (
         <div>
-            <Input
+            <input
                 name="username"
                 type="email"
                 value={handleLoginInput.username}
                 onChange={handleInputChange}
             />
-            <Input
+            <input
                 name="password"
                 type="password"
                 value={handleLoginInput.password}
