@@ -1,12 +1,7 @@
 import React, { Component, Suspense } from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-
-const loading = (
-  <div className="pt-3 text-center">
-    <p>Loading...</p>
-  </div>
-)
+import loading from './components/loading/loading';
 
 const Home = React.lazy(() => import('./views/home'))
 const Login = React.lazy(() => import('./views/login'))

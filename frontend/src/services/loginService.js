@@ -1,6 +1,6 @@
 const API_BASE_URL = "http://localhost:5000/api";
 
-const fetchApiData = async (endpoint, requestData = {}, options = {}) => {
+const handleLoginApi = async (endpoint, requestData = {}, options = {}) => {
     try {
         const response = await fetch(`${API_BASE_URL}/${endpoint}`, {
             method: 'POST',
@@ -23,4 +23,4 @@ const fetchApiData = async (endpoint, requestData = {}, options = {}) => {
     }
 };
 
-export { fetchApiData };
+export { handleLoginApi };
