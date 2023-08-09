@@ -6,7 +6,8 @@ import { Link } from 'react-router-dom';
 const Login = () => {
     return (
         <div>
-            <AppHeader/>
+            {/* <AppHeader/> */}
+            <h1>This is login page</h1>
             <LoginForm/>
             <Link to="/">Link to home page</Link>
         </div>

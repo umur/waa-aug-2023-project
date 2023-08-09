@@ -1,0 +1,59 @@
+/* Sidebar.css */
+.sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    /* Arrange links vertically */
+}
+
+.sidebar li {
+    margin-bottom: 10px;
+}
+
+.sidebar li a {
+    color: white;
+    /* Set the link color to match the sidebar text color */
+    text-decoration: none;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    /* Add transitions */
+    padding: 5px;
+    display: inline-block;
+}
+
+.sidebar li a:hover {
+    color: #61dafb;
+    /* Set a color that contrasts with the dark background */
+    background-color: #444;
+}
+
+.sidebar li a:active {
+    color: #fff;
+    /* Set the link color to white on click */
+    background-color: #333;
+    /* Darken the background on click */
+    transform: scale(0.95);
+    /* Add a slight scale effect on click */
+}
+
+.app-sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+}

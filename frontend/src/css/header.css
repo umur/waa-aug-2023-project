@@ -1,0 +1,22 @@
+/* AppHeader.css */
+.header {
+    background-color: #444;
+    /* Set the background color to match the dark sidebar */
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.header button {
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+}
