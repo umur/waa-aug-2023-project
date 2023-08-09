@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 let color = 'light';
 
@@ -6,6 +6,7 @@ const ThemeContext = createContext();
 
 const ThemeProvider = ({ children }) => {
     const [theme, setTheme] = useState(require('../css/light-theme.css'))
+    
     const ThemeDark = () => {
         document.body.classList.remove('light-theme');
         setTheme(require(`../css/${color === 'light' ? 'dark' : 'light'}-theme.css`));
