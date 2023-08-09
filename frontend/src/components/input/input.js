@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Input = ({ color, type, onChange, disabled, value }) => {
+  console.log(onChange)
   return (
     <input
       className={`custom-input ${color}`}
