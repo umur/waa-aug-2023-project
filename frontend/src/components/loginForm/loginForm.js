@@ -57,7 +57,6 @@ const LoginForm = () => {
             <Button color="primary" onClick={handleLogin}>
                 Login
             </Button>
-            <a href="/">Link to home page</a>
             {isLoading && <Loading />}
         </div>
     );

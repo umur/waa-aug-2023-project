@@ -1,5 +1,5 @@
 import React, { Component, Suspense } from 'react';
-import { HashRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import loading from './components/loading/loading';
 import ThemeProvider from './contexts/ThemeContext';
@@ -16,7 +16,7 @@ class App extends Component {
     return (
       <div className="App">
         <ThemeProvider>
-          <HashRouter>
+          <BrowserRouter>
             <Suspense fallback={loading} >
               <Routes>
                 <Route path="/login" name="Login Page" element={<Login />} />
@@ -25,7 +25,7 @@ class App extends Component {
                 <Route path="*" element={<Home />} />
               </Routes>
             </Suspense>
-          </HashRouter>
+          </BrowserRouter>
         </ThemeProvider>
       </div>
     );
