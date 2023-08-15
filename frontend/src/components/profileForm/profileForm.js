@@ -4,7 +4,7 @@ import Button from '../button/Button';
 import Input from '../input/input';
 import Loading from '../loading/loading';
 
-// import { handleProfileApi } from '../../services/profileService';
+import ProfileService from '../../services/ProfileService';
 
 const ProfileForm = () => {
     const navigate = useNavigate();
@@ -33,8 +33,7 @@ const ProfileForm = () => {
     const handleProfile = async () => {
         try {
             setIsLoading(true);
-            console.log(handleProfileInput)
-            const apiResponse = await handleProfileApi('profile', handleLoginInput);
+            const apiResponse = await ProfileService.handlePostApi('profile', handleLoginInput);
             setIsLoading(false);
             if (apiResponse.token) {
                 navigate('/');
