@@ -24,7 +24,7 @@ const LoginForm = () => {
     const handleLogin = async () => {
         try {
             setIsLoading(true);
-            const apiResponse = await AuthService.handleLoginApi('login', handleLoginInput);
+            const apiResponse = await AuthService.handlePostApi('login', handleLoginInput);
             setIsLoading(false);
             if (apiResponse.accessToken) {
                 navigate('/');

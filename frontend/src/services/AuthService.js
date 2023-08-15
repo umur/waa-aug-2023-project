@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_BASE_URL = "http://localhost:8080/auth";
 
-const handleLoginApi = async (endpoint, requestData = {}, options = {}) => {
+const handlePostApi = async (endpoint, requestData = {}, options = {}) => {
     try {
         const response = await axios.post(`${API_BASE_URL}/${endpoint}`,requestData, {
             headers: {
@@ -21,7 +21,7 @@ const handleLoginApi = async (endpoint, requestData = {}, options = {}) => {
 };
 
 const AuthService = {
-    handleLoginApi,
+    handlePostApi,
 }
 
 export default AuthService;
