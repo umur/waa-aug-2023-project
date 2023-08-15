@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/eventParticipants")
+@CrossOrigin
 public class EventParticipantController {
     @Autowired
     private EventParticipantService eventParticipantService;

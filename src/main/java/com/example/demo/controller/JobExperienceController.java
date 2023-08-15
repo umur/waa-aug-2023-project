@@ -16,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/job-experiences")
 @Validated
+@CrossOrigin
 public class JobExperienceController {
 
     @Autowired

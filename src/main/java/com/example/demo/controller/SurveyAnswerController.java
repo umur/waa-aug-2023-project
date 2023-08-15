@@ -16,8 +16,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("surveys/questions/{questionId}/answers")
-
 @Validated
+@CrossOrigin
 public class SurveyAnswerController {
     @Autowired
     private ISurveyAnswerService surveyAnswerService;
