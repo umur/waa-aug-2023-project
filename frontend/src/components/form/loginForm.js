@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../button/Button';
-import Input from '../input/input';
 import Loading from '../loading/loading';
 
-import { handleLoginApi } from '../../services/loginService';
+import AuthService from '../../services/AuthService';
 
 const LoginForm = () => {
     const navigate = useNavigate();
     const [handleLoginInput, setHandleLoginInput] = useState({
-        username: '',
+        email: '',
         password: '',
     });
     const [isLoading, setIsLoading] = useState(false);
@@ -25,9 +24,9 @@ const LoginForm = () => {
     const handleLogin = async () => {
         try {
             setIsLoading(true);
-            const apiResponse = await handleLoginApi('auth', handleLoginInput);
+            const apiResponse = await AuthService.handlePostApi('login', handleLoginInput);
             setIsLoading(false);
-            if (apiResponse.token) {
+            if (apiResponse.accessToken) {
                 navigate('/');
             } else {
                 alert('Bad credentials, try again');
@@ -41,22 +40,30 @@ const LoginForm = () => {
 
     return (
         <div>
-            <input
-                name="username"
-                type="email"
-                value={handleLoginInput.username}
-                onChange={handleInputChange}
-            />
+            <div>
+                <label>email: </label>
+                <input
+                    name="email"
+                    type="email"
+                    value={handleLoginInput.email}
+                    onChange={handleInputChange}
+                />
+            </div>
 
-            <input
-                name="password"
-                type="password"
-                value={handleLoginInput.password}
-                onChange={handleInputChange}
-            />
-            <Button color="primary" onClick={handleLogin}>
-                Login
-            </Button>
+            <div>
+                <label>password: </label>
+                <input
+                    name="password"
+                    type="password"
+                    value={handleLoginInput.password}
+                    onChange={handleInputChange}
+                />
+            </div>
+            <div>
+                <Button color="primary" onClick={handleLogin}>
+                    Login
+                </Button>
+            </div>
             {isLoading && <Loading />}
         </div>
     );

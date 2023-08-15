@@ -7,6 +7,7 @@ import ThemeProvider from './contexts/ThemeContext';
 import './css/dark-theme.css'
 import AppHeader from './components/header/AppHeader';
 import AppSidebar from './components/sidebar/AppSidebar';
+import Register from './views/register';
 
 const Home = React.lazy(() => import('./views/home'))
 const Login = React.lazy(() => import('./views/login'))
@@ -27,6 +28,7 @@ class App extends Component {
                 <Suspense fallback={loading}>
                   <Routes>
                     <Route path="/login" name="Login Page" element={<Login />} />
+                    <Route path="/register" name="Register Page" element={<Register />} />
                     <Route path="/profile" name="Profile Page" element={<Profile />} />
                     <Route path="/404" name="Not Found Page" element={<NotFoundError />} />
                     <Route path="/500" name="Internal Server Page" element={<InternalServerError />} />
