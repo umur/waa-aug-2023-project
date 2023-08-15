@@ -1,0 +1,11 @@
+.filterSection{
+    justify-content:space-evenly;
+}
+
+.filterSection > button  {
+    width: 20%;
+}
+
+.filterSection > * {
+    width: 35%;
+}

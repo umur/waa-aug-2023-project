@@ -8,6 +8,7 @@ function App() {
   return (
     <div className="app">
       <AlumnusDirectory/>
+      {/* <AlumniProfile/> */}
     </div>
   );
 }

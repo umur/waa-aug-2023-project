@@ -1,0 +1,10 @@
+.almuniPreview{
+    align-items: center;
+    margin-top: 30px;
+}
+.almuniPreview > div {
+    margin-left: 20px;
+}
+.nameNphone{
+    align-items: center;
+}

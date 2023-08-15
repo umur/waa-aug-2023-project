@@ -5,13 +5,11 @@
 
 .rowFlex{
   display: flex;
-  justify-content: space-between;
 }
 
 .columnFlex{
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
 }
 
 .roundButton{
@@ -26,4 +24,3 @@
 .centerItems{
   align-items: center;
 }
-
