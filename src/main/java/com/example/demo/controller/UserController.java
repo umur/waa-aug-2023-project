@@ -20,6 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 @Validated
+@CrossOrigin(origins = "*")
 public class UserController {
     @Autowired
     private UserService userService;

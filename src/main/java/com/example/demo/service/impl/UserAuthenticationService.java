@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.dto.UserAuthenticationRequestDTO;
 import com.example.demo.dto.UserAuthenticationResponseDTO;
+import com.example.demo.dto.UserDto;
 import com.example.demo.dto.UserLoginDto;
 import com.example.demo.entity.RoleType;
 import com.example.demo.entity.User;
@@ -55,6 +56,6 @@ public class UserAuthenticationService {
             throw new ArithmeticException();
         }
         var jwtToken = jwtService.generateToken(userEntity);
-        return UserAuthenticationResponseDTO.builder().token(jwtToken).build();
+        return UserAuthenticationResponseDTO.builder().token(jwtToken).user(modelMapper.map(userEntity, UserDto.class)).build();
     }
 }
