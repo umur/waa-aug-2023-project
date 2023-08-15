@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/job-applications")
 @Validated
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class JobApplicationController {
     @Autowired
     private JobApplicationService jobApplicationService;

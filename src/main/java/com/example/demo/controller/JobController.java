@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/jobs")
 @Validated
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class JobController {
     @Autowired
     private JobService jobService;

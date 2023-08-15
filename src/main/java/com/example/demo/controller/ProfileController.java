@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/profiles")
 @Validated
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class ProfileController {
     @Autowired
     private ProfileService profileService;

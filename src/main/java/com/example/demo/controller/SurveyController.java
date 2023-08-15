@@ -20,7 +20,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/surveys")
 @Validated
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class SurveyController {
     @Autowired
     private ISurveyService surveyService;
