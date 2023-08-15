@@ -27,6 +27,8 @@ const LoginForm = () => {
             const apiResponse = await AuthService.handlePostApi('login', handleLoginInput);
             setIsLoading(false);
             if (apiResponse.accessToken) {
+                localStorage.setItem('accessToken', apiResponse.accessToken);
+                console.log(localStorage.getItem('accessToken'));
                 navigate('/');
             } else {
                 alert('Bad credentials, try again');

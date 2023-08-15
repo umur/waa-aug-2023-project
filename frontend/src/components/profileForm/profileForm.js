@@ -33,7 +33,7 @@ const ProfileForm = () => {
     const handleProfile = async () => {
         try {
             setIsLoading(true);
-            const apiResponse = await ProfileService.handlePostApi('profile', handleLoginInput);
+            const apiResponse = await ProfileService.handlePostApi('profile', handleProfileInput);
             setIsLoading(false);
             if (apiResponse.token) {
                 navigate('/');
