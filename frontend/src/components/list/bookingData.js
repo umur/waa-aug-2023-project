@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import bookingService, { handleFetchList } from '../../services/bookingService'; // Update with your actual import path
-import { handleFetchListMock } from '../../services/handleFetchListMock';
 
 const BookingData = () => {
     const navigate = useNavigate();
@@ -10,7 +9,7 @@ const BookingData = () => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const data = await bookingService.handleFetchList('list');
+                const data = await bookingService.handleFetchList('booking');
                 setUserData(data);
                 console.log(data);
             } catch (error) {

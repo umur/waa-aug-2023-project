@@ -1,18 +1,18 @@
 import React from 'react';
-import "../../css/sidebar.css"
+import '../../css/sidebar.css';
 import { Link } from 'react-router-dom';
 
 const AppSidebar = () => {
     return (
-        <div className="sidebar">
+        <div className="app-sidebar">
             <ul>
-                <Link to="/">Home Page</Link>
-                <Link to="/login">Login Page</Link>
-                <Link to="/404">Not Found Page</Link>
-                <Link to="/500">Internal Error</Link>
+                <li><Link to="/" children="Home Page"/></li>
+                <li><Link to="/login" children="Login Page"/></li>
+                <li><Link to="/404" children="404 Page"/></li>
+                <li><Link to="/500" children="500 Page"/></li>
             </ul>
         </div>
     )
 }
 
-export default AppSidebar
+export default AppSidebar;

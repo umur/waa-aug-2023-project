@@ -1,59 +1,42 @@
 /* Sidebar.css */
-.sidebar {
+.app-sidebar {
     position: absolute;
-    top: 0;
+    top: 68px; /* Adjust the top value to account for the header height and additional spacing */
     left: 0;
     width: 250px;
-    height: 100vh;
+    height: calc(100vh - 85px); /* Adjust the height to fit the remaining viewport */
     background-color: #333;
     color: white;
     padding: 20px;
+    z-index: 1; /* Make sure the sidebar is on top of the header */
 }
 
-.sidebar ul {
+.app-sidebar ul {
     list-style-type: none;
     padding: 0;
     display: flex;
     flex-direction: column;
-    /* Arrange links vertically */
 }
 
-.sidebar li {
+.app-sidebar li {
     margin-bottom: 10px;
 }
 
-.sidebar li a {
+.app-sidebar li a {
     color: white;
-    /* Set the link color to match the sidebar text color */
     text-decoration: none;
     transition: color 0.3s ease, background-color 0.3s ease;
-    /* Add transitions */
     padding: 5px;
     display: inline-block;
 }
 
-.sidebar li a:hover {
+.app-sidebar li a:hover {
     color: #61dafb;
-    /* Set a color that contrasts with the dark background */
     background-color: #444;
 }
 
-.sidebar li a:active {
+.app-sidebar li a:active {
     color: #fff;
-    /* Set the link color to white on click */
     background-color: #333;
-    /* Darken the background on click */
     transform: scale(0.95);
-    /* Add a slight scale effect on click */
-}
-
-.app-sidebar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 250px;
-    height: 100vh;
-    background-color: #333;
-    color: white;
-    padding: 20px;
 }
