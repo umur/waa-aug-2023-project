@@ -25,5 +25,4 @@ public class Alumni extends User{
     private List<Education> educationalHistory;
     @OneToMany(cascade = CascadeType.ALL)
     private List<ProfessionalHistory> professionalHistories;
-
 }

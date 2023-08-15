@@ -1,0 +1,29 @@
+*{
+  margin: 0;
+  background-color: #eee;
+}
+
+.rowFlex{
+  display: flex;
+  justify-content: space-between;
+}
+
+.columnFlex{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.roundButton{
+  border-radius:100px;
+  border: none;
+}
+
+.form-control{
+  margin-top: 10px;
+}
+
+.centerItems{
+  align-items: center;
+}
+

@@ -13,6 +13,7 @@ public class SurveyAnswerServiceImpl implements SurveyAnswerService {
 
     @Override
     public SurveyAnswer findSurveyAnswerByResponderIdAndQuestionId(int questionId, int alumniId) {
-        return surveyAnswerRepo.findSurveyAnswerBySurveyQuestionIdAndResponderId(questionId, alumniId);
+        return surveyAnswerRepo
+                .findSurveyAnswerBySurveyQuestionIdAndResponderId(questionId, alumniId);
     }
 }
