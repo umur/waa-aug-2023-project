@@ -57,4 +57,13 @@ public class EventServiceImpl implements EventService {
     public List<Event> findAll() {
         return eventRepo.findAll();
     }
+
+	@Override
+	public Event getById(int id) {
+		Optional<Event> event = eventRepo.findById(id);
+		if(event.isEmpty()) {
+			throw new IllegalArgumentException();
+		}
+		return event.get();
+	}
 }

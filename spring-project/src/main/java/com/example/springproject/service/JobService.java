@@ -19,5 +19,6 @@ public interface JobService {
     public List<Job> getByCompanyName(String companyName);
 
     List<Job> findAll();
+	public Job findById(int id);
 
 }

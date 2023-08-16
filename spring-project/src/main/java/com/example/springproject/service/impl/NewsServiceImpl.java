@@ -45,4 +45,6 @@ public class NewsServiceImpl implements NewsService {
         }
         return news.get();
     }
+
+	
 }

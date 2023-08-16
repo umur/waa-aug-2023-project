@@ -15,4 +15,5 @@ public interface EventService {
     public void RSVP (int id, Student student);
 
     List<Event> findAll();
+	public Event getById(int id);
 }

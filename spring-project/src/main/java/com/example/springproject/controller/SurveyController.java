@@ -11,6 +11,8 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/survey")
+@CrossOrigin(origins = "http://localhost:3000")
+
 public class SurveyController {
     private final SurveyService surveyService;
 
@@ -24,6 +26,10 @@ public class SurveyController {
     @GetMapping
     public List<Survey> get() {
         return surveyService.findAll();
+    }
+    @GetMapping("/{id}")
+    public Survey getById(@PathVariable int id) {
+    	return surveyService.getById(id);
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable int id){

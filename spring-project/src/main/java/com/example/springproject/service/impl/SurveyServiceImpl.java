@@ -64,4 +64,14 @@ public class SurveyServiceImpl implements SurveyService {
             update(survey);
         }
     }
+
+	@Override
+	public Survey getById(int id) {
+		Optional<Survey> survey = surveyRepo.findById(id);
+		if(survey.isEmpty()) {
+			throw new IllegalArgumentException();
+		}
+		
+		return survey.get();
+	}
 }

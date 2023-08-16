@@ -87,5 +87,14 @@ public class JobServiceImpl implements JobService {
         return jobRepo.findByCompanyName(companyName);
     }
 
+	@Override
+	public Job findById(int id) {
+		Optional<Job> job = jobRepo.findById(id);
+		if(job.isEmpty()) {
+			throw new IllegalArgumentException();
+		}
+		return job.get();
+	}
+
 
 }

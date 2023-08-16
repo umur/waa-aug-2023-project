@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/event")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class EventController {
     private final EventService eventService;
 
@@ -29,6 +30,11 @@ public class EventController {
     @GetMapping
     public List<Event> get() {
         return eventService.findAll();
+    }
+    
+    @GetMapping("/{id}")
+    public Event getById(@PathVariable int id) {
+    	return eventService.getById(id);
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable int id){

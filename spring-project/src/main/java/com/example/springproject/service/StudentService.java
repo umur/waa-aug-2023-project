@@ -14,5 +14,5 @@ public interface StudentService {
     public List<Student> findByIndustry(String industry);
 
 
-    Student findById(int studentId);
+    public Student findById(int studentId);
 }

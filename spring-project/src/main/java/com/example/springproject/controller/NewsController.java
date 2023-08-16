@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/news")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class NewsController {
     private final NewsService newsService;
 
@@ -24,6 +25,10 @@ public class NewsController {
     @GetMapping
     public List<News> get() {
         return newsService.findAll();
+    }
+    @GetMapping("/{id}")
+    public News getNewsById(@PathVariable int id) {
+    	return newsService.get(id);
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable int id){

@@ -11,5 +11,6 @@ public interface SurveyService {
     public List<Survey> findAll();
     public void update(Survey survey);
     public void addResponse(int survey_id, SurveyResponse surveyResponse);
+	public Survey getById(int id);
 
 }
