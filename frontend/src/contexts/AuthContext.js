@@ -9,12 +9,12 @@ export const AuthProvider = ({ children }) => {
 
   const login = (newToken) => {
     setToken(newToken);
-    localStorage.setItem('token', newToken);
+    localStorage.setItem('accessToken', newToken);
   };
 
   const logout = () => {
     setToken(null);
-    localStorage.removeItem('token');
+    localStorage.removeItem('accessToken');
   };
 
   return (

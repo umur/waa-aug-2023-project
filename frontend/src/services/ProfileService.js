@@ -6,7 +6,6 @@ const FACULTY_ACCESS_TOKEN = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c
 
 const ADMIN_ACCESS_TOKEN = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyNEBleGFtcGxlLmNvbSIsImlzcyI6ImFwcCIsImlhdCI6MTY5MjE0MzgzNywiZXhwIjoxNjk0ODIyMjM3fQ.z1Y1kXD7I5EPdJKYypfCLuflzxPMUFpDPG66phUocSyofDOV9Fb_LjAJiIyrV1tQw5zCur_GW2vRhFFNg-StPQ";
 
-
 const handlePostApi = async (endpoint, requestData = {}, options = {}) => {
     try {
         const response = await axios.post(`${API_BASE_URL}/${endpoint}`,requestData, {

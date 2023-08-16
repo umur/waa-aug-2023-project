@@ -31,7 +31,7 @@ const LoginForm = () => {
             const apiResponse = await AuthService.handlePostApi('login', handleLoginInput);
             setIsLoading(false);
             if (apiResponse.accessToken) {
-                localStorage.setItem('accessToken', apiResponse.accessToken);
+                localStorage.setItem('accessToken', apiResponse.role);
                 console.log(localStorage.getItem('accessToken'));
                 navigate('/');
             } else {
