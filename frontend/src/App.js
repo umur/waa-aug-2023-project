@@ -14,7 +14,7 @@ import { AuthProvider } from './contexts/AuthContext';
 
 const Home = React.lazy(() => import('./views/home'))
 const Login = React.lazy(() => import('./views/login'))
-const CreateProfile = React.lazy(() => import('./views/profile'))
+const CreateProfile = React.lazy(() => import('./views/createProfile'))
 const NotFoundError = React.lazy(() => import('./views/404'))
 const InternalServerError = React.lazy(() => import('./views/500'))
 
