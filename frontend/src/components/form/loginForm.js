@@ -31,8 +31,8 @@ const LoginForm = () => {
             const apiResponse = await AuthService.handlePostApi('login', handleLoginInput);
             setIsLoading(false);
             if (apiResponse.accessToken) {
-                localStorage.setItem('accessToken', apiResponse.role);
-                console.log(localStorage.getItem('accessToken'));
+                localStorage.setItem('accessToken', apiResponse.accessToken);
+                localStorage.setItem('role', apiResponse.role);
                 navigate('/');
             } else {
                 alert('Bad credentials, try again');
@@ -66,22 +66,21 @@ const LoginForm = () => {
                 />
             </div>
             <div>
-                <Button color="primary" onClick={handleLogin}>
-                    Login
-                </Button>
+                {isLoading && <Loading />}
+                {'' ? (
+                    <>
+                        <p>Logged in</p>
+                        <button onClick={logout}>Logout</button>
+                    </>
+                ) : (
+                    <>
+                        <p>Not logged in</p>
+                        <Button color="primary" onClick={handleLogin}>
+                            Login
+                        </Button>
+                    </>
+                )}
             </div>
-            {isLoading && <Loading />}
-            {'' ? (
-        <>
-          <p>Logged in</p>
-          <button onClick={logout}>Logout</button>
-        </>
-      ) : (
-        <>
-          <p>Not logged in</p>
-          <button onClick={() => login('yourAuthTokenHere')}>Login</button>
-        </>
-      )}
         </div>
     );
 };

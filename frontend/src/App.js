@@ -1,5 +1,5 @@
 // App.js
-import React, { Component, Suspense } from 'react';
+import React, { Component, Suspense, useContext } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import loading from './components/loading/loading';
@@ -9,8 +9,7 @@ import AppHeader from './components/header/AppHeader';
 import AppSidebar from './components/sidebar/AppSidebar';
 import Register from './views/register';
 import AppFooter from './components/footer/AppFooter';
-// import LoginForm from './form/loginForm';
-import { AuthProvider } from './contexts/AuthContext';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 
 const Home = React.lazy(() => import('./views/home'))
 const Login = React.lazy(() => import('./views/login'))
@@ -18,12 +17,11 @@ const CreateProfile = React.lazy(() => import('./views/createProfile'))
 const NotFoundError = React.lazy(() => import('./views/404'))
 const InternalServerError = React.lazy(() => import('./views/500'))
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <ThemeProvider>
-          <AuthProvider>
+const App = () => {
+  return (
+    <div className="App">
+      <ThemeProvider>
+        <AuthProvider>
           <BrowserRouter>
             <div className="app-container">
               <AppSidebar />
@@ -43,11 +41,10 @@ class App extends Component {
               </div>
             </div>
           </BrowserRouter>
-          </AuthProvider>
-        </ThemeProvider>
-      </div>
-    );
-  }
+        </AuthProvider>
+      </ThemeProvider>
+    </div>
+  );
 }
 
 export default App;
