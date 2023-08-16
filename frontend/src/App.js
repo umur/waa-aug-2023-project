@@ -8,10 +8,11 @@ import './css/dark-theme.css'
 import AppHeader from './components/header/AppHeader';
 import AppSidebar from './components/sidebar/AppSidebar';
 import Register from './views/register';
+import AppFooter from './components/footer/AppFooter';
 
 const Home = React.lazy(() => import('./views/home'))
 const Login = React.lazy(() => import('./views/login'))
-const Profile = React.lazy(() => import('./views/profile'))
+const CreateProfile = React.lazy(() => import('./views/profile'))
 const NotFoundError = React.lazy(() => import('./views/404'))
 const InternalServerError = React.lazy(() => import('./views/500'))
 
@@ -29,12 +30,13 @@ class App extends Component {
                   <Routes>
                     <Route path="/login" name="Login Page" element={<Login />} />
                     <Route path="/register" name="Register Page" element={<Register />} />
-                    <Route path="/profile" name="Profile Page" element={<Profile />} />
+                    <Route path="/create-profile" name="Create Profile Page" element={<CreateProfile />} />
                     <Route path="/404" name="Not Found Page" element={<NotFoundError />} />
                     <Route path="/500" name="Internal Server Page" element={<InternalServerError />} />
                     <Route path="*" element={<Home />} />
                   </Routes>
                 </Suspense>
+                <AppFooter />
               </div>
             </div>
           </BrowserRouter>

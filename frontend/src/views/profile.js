@@ -1,8 +1,8 @@
 import React from 'react';
-import ProfileForm from '../components/profileForm/profileForm';
+import ProfileForm from '../components/form/profileForm';
 import { Link } from 'react-router-dom';
 
-const Profile = () => {
+const CreateProfile = () => {
     return (
         <div>
             {/* <AppHeader/> */}
@@ -12,4 +12,4 @@ const Profile = () => {
         </div>
     );
 };
-export default Profile;
+export default CreateProfile;

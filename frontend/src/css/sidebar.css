@@ -1,14 +1,14 @@
 /* Sidebar.css */
 .app-sidebar {
     position: absolute;
-    top: 68px; /* Adjust the top value to account for the header height and additional spacing */
+    top: 68px;
     left: 0;
     width: 250px;
-    height: calc(100vh - 85px); /* Adjust the height to fit the remaining viewport */
+    height: calc(125vh - 85px);
     background-color: #333;
     color: white;
     padding: 20px;
-    z-index: 1; /* Make sure the sidebar is on top of the header */
+    z-index: 1;
 }
 
 .app-sidebar ul {
