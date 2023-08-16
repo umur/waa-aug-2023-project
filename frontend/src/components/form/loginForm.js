@@ -4,8 +4,12 @@ import Button from '../button/Button';
 import Loading from '../loading/loading';
 
 import AuthService from '../../services/AuthService';
+import { useAuth } from '../../contexts/AuthContext';
+
 
 const LoginForm = () => {
+    //token I added
+    const { token, login, logout } = useAuth();
     const navigate = useNavigate();
     const [handleLoginInput, setHandleLoginInput] = useState({
         email: '',
@@ -67,6 +71,17 @@ const LoginForm = () => {
                 </Button>
             </div>
             {isLoading && <Loading />}
+            {'' ? (
+        <>
+          <p>Logged in</p>
+          <button onClick={logout}>Logout</button>
+        </>
+      ) : (
+        <>
+          <p>Not logged in</p>
+          <button onClick={() => login('yourAuthTokenHere')}>Login</button>
+        </>
+      )}
         </div>
     );
 };

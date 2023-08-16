@@ -8,6 +8,8 @@ import './css/dark-theme.css'
 import AppHeader from './components/header/AppHeader';
 import AppSidebar from './components/sidebar/AppSidebar';
 import Register from './views/register';
+// import LoginForm from './form/loginForm';
+import { AuthProvider } from './contexts/AuthContext';
 
 const Home = React.lazy(() => import('./views/home'))
 const Login = React.lazy(() => import('./views/login'))
@@ -20,6 +22,7 @@ class App extends Component {
     return (
       <div className="App">
         <ThemeProvider>
+          <AuthProvider>
           <BrowserRouter>
             <div className="app-container">
               <AppSidebar />
@@ -38,6 +41,7 @@ class App extends Component {
               </div>
             </div>
           </BrowserRouter>
+          </AuthProvider>
         </ThemeProvider>
       </div>
     );
