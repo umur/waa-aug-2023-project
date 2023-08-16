@@ -44,6 +44,7 @@ const handleGetApi = async (endpoint, options) => {
         throw new Error(`API request error: ${error.message}`);
     }
 }
+
 const handleUpdateApi = async (updatedProfileData, userRole, options = {}) => {
     try {
       let token = null;

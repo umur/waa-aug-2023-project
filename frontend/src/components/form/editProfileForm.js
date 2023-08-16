@@ -3,8 +3,11 @@ import '../../css/ProfileForm.css';
 
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import UserService from '../../services/userService';
+import { useNavigate } from 'react-router-dom';
 
 const EditProfileForm = () => {
+  const navigate = useNavigate();
   const { token, profileId } = useAuth();
 
   const [user, setUser] = useState(null);
@@ -22,27 +25,16 @@ const EditProfileForm = () => {
   });
 
   useEffect(() => {
-    async function fetchUserData() {
+    const fetchUserData = async () => {
       try {
-        // Fetch user data from your backend using the token
-        const response = await fetch(`http://localhost:8080/profile/${profileId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-        if (response.ok) {
-          const userData = await response.json();
-          setUser(userData);
+        const response  = await UserService.handleGetSingleApi("profile",profileId);
+        console.log("reponse", response)
           // eslint-disable-next-line eqeqeq
-          if (userData.id == profileId && userData.role == token.role) {
+          if (response.id == profileId && response.role == token.role) {
             setEditable(true);
+            setUser(response);
           }
-        } else {
-          // Handle error cases
-          console.error('Error fetching user data');
-        }
       } catch (error) {
-        // Handle fetch or other errors
         console.error('An error occurred:', error);
       }
     }
@@ -52,11 +44,25 @@ const EditProfileForm = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setHandleProfileInput((prevInput) => ({
+    setUser((prevInput) => ({
       ...prevInput,
       [name]: value,
     }));
   };
+
+  const handlesumbitUpdate = async (e) => {
+    try {
+      const response  = await UserService.handlePutApi("profile",profileId,user);
+        console.log("reponse", response)
+          // eslint-disable-next-line eqeqeq
+          if (response) {
+            alert("update sucessful");
+            navigate("/")
+          }
+    } catch(error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div className="profile-form-container">
@@ -72,7 +78,7 @@ const EditProfileForm = () => {
             <input
               name="dateOfBirth"
               type="date"
-              value={handleProfileInput.dateOfBirth}
+              value={user.dateOfBirth}
               onChange={handleInputChange}
             />
           </label>
@@ -80,7 +86,7 @@ const EditProfileForm = () => {
             <input
               name="gender"
               type="text"
-              value={handleProfileInput.gender}
+              value={user.gender}
               onChange={handleInputChange}
             />
           </label>
@@ -88,7 +94,7 @@ const EditProfileForm = () => {
             <input
               name="address"
               type="text"
-              value={handleProfileInput.address}
+              value={user.address}
               onChange={handleInputChange}
             />
           </label>
@@ -96,7 +102,7 @@ const EditProfileForm = () => {
             <input
               name="phoneNumber"
               type="text"
-              value={handleProfileInput.phoneNumber}
+              value={user.phoneNumber}
               onChange={handleInputChange}
             />
           </label>
@@ -104,7 +110,7 @@ const EditProfileForm = () => {
             <input
               name="graduationYear"
               type="text"
-              value={handleProfileInput.graduationYear}
+              value={user.graduationYear}
               onChange={handleInputChange}
             />
           </label>
@@ -112,7 +118,7 @@ const EditProfileForm = () => {
             <input
               name="numberOfExperience"
               type="text"
-              value={handleProfileInput.numberOfExperience}
+              value={user.numberOfExperience}
               onChange={handleInputChange}
             />
           </label>
@@ -120,11 +126,11 @@ const EditProfileForm = () => {
             <input
               name="profilePicture"
               type="text"
-              value={handleProfileInput.profilePicture}
+              value={user.profilePicture}
               onChange={handleInputChange}
             />
           </label>
-          <button type="submit">Save Changes</button>
+          <button onClick={handlesumbitUpdate}>Save Changes</button>
         </form>
       ) : (
         <p>You are not authorized to edit this profile.</p>
@@ -135,129 +141,3 @@ const EditProfileForm = () => {
 
 
 export default EditProfileForm;
-
-
-// const EditProfile = () => {
-//     const navigate = useNavigate();
-//     const [handleProfileInput, setHandleProfileInput] = useState({
-//         firstName: '',
-//         lastName: '',
-//         dateOfBirth: '',
-//         gender: '',
-//         address: '',
-//         phoneNumber: '',
-//         graduationYear: '',
-//         numberOfExperience: '',
-//         profilePicture: ''
-//     });
-//     const [isLoading, setIsLoading] = useState(false);
-
-//     const handleInputChange = (e) => {
-//         const { name, value } = e.target;
-//         setHandleProfileInput((prevInput) => ({
-//             ...prevInput,
-//             [name]: value,
-//         }));
-//     };
-
-//     const handleProfile = async () => {
-//         try {
-//             setIsLoading(true);
-//             const apiResponse = await ProfileService.handlePostApi('profile', handleProfileInput);
-//             setIsLoading(false);
-//             if (apiResponse) {
-//                 alert('Create Profile successfully');
-//                 navigate('/');
-//             } else {
-//                 alert('Bad credentials, try again');
-//             }
-//         } catch (error) {
-//             setIsLoading(false);
-//             console.error('API request error:', error);
-//             navigate('/500');
-//         }
-//     };
-
-//     return (
-//         <div className="profile-form-container">
-//             <label>First Name:
-//                 <input
-//                     name="firstName"
-//                     type="text"
-//                     value={handleProfileInput.firstName}
-//                     onChange={handleInputChange}
-//                 />
-//             </label>
-//             <label>Last Name:
-//                 <input
-//                     name="lastName"
-//                     type="text"
-//                     value={handleProfileInput.lastName}
-//                     onChange={handleInputChange}
-//                 />
-//             </label>
-//             <label>Date of Birth:
-//                 <input
-//                     name="dateOfBirth"
-//                     type="date"
-//                     value={handleProfileInput.dateOfBirth}
-//                     onChange={handleInputChange}
-//                 />
-//             </label>
-//             <label>Gender:
-//                 <input
-//                     name="gender"
-//                     type="text"
-//                     value={handleProfileInput.gender}
-//                     onChange={handleInputChange}
-//                 />
-//             </label>
-//             <label>Address:
-//                 <input
-//                     name="address"
-//                     type="text"
-//                     value={handleProfileInput.address}
-//                     onChange={handleInputChange}
-//                 />
-//             </label>
-//             <label>Phone Number:
-//                 <input
-//                     name="phoneNumber"
-//                     type="text"
-//                     value={handleProfileInput.phoneNumber}
-//                     onChange={handleInputChange}
-//                 />
-//             </label>
-//             <label>Graduation Year:
-//                 <input
-//                     name="graduationYear"
-//                     type="text"
-//                     value={handleProfileInput.graduationYear}
-//                     onChange={handleInputChange}
-//                 />
-//             </label>
-//             <label>Number of Experience:
-//                 <input
-//                     name="numberOfExperience"
-//                     type="text"
-//                     value={handleProfileInput.numberOfExperience}
-//                     onChange={handleInputChange}
-//                 />
-//             </label>
-//             <label>Profile Picture URL:
-//                 <input
-//                     name="profilePicture"
-//                     type="text"
-//                     value={handleProfileInput.profilePicture}
-//                     onChange={handleInputChange}
-//                 />
-//             </label>
-//             <Button color="primary" onClick={handleProfile}>
-//                 Edit Profile
-//             </Button>
-//             {isLoading && <Loading />}
-//         </div>
-//     );
-// };
-
-// export default EditProfile;
