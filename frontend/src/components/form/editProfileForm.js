@@ -1,10 +1,14 @@
 // import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Button from '../button/Button';
+import Loading from '../loading/loading';
+
+import ProfileService from '../../services/ProfileService';
 import '../../css/ProfileForm.css';
 
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import UserService from '../../services/userService';
-import { useNavigate } from 'react-router-dom';
 
 const EditProfileForm = () => {
   const navigate = useNavigate();
@@ -12,23 +16,15 @@ const EditProfileForm = () => {
 
   const [user, setUser] = useState(null);
   const [editable, setEditable] = useState(false);
-  const [handleProfileInput, setHandleProfileInput] = useState({
-    firstName: '',
-    lastName: '',
-    dateOfBirth: '',
-    gender: '',
-    address: '',
-    phoneNumber: '',
-    graduationYear: '',
-    numberOfExperience: '',
-    profilePicture: ''
-  });
 
   useEffect(() => {
     const fetchUserData = async () => {
+      console.log("my profile id" + profileId)
       try {
         const response  = await UserService.handleGetSingleApi("profile",profileId);
         console.log("reponse", response)
+        console.log(response.id == profileId)
+        console.log(response.role == token.role)
           // eslint-disable-next-line eqeqeq
           if (response.id == profileId && response.role == token.role) {
             setEditable(true);
@@ -40,7 +36,7 @@ const EditProfileForm = () => {
     }
 
     fetchUserData();
-  }, [token,profileId]);
+  }, [token]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
