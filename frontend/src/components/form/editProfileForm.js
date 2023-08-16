@@ -1,36 +1,40 @@
 // import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Button from '../button/Button';
-import Loading from '../loading/loading';
-
-import ProfileService from '../../services/ProfileService';
-// import '../../css/ProfileForm.css';
+import '../../css/ProfileForm.css';
 
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 
 const EditProfileForm = () => {
-  const { token } = useAuth();
+  const { token, profileId } = useAuth();
 
   const [user, setUser] = useState(null);
   const [editable, setEditable] = useState(false);
+  const [handleProfileInput, setHandleProfileInput] = useState({
+    firstName: '',
+    lastName: '',
+    dateOfBirth: '',
+    gender: '',
+    address: '',
+    phoneNumber: '',
+    graduationYear: '',
+    numberOfExperience: '',
+    profilePicture: ''
+  });
 
   useEffect(() => {
     async function fetchUserData() {
       try {
         // Fetch user data from your backend using the token
-        const response = await fetch('http://localhost:8080/profile/12', {
+        const response = await fetch(`http://localhost:8080/profile/${profileId}`, {
           headers: {
-            Authorization: `Bearer ${token}` // Add your token to the headers
+            Authorization: `Bearer ${token}`
           }
         });
-
         if (response.ok) {
           const userData = await response.json();
           setUser(userData);
-
-          // Check if the user's role and ID match the fetched data
-          if (userData.id === token.userId && userData.role === token.role) {
+          // eslint-disable-next-line eqeqeq
+          if (userData.id == profileId && userData.role == token.role) {
             setEditable(true);
           }
         } else {
@@ -44,10 +48,18 @@ const EditProfileForm = () => {
     }
 
     fetchUserData();
-  }, [token]);
+  }, [token,profileId]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setHandleProfileInput((prevInput) => ({
+      ...prevInput,
+      [name]: value,
+    }));
+  };
 
   return (
-    <div>
+    <div className="profile-form-container">
       {editable ? (
         <form>
           <label htmlFor="firstName">First Name:</label>
@@ -56,8 +68,62 @@ const EditProfileForm = () => {
           <label htmlFor="lastName">Last Name:</label>
           <input type="text" id="lastName" value={user.lastName} onChange={(e) => setUser({ ...user, lastName: e.target.value })} />
 
-          {/* Include other fields here */}
-          
+          <label>Date of Birth:
+            <input
+              name="dateOfBirth"
+              type="date"
+              value={handleProfileInput.dateOfBirth}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>Gender:
+            <input
+              name="gender"
+              type="text"
+              value={handleProfileInput.gender}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>Address:
+            <input
+              name="address"
+              type="text"
+              value={handleProfileInput.address}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>Phone Number:
+            <input
+              name="phoneNumber"
+              type="text"
+              value={handleProfileInput.phoneNumber}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>Graduation Year:
+            <input
+              name="graduationYear"
+              type="text"
+              value={handleProfileInput.graduationYear}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>Number of Experience:
+            <input
+              name="numberOfExperience"
+              type="text"
+              value={handleProfileInput.numberOfExperience}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>Profile Picture URL:
+            <input
+              name="profilePicture"
+              type="text"
+              value={handleProfileInput.profilePicture}
+              onChange={handleInputChange}
+            />
+          </label>
           <button type="submit">Save Changes</button>
         </form>
       ) : (

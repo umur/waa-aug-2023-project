@@ -35,6 +35,7 @@ const ProfileForm = () => {
             const apiResponse = await ProfileService.handlePostApi('profile', handleProfileInput);
             setIsLoading(false);
             if (apiResponse) {
+                localStorage.setItem('profile_id', apiResponse.id);
                 alert('Create Profile successfully');
                 navigate('/');
             } else {
