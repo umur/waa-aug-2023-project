@@ -9,6 +9,7 @@ const AppSidebar = () => {
     return (
         <div className="app-sidebar">
             <ul>
+                <li><Link to="/edit-profile" children="Edit Profile Page"/></li>
                 <li><Link to="/" children="Home Page" /></li>
                 <li><Link to="/login" children="Login Page" /></li>
                 {token === "ADMIN" && (
