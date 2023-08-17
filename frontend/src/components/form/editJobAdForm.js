@@ -3,7 +3,7 @@ import { useAuth } from '../../contexts/AuthContext'; // Assuming you have an Au
 import JobService from '../../services/jobService'; // Import your service for handling job advertisements
 
 const EditJobAdForm = () => {
-  const { token } = useAuth();
+  const { token, profileId } = useAuth();
   const [jobAdvertisement, setJobAdvertisement] = useState(null);
   const [editable, setEditable] = useState(false);
 
@@ -36,7 +36,7 @@ const EditJobAdForm = () => {
   const handleSubmitUpdate = async (e) => {
     e.preventDefault();
     try {
-      const response = await JobService.updateJobAdvertisement(jobAdvertisement); // Replace with your actual method
+      const response = await JobService.updateJobAdvertisement(profileId,jobAdvertisement);
       if (response) {
         alert("Update successful");
         // Handle navigation or feedback as needed
@@ -66,9 +66,6 @@ const EditJobAdForm = () => {
             value={jobAdvertisement.city}
             onChange={handleInputChange}
           />
-
-          {/* Add similar input fields for other attributes like description, state, city, companyName */}
-          
           <button onClick={handleSubmitUpdate}>Save Changes</button>
         </form>
       ) : (

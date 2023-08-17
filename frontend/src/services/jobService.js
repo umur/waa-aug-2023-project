@@ -1,34 +1,85 @@
 // services/JobService.js
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8080'; // Replace with your actual API URL
+const API_BASE_URL = 'http://localhost:8080';
+
+const ACCESS_TOKEN = localStorage.getItem('accessToken');
 
 const JobService = {
-  getJobAdvertisement: async (jobId) => {
+  getJobAdvertisement: async (jobId, options = {}) => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/api/jobAdvertisements/${jobId}`);
+      const response = await axios.get(`${API_BASE_URL}/jobAdvertisements/${jobId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + ACCESS_TOKEN,
+          ...options.headers
+        },
+        ...options
+      });
+      if (response.status !== 200) {
+        throw new Error(`API request failed with status: ${response.status}`);
+      }
       return response.data;
     } catch (error) {
-      throw error;
+      throw new Error(`API request error: ${error.message}`);
     }
   },
 
-  updateJobAdvertisement: async (jobAdvertisement) => {
+  updateJobAdvertisement: async (id, requestData = {}, options = {}) => {
     try {
-      const response = await axios.put(`${API_BASE_URL}/api/jobAdvertisements/${jobAdvertisement.id}`, jobAdvertisement);
+      const response = await axios.put(`${API_BASE_URL}/jobAdvertisements/${id}`, requestData, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + ACCESS_TOKEN,
+          ...options.headers
+        },
+        ...options
+      });
+      if (response.status !== 200) {
+        throw new Error(`API request failed with status: ${response.status}`);
+      }
       return response.data;
     } catch (error) {
-      throw error;
+      throw new Error(`API request error: ${error.message}`);
     }
   },
-  createJobAdvertisement: async (jobAdvertisementData) => {
-    try {
-      const response = await axios.post(`${API_BASE_URL}/api/jobAdvertisements`, jobAdvertisementData);
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
-  },
-};
 
+  createJobAdvertisement: async (requestData = {}, options = {}) => {
+    try {
+      const response = await axios.post(`${API_BASE_URL}/jobAdvertisements`, requestData, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + ACCESS_TOKEN,
+          ...options.headers
+        },
+        ...options
+      });
+      if (response.status !== 201) {
+        throw new Error(`API request failed with status: ${response.status}`);
+      }
+      return response.data;
+    } catch (error) {
+      throw new Error(`API request error: ${error.message}`);
+    }
+  },
+
+  getJobsByStudentId: async (jobId, options = {}) => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/jobAdvertisements/findByStudentId/${jobId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + ACCESS_TOKEN,
+          ...options.headers
+        },
+        ...options
+      });
+      if (response.status !== 200) {
+        throw new Error(`API request failed with status: ${response.status}`);
+      }
+      return response.data;
+    } catch (error) {
+      throw new Error(`API request error: ${error.message}`);
+    }
+  }
+}
 export default JobService;

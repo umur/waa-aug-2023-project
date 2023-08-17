@@ -11,8 +11,9 @@ import java.util.List;
 public interface JobAdvertisementService {
 
     JobAdvertisement findById(long id);
+    List<JobPostingDto> getAllJobsByStudentId(Long studentId);
     JobPostingDto save(JobPostingDto jobPostingDto, Long id, UserRole userRole);
     ResponseEntity<String> updateJobAdvertisement(JobPostingDto jobPostingDto,Long id,UserRole userRole,String loggedInUserEmail);
-    public List<JobPostingDto> filter(String state, String city, String companyName);
+    List<JobPostingDto> filter(String state, String city, String companyName);
 
 }

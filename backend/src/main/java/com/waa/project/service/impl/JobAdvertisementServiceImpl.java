@@ -95,10 +95,15 @@ public class JobAdvertisementServiceImpl implements JobAdvertisementService {
         }
     }
 
+    public List<JobPostingDto> getAllJobsByStudentId(Long studentId) {
+        List<JobAdvertisement> jobAdvertisements = jobAdvertisementRepository.findAllByStudentId(studentId);
+        return jobAdvertisements.stream()
+                .map(JobPostingDto::fromJobAdvertissement)
+                .collect(Collectors.toList());
+    }
+
     public List<JobPostingDto> filter(String state, String city, String companyName) {
         List<JobAdvertisement> jobAdvertisementList = jobAdvertisementRepository.findAll(new JobAdvertisementSpecification(state, city, companyName));
         return jobAdvertisementList.stream().map(JobPostingDto::fromJobAdvertissement).collect(Collectors.toList());
     }
-
-
 }

@@ -19,6 +19,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/jobAdvertisements")
@@ -66,6 +67,11 @@ public class JobAdvertisementController {
     @GetMapping
     public List<JobPostingDto> filter(@RequestParam(required = false) String state, @RequestParam(required = false) String city, @RequestParam(required = false) String companyName){
         return jobAdvertisementService.filter(state,city,companyName);
-
+    }
+    @LogMe
+    @CheckUserActive
+    @GetMapping("/findByStudentId/{id}")
+    public List<JobPostingDto> getJobById(@PathVariable Long id) {
+        return jobAdvertisementService.getAllJobsByStudentId(id);
     }
 }

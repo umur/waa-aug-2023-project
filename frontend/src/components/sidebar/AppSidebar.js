@@ -4,26 +4,28 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 
 const AppSidebar = () => {
-    const { token, setToken } = useAuth();
+    const { token, role } = useAuth();
 
     return (
         <div className="app-sidebar">
             <ul>
                 <li><Link to="/" children="Home Page" /></li>
                 <li><Link to="/login" children="Login Page" /></li>
-                {token !== "ADMIN" && (
+                {role !== "ADMIN" && (
                     <li>
                         <Link to="/edit-profile" children="Edit Profile Page"/>
                         <Link to="/create-profile" children="Create Profile Page" />
                     </li>
                 )}
-                {/* {token === "ALUMNI" && ( */}
+                {role === "ALUMNI" && (
                     <li>
-                        <Link to="/jobAdvertisements" children="Edit Advertisment Page"/>
-                        
+                        <Link to="/jobs/create" children="Create Jobs Advertisment Page"/>
+                        <Link to="/jobs/edit" children="Edit Job Advertisment Page"/>
                     </li>
-                {/* )} */}
-                <li><Link to="/user" children="User Page" /></li>
+                )}
+                {role === "ADMIN" && (
+                    <li><Link to="/user" children="User Page" /></li>
+                )}
                 <li><Link to="/register" children="Register Page" /></li>
                 <li><Link to="/404" children="404 Page" /></li>
                 <li><Link to="/500" children="500 Page" /></li>

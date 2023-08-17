@@ -1,11 +1,11 @@
 import React from 'react';
-import BookingData from '../components/list/bookingData';
-import UserList from '../components/list/userList';
+import UserTable from '../components/table/userTable';
 
 const User = () => {
     return (
         <div>
-            <UserList/>
+            <h1>User Page: </h1>
+            <UserTable />
         </div>
     )
 }

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../button/Button';
 import Loading from '../loading/loading';
 import JobService from '../../services/jobService'; // Import your service for handling job advertisements
-// import '../../css/JobAdvertisementForm.css';
+import '../../css/JobAdvertisementForm.css';
 
 const CreateJobAdForm = () => {
     const navigate = useNavigate();
@@ -31,7 +31,7 @@ const CreateJobAdForm = () => {
             setIsLoading(false);
             if (apiResponse) {
                 alert('Job Advertisement created successfully');
-                navigate('/');
+                navigate("/");
             } else {
                 alert('Failed to create Job Advertisement');
             }
@@ -43,7 +43,7 @@ const CreateJobAdForm = () => {
     };
 
     return (
-        <div className="profile-form-container">
+        <div className="job-form-container">
             <label>Title:
                 <input
                     name="title"

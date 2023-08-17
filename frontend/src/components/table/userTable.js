@@ -1,52 +1,43 @@
-import React, { useState } from 'react';
-import '../../css/UserTable.css';
-import AdminService from '../../services/AdminService';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import bookingService, { handleFetchList } from '../../services/bookingService'; // Update with your actual import path
+import UserService from '../../services/userService';
+import User from './user';
+import '../../css/UserList.css';
 
-const UserTable = ({ id, email, userRole, lastLogin, loginAttempt, active }) => {
-    const [isChecked, setIsChecked] = useState(active);
+const UserTable = () => {
+    const [userData, setUserData] = useState([]);
 
-    const handleCheckboxChange = async () => {
-        try {
-            if (userRole === 'ADMIN') {
-                alert("Cannot deactivate users with role ADMIN");
-                return;
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const data = await UserService.handleGetApi("users");
+                setUserData(data.data);
+                console.log(data.data);
+            } catch (error) {
+                console.error(error.message);
             }
-
-            if (isChecked) {
-                await AdminService.handleDeactiveApi('admin', id);
-            } else {
-                await AdminService.handleActiveApi('admin', id);
-            }
-            setIsChecked(prev => !prev);
-        } catch (error) {
-            console.error('An error occurred:', error);
         }
-    };
+        fetchData();
+    }, []);
 
     return (
-        <table className="user-table">
-            <thead>
-                {/* ... */}
-            </thead>
-            <tbody>
-                <tr key={id}>
-                    <td>{id}</td>
-                    <td>{email}</td>
-                    <td>{userRole}</td>
-                    <td>{lastLogin}</td>
-                    <td>{loginAttempt}</td>
-                    <td>
-                        <input
-                            className="active-checkbox"
-                            type="checkbox"
-                            checked={isChecked}
-                            onChange={handleCheckboxChange}
-                        />
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div className="user-list-container">
+            <h1>User Table</h1>
+            <ul>
+                {userData.map(user => (
+                    <User
+                        id={user.id}
+                        email={user.email}
+                        userRole={user.userRole}
+                        lastLogin={user.lastLogin}
+                        loginAttempt={user.loginAttempt}
+                        active={user.active}
+                    />
+                ))}
+            </ul>
+        </div>
     );
-};
+}
 
 export default UserTable;
