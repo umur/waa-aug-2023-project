@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import JobService from '../../services/jobService';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import "../../css/EditJobAdForm.css"
 
 const EditJobAdForm = () => {
+  const navigate = useNavigate();
   const { id } = useParams("id");
   const { token } = useAuth();
   const [jobAdvertisement, setJobAdvertisement] = useState(null);
@@ -41,7 +43,7 @@ const EditJobAdForm = () => {
       const response = await JobService.updateJobAdvertisement(id, jobAdvertisement);
       if (response) {
         alert("Update successful");
-        // Handle navigation or feedback as needed
+        navigate(`/jobs/edit`)
       }
     } catch (error) {
       console.error('An error occurred:', error);
@@ -52,7 +54,7 @@ const EditJobAdForm = () => {
     <div className="job-advertisement-form-container">
       {editable && jobAdvertisement ? (
         <form>
-          <label htmlFor="title">Title:</label>
+          <label htmlFor="Title">Title:</label>
           <input
             type="text"
             id="title"
@@ -60,12 +62,36 @@ const EditJobAdForm = () => {
             value={jobAdvertisement.title}
             onChange={handleInputChange}
           />
-          <label htmlFor="city">City:</label>
+          <label htmlFor="Description">Description:</label>
+          <input
+            type="text"
+            id="description"
+            name="description"
+            value={jobAdvertisement.description}
+            onChange={handleInputChange}
+          />
+          <label htmlFor="State">State:</label>
+          <input
+            type="text"
+            id="state"
+            name="state"
+            value={jobAdvertisement.state}
+            onChange={handleInputChange}
+          />
+          <label htmlFor="City">City:</label>
           <input
             type="text"
             id="city"
             name="city"
             value={jobAdvertisement.city}
+            onChange={handleInputChange}
+          />
+          <label htmlFor="Company Name">Company Name:</label>
+          <input
+            type="text"
+            id="companyName"
+            name="companyName"
+            value={jobAdvertisement.companyName}
             onChange={handleInputChange}
           />
           <button onClick={handleSubmitUpdate}>Save Changes</button>

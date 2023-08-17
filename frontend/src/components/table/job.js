@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Job = ({ id, title, description, state, companyName, city}) => {
     return (
-        <table>
+        <table className="user-table">
             <thead>
                 <tr>
                     <th>Title</th>
@@ -13,6 +13,7 @@ const Job = ({ id, title, description, state, companyName, city}) => {
                     <th>State</th>
                     <th>Company Name</th>
                     <th>City</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,6 +25,8 @@ const Job = ({ id, title, description, state, companyName, city}) => {
                     <td>{city}</td>
                     <td>
                         <Link to={`/jobs/${id}/update`}>Update</Link>
+                        <br/>
+                        <Link to={`/jobs/${id}/update`}>Delete</Link>
                     </td>
                 </tr>
             </tbody>

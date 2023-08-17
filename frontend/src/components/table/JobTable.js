@@ -11,10 +11,7 @@ const JobTable = () => {
         async function fetchData() {
             try {
                 const data = await JobService.getJobsByStudentId(userId);
-                for(let i = 0;i<data.length;i++) {
-                    console.log(data[i])
-                    setUserData([data[i]]);
-                }
+                setUserData(data);
             } catch (error) {
                 console.error(error.message);
             }

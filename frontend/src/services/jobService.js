@@ -80,6 +80,25 @@ const JobService = {
     } catch (error) {
       throw new Error(`API request error: ${error.message}`);
     }
-  }
+  },
+
+  getFilterJobAdvertisement: async (id, options = {}) => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/jobAdvertisements/${id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + ACCESS_TOKEN,
+          ...options.headers
+        },
+        ...options
+      });
+      if (response.status !== 200) {
+        throw new Error(`API request failed with status: ${response.status}`);
+      }
+      return response.data;
+    } catch (error) {
+      throw new Error(`API request error: ${error.message}`);
+    }
+  },
 }
 export default JobService;
