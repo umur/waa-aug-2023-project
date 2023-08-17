@@ -6,9 +6,9 @@ const API_BASE_URL = 'http://localhost:8080';
 const ACCESS_TOKEN = localStorage.getItem('accessToken');
 
 const JobService = {
-  getJobAdvertisement: async (jobId, options = {}) => {
+  getJobAdvertisement: async (id, options = {}) => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/jobAdvertisements/${jobId}`, {
+      const response = await axios.get(`${API_BASE_URL}/jobAdvertisements/${id}`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + ACCESS_TOKEN,
@@ -35,7 +35,7 @@ const JobService = {
         },
         ...options
       });
-      if (response.status !== 200) {
+      if (response.status !== 201) {
         throw new Error(`API request failed with status: ${response.status}`);
       }
       return response.data;

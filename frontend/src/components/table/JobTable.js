@@ -1,40 +1,41 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import bookingService, { handleFetchList } from '../../services/bookingService'; // Update with your actual import path
-import UserService from '../../services/userService';
-import User from './user';
-import '../../css/UserList.css';
+import React, { useState, useEffect } from 'react';
 import JobService from '../../services/jobService';
 import { useAuth } from '../../contexts/AuthContext';
 import Job from './job';
 
 const JobTable = () => {
-    const { profileId } = useAuth();
+    const { userId } = useAuth();
     const [userData, setUserData] = useState([]);
 
     useEffect(() => {
         async function fetchData() {
             try {
-                const data = await JobService.getJobsByStudentId(profileId);
-                setUserData(data.data);
-                console.log(data.data);
+                const data = await JobService.getJobsByStudentId(userId);
+                for(let i = 0;i<data.length;i++) {
+                    console.log(data[i])
+                    setUserData([data[i]]);
+                }
             } catch (error) {
                 console.error(error.message);
             }
         }
         fetchData();
-    }, [profileId]);
+    }, []);
 
     return (
         <div className="user-list-container">
             <h1>Job Table</h1>
-            {userData.length > 0 ? (
+            {userData && userData.length > 0 ? (
                 <ul>
                     {userData.map(job => (
                         <Job
+                            key={job.id}
                             id={job.id}
-                            email={job.title}
-                            userRole={job.city}
+                            title={job.title}
+                            description={job.description}
+                            state={job.state}
+                            companyName={job.companyName}
+                            city={job.city}
                         />
                     ))}
                 </ul>

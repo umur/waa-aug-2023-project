@@ -8,7 +8,7 @@ const AppHeader = () => {
     const { role, token, logout } = useAuth();
     return (
         <header className={`header ${theme}`}>
-            <h1>{role}</h1>
+            <h1>Hello! {role}</h1>
             <h1>WAA Project - This is header</h1>
             <button onClick={toggleTheme}>Toggle Theme</button>
             {token !== null && (

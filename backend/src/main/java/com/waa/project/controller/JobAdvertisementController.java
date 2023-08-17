@@ -74,4 +74,10 @@ public class JobAdvertisementController {
     public List<JobPostingDto> getJobById(@PathVariable Long id) {
         return jobAdvertisementService.getAllJobsByStudentId(id);
     }
+    @LogMe
+    @CheckUserActive
+    @GetMapping("/{id}")
+    public JobAdvertisement getById(@PathVariable Long id) {
+        return jobAdvertisementService.findById(id);
+    }
 }

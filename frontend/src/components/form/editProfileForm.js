@@ -1,10 +1,11 @@
 // import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../../css/ProfileForm.css';
 
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import UserService from '../../services/userService';
+
+import '../../css/ProfileForm.css';
 
 const EditProfileForm = () => {
   const navigate = useNavigate();
@@ -18,9 +19,6 @@ const EditProfileForm = () => {
       console.log("my profile id" + profileId)
       try {
         const response  = await UserService.handleGetSingleApi("profile",profileId);
-        console.log("reponse", response)
-        console.log(response.id == profileId)
-        console.log(response.role == token.role)
           // eslint-disable-next-line eqeqeq
           if (response.id == profileId && response.role == token.role) {
             setEditable(true);

@@ -3,19 +3,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Job = ({ id, title, city }) => {
+const Job = ({ id, title, description, state, companyName, city}) => {
     return (
         <table>
             <thead>
                 <tr>
                     <th>Title</th>
+                    <th>Description</th>
+                    <th>State</th>
+                    <th>Company Name</th>
                     <th>City</th>
-                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <tr key={id}>
                     <td>{title}</td>
+                    <td>{description}</td>
+                    <td>{state}</td>
+                    <td>{companyName}</td>
                     <td>{city}</td>
                     <td>
                         <Link to={`/jobs/${id}/update`}>Update</Link>

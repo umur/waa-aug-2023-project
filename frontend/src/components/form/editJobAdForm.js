@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../../contexts/AuthContext'; // Assuming you have an AuthContext for authentication
-import JobService from '../../services/jobService'; // Import your service for handling job advertisements
+import { useAuth } from '../../contexts/AuthContext';
+import JobService from '../../services/jobService';
+import { useParams } from 'react-router-dom';
 
 const EditJobAdForm = () => {
-  const { token, profileId } = useAuth();
+  const { id } = useParams("id");
+  const { token } = useAuth();
   const [jobAdvertisement, setJobAdvertisement] = useState(null);
   const [editable, setEditable] = useState(false);
 
   useEffect(() => {
     const fetchJobAdvertisementData = async () => {
+      console.log(id)
       try {
-        // Fetch the job advertisement data using your service
-        const response = await JobService.getJobAdvertisement(); // Replace with your actual method
+        const response = await JobService.getJobAdvertisement(id);
         console.log(response && response.studentId === token.userId)
         if (response && response.studentId === token.userId) {
           setEditable(true);
@@ -36,7 +38,7 @@ const EditJobAdForm = () => {
   const handleSubmitUpdate = async (e) => {
     e.preventDefault();
     try {
-      const response = await JobService.updateJobAdvertisement(profileId,jobAdvertisement);
+      const response = await JobService.updateJobAdvertisement(id, jobAdvertisement);
       if (response) {
         alert("Update successful");
         // Handle navigation or feedback as needed
@@ -58,7 +60,7 @@ const EditJobAdForm = () => {
             value={jobAdvertisement.title}
             onChange={handleInputChange}
           />
-          <label htmlFor="city">Title:</label>
+          <label htmlFor="city">City:</label>
           <input
             type="text"
             id="city"
@@ -74,5 +76,4 @@ const EditJobAdForm = () => {
     </div>
   );
 }
-
 export default EditJobAdForm;

@@ -33,6 +33,7 @@ const LoginForm = () => {
             if (apiResponse.accessToken) {
                 localStorage.setItem('accessToken', apiResponse.accessToken);
                 localStorage.setItem('role', apiResponse.role);
+                localStorage.setItem('user_id', apiResponse.id);
                 navigate('/');
             } else {
                 alert('Bad credentials, try again');

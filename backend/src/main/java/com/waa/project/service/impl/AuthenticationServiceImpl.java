@@ -58,8 +58,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
         loginAttempts.remove(email);
         String token = jwtTokenService.generateToken(user);
+        Long id = user.getId();
         UserRole userRole = user.getUserRole();
-        return ResponseEntity.ok(new LoginResponseDto(token, userRole));
+        return ResponseEntity.ok(new LoginResponseDto(id, token, userRole));
     }
     private boolean isUserLocked(User user) {
         LocalDateTime lockedTime = lockedUsers.get(user.getEmail());
@@ -80,6 +81,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         User user = new User();
         user.setEmail(registrationDto.getEmail());
         user.setPassword(passwordEncoder.encode(registrationDto.getPassword()));
+        if(registrationDto.getRole().toString() == "ADMIN") {
+            user.setActive(true);
+        }
         if(registrationDto.getRole().toString().isEmpty()) {
             user.setUserRole(UserRole.ALUMNI);
         }
