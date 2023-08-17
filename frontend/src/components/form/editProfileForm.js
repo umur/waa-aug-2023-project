@@ -61,10 +61,14 @@ const EditProfileForm = () => {
       {editable ? (
         <form>
           <label htmlFor="firstName">First Name:</label>
-          <input type="text" id="firstName" value={user.firstName} onChange={(e) => setUser({ ...user, firstName: e.target.value })} />
+          <input type="text" id="firstName" 
+          value={user.firstName} 
+          onChange={(e) => setUser({ ...user, firstName: e.target.value })} />
 
           <label htmlFor="lastName">Last Name:</label>
-          <input type="text" id="lastName" value={user.lastName} onChange={(e) => setUser({ ...user, lastName: e.target.value })} />
+          <input type="text" id="lastName" 
+          value={user.lastName} 
+          onChange={(e) => setUser({ ...user, lastName: e.target.value })} />
 
           <label>Date of Birth:
             <input

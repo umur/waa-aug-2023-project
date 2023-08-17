@@ -17,6 +17,12 @@ const AppSidebar = () => {
                         <Link to="/create-profile" children="Create Profile Page" />
                     </li>
                 )}
+                {/* {token === "ALUMNI" && ( */}
+                    <li>
+                        <Link to="/jobAdvertisements" children="Edit Advertisment Page"/>
+                        
+                    </li>
+                {/* )} */}
                 <li><Link to="/user" children="User Page" /></li>
                 <li><Link to="/register" children="Register Page" /></li>
                 <li><Link to="/404" children="404 Page" /></li>

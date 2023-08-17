@@ -15,7 +15,9 @@ import UserList from './components/list/userList';
 const Home = React.lazy(() => import('./views/home'))
 const Login = React.lazy(() => import('./views/login'))
 const CreateProfile = React.lazy(() => import('./views/createProfile'))
+const CreateJobAd = React.lazy(() => import('./views/createJobAd'))
 const EditProfile = React.lazy(() => import('./views/editProfile'))
+const EditJobAd = React.lazy(() => import('./views/editJobAd'))
 const NotFoundError = React.lazy(() => import('./views/404'))
 const InternalServerError = React.lazy(() => import('./views/500'))
 
@@ -37,6 +39,8 @@ class App extends Component {
                       <Route path="/register" name="Register Page" element={<Register />} />
                       <Route path="/create-profile" name="Create Profile Page" element={<CreateProfile />} />
                       <Route path="/edit-profile" name="Create Profile Page" element={<EditProfile />} />
+                      <Route path="/create-jobAd" name="Create Profile Page" element={<CreateJobAd />} />
+                      <Route path="/jobAdvertisments" name="Edit Job Advertisment Page" element={<EditJobAd />} />
                       <Route path="/404" name="Not Found Page" element={<NotFoundError />} />
                       <Route path="/500" name="Internal Server Page" element={<InternalServerError />} />
                       <Route path="*" element={<Home />} />
