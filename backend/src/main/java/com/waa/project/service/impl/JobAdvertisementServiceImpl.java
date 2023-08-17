@@ -6,6 +6,7 @@ import com.waa.project.entity.JobAdvertisement;
 import com.waa.project.entity.User;
 import com.waa.project.entity.UserRole;
 import com.waa.project.repository.JobAdvertisementRepository;
+import com.waa.project.repository.UserRepository;
 import com.waa.project.repository.specifications.JobAdvertisementSpecification;
 import com.waa.project.service.JobAdvertisementService;
 import com.waa.project.util.LoggingUtil;
@@ -23,10 +24,12 @@ import java.util.stream.Collectors;
 public class JobAdvertisementServiceImpl implements JobAdvertisementService {
 
     private final JobAdvertisementRepository jobAdvertisementRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public JobAdvertisementServiceImpl(JobAdvertisementRepository jobAdvertisementRepository) {
+    public JobAdvertisementServiceImpl(JobAdvertisementRepository jobAdvertisementRepository, UserRepository userRepository) {
         this.jobAdvertisementRepository = jobAdvertisementRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -56,30 +59,30 @@ public class JobAdvertisementServiceImpl implements JobAdvertisementService {
 
     @Override
     public ResponseEntity<String> updateJobAdvertisement(JobPostingDto jobPostingDto, Long id, UserRole userRole, String loggedInUserEmail) {
-        User user = new User();
+
+        Optional<User> loggedInUser = userRepository.findByEmail(loggedInUserEmail); // Fetch the logged-in user from the repository
+
         JobAdvertisement existingJobAdvertisement = jobAdvertisementRepository.findById(id).orElse(null);
         if (existingJobAdvertisement == null) {
             return ResponseEntity.notFound().build();
         }
 
-        // Ensure that only the "Alumni" user who owns the job advertisement can edit it
+        // Ensure that only the user who owns the job advertisement can edit it
         if (!loggedInUserEmail.equals(existingJobAdvertisement.getStudent().getEmail())) {
-            LoggingUtil.logMessage("log email: " + existingJobAdvertisement.getStudent().getEmail());
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You are not authorized to edit this job advertisement.");
         }
 
-        JobAdvertisement jobAdvertisement = new JobAdvertisement();
-        jobAdvertisement.setTitle(jobPostingDto.getTitle());
-        jobAdvertisement.setDescription(jobPostingDto.getDescription());
-        jobAdvertisement.setState(jobPostingDto.getState());
-        jobAdvertisement.setCity(jobPostingDto.getCity());
-        jobAdvertisement.setCompanyName(jobPostingDto.getCompanyName());
-        if (user != null) {
-            user.setId(id);
-            user.setUserRole(userRole);
-            jobAdvertisement.setStudent(user);
+        existingJobAdvertisement.setTitle(jobPostingDto.getTitle());
+        existingJobAdvertisement.setDescription(jobPostingDto.getDescription());
+        existingJobAdvertisement.setState(jobPostingDto.getState());
+        existingJobAdvertisement.setCity(jobPostingDto.getCity());
+        existingJobAdvertisement.setCompanyName(jobPostingDto.getCompanyName());
+
+        // If you have a user associated with the job advertisement, update its role
+        if (loggedInUser != null) {
+            existingJobAdvertisement.getStudent().setUserRole(userRole);
         } else {
-            throw new RuntimeException("error");
+            throw new RuntimeException("Logged-in user not found."); // Handle this exception properly
         }
 
         JobAdvertisement updatedJobAdvertisement = jobAdvertisementRepository.save(existingJobAdvertisement);
