@@ -82,9 +82,10 @@ const JobService = {
     }
   },
 
-  getFilterJobAdvertisement: async (id, options = {}) => {
+  getFilterJobAdvertisement: async (requestData = {}, options = {}) => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/jobAdvertisements/${id}`, {
+      const response = await axios.get(`${API_BASE_URL}/jobAdvertisements`, {
+        params: requestData,
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + ACCESS_TOKEN,
@@ -99,6 +100,6 @@ const JobService = {
     } catch (error) {
       throw new Error(`API request error: ${error.message}`);
     }
-  },
+  }
 }
 export default JobService;

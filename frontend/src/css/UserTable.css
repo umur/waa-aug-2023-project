@@ -1,8 +1,9 @@
 /* UserTable.css */
 .user-table {
-    width: 100%;
+    width: 90%;
     border-collapse: collapse;
     margin-top: 20px;
+    margin-right: 600px;
     border: 1px solid #ddd;
 }
 
