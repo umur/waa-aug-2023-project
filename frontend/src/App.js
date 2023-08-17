@@ -10,6 +10,7 @@ import AppSidebar from './components/sidebar/AppSidebar';
 import Register from './views/register';
 import AppFooter from './components/footer/AppFooter';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
+import UserList from './components/list/userList';
 
 const Home = React.lazy(() => import('./views/home'))
 const Login = React.lazy(() => import('./views/login'))
@@ -32,6 +33,7 @@ class App extends Component {
                   <Suspense fallback={loading}>
                     <Routes>
                       <Route path="/login" name="Login Page" element={<Login />} />
+                      <Route path="/user" name="User Page" element={<UserList />} />
                       <Route path="/register" name="Register Page" element={<Register />} />
                       <Route path="/create-profile" name="Create Profile Page" element={<CreateProfile />} />
                       <Route path="/edit-profile" name="Create Profile Page" element={<EditProfile />} />

@@ -27,7 +27,7 @@ const RegisterForm = () => {
             setIsLoading(true);
             const apiResponse = await AuthService.handlePostApi('register', registerInput);
             setIsLoading(false);
-            if (apiResponse.success) {
+            if (apiResponse) {
                 navigate('/login');
             }
         } catch (error) {

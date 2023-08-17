@@ -1,9 +1,5 @@
 // import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from '../button/Button';
-import Loading from '../loading/loading';
-
-import ProfileService from '../../services/ProfileService';
 import '../../css/ProfileForm.css';
 
 import React, { useEffect, useState } from 'react';
@@ -36,7 +32,7 @@ const EditProfileForm = () => {
     }
 
     fetchUserData();
-  }, [token]);
+  }, [token,profileId]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -79,13 +75,16 @@ const EditProfileForm = () => {
             />
           </label>
           <label>Gender:
-            <input
-              name="gender"
-              type="text"
-              value={user.gender}
-              onChange={handleInputChange}
-            />
-          </label>
+                <select
+                    name="gender"
+                    value={user.gender}
+                    onChange={handleInputChange}
+                >
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </label>
           <label>Address:
             <input
               name="address"

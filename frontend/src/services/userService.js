@@ -26,6 +26,28 @@ const handleGetSingleApi = async (endpoint, id, options = {}) => {
     }
 };
 
+const handleGetApi = async (endpoint, id, options = {}) => {
+    
+    try {
+        const response = await axios.get(`${API_BASE_URL}/${endpoint}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + ACCESS_TOKEN,
+                ...options.headers
+            },
+            ...options
+        });
+
+        if (response.status !== 200) {
+            return Promise.reject(new Error(`API request failed with status: ${response.status}`));
+        }
+        
+        return response.data;
+    } catch (error) {
+        return Promise.reject(new Error(`API request error: ${error.message}`));
+    }
+};
+
 const handlePutApi = async (endpoint,id ,requestData = {}, options = {}) => {
     try {
         const response = await axios.put(`${API_BASE_URL}/${endpoint}/${id}`, requestData, {
@@ -47,6 +69,7 @@ const handlePutApi = async (endpoint,id ,requestData = {}, options = {}) => {
 
 const UserService = {
     handleGetSingleApi,
+    handleGetApi,
     handlePutApi
 }
 

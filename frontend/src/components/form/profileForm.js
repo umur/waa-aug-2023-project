@@ -12,7 +12,7 @@ const ProfileForm = () => {
         firstName: '',
         lastName: '',
         dateOfBirth: '',
-        gender: '',
+        gender: '', // Initialize gender with an empty string
         address: '',
         phoneNumber: '',
         graduationYear: '',
@@ -75,12 +75,15 @@ const ProfileForm = () => {
                 />
             </label>
             <label>Gender:
-                <input
+                <select
                     name="gender"
-                    type="text"
                     value={handleProfileInput.gender}
                     onChange={handleInputChange}
-                />
+                >
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
             </label>
             <label>Address:
                 <input
