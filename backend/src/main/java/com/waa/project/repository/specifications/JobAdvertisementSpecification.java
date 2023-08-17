@@ -22,6 +22,21 @@ public class JobAdvertisementSpecification implements Specification<JobAdvertise
         this.companyName = companyName;
     }
 
+    public static Specification<JobAdvertisement> byState(String state) {
+        return (root, query, criteriaBuilder) ->
+                criteriaBuilder.equal(root.get("state"), state);
+    }
+
+    public static Specification<JobAdvertisement> byCity(String city) {
+        return (root, query, criteriaBuilder) ->
+                criteriaBuilder.equal(root.get("city"), city);
+    }
+
+    public static Specification<JobAdvertisement> byCompanyName(String companyName) {
+        return (root, query, criteriaBuilder) ->
+                criteriaBuilder.equal(root.get("companyName"), companyName);
+    }
+
     @Override
     public Predicate toPredicate(Root<JobAdvertisement> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
         List<Predicate> predicates = new ArrayList<>();

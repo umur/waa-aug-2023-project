@@ -11,6 +11,7 @@ import com.waa.project.repository.specifications.JobAdvertisementSpecification;
 import com.waa.project.service.JobAdvertisementService;
 import com.waa.project.util.LoggingUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -106,7 +107,21 @@ public class JobAdvertisementServiceImpl implements JobAdvertisementService {
     }
 
     public List<JobPostingDto> filter(String state, String city, String companyName) {
-        List<JobAdvertisement> jobAdvertisementList = jobAdvertisementRepository.findAll(new JobAdvertisementSpecification(state, city, companyName));
+        Specification<JobAdvertisement> specification = Specification.where(null);
+
+        if (state != null && !state.isEmpty()) {
+            specification = specification.and(JobAdvertisementSpecification.byState(state));
+        }
+
+        if (city != null && !city.isEmpty()) {
+            specification = specification.and(JobAdvertisementSpecification.byCity(city));
+        }
+
+        if (companyName != null && !companyName.isEmpty()) {
+            specification = specification.and(JobAdvertisementSpecification.byCompanyName(companyName));
+        }
+
+        List<JobAdvertisement> jobAdvertisementList = jobAdvertisementRepository.findAll(specification);
         return jobAdvertisementList.stream().map(JobPostingDto::fromJobAdvertissement).collect(Collectors.toList());
     }
 }

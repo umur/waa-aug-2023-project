@@ -31,7 +31,7 @@ const CreateJobAdForm = () => {
             setIsLoading(false);
             if (apiResponse) {
                 alert('Job Advertisement created successfully');
-                navigate("/");
+                navigate("/jobs/edit");
             } else {
                 alert('Failed to create Job Advertisement');
             }
