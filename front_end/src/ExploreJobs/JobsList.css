@@ -1,0 +1,4 @@
+.jobsList{
+    overflow-y: scroll;
+    height: 500px;
+}

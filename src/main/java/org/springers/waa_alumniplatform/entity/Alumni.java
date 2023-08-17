@@ -12,12 +12,14 @@ import java.util.List;
 @DiscriminatorValue(value = "ALUMNI")
 @SuperBuilder
 @NoArgsConstructor
+//@Builder
+//@AllArgsConstructor
 public class Alumni extends User{
     private String profilePic;
     private String phoneNum;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Industry industry;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Location location;
     @OneToOne(cascade = CascadeType.ALL)
     private Education eduInOurUni;

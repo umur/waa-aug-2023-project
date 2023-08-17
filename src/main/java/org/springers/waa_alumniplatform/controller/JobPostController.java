@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/alumnus/{alumni_Id}/jobPosts")
 @RequiredArgsConstructor
+@CrossOrigin
 public class JobPostController {
     private final JobPostService jobPostService;
 

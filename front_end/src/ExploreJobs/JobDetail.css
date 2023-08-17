@@ -1,0 +1,11 @@
+.rowFlex > p{
+    margin-left: 10px;
+}
+
+.dateNapplicants{
+    justify-content: end;
+}
+
+.bottom > h4{
+    margin-top: 20px;
+}

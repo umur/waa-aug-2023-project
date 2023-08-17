@@ -35,22 +35,22 @@ public class SpringSecAuthFiltersConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeHttpRequests(authroize -> {
-//                    authroize.anyRequest().permitAll();
-                   authroize
-                            .requestMatchers("/auth/**").permitAll()
-                            .requestMatchers("/news/**").permitAll()
-
-                            .requestMatchers(HttpMethod.GET,"/alumnus/**").hasAuthority(Role.ALUMNI.name())
-                            .requestMatchers(HttpMethod.PUT,"/alumnus/**").hasAuthority(Role.ALUMNI.name())
-
-                            .requestMatchers(HttpMethod.PUT,"/admins/**").hasAuthority(Role.ADMIN.name())
-                            .requestMatchers(HttpMethod.GET,"/admins/**").hasAuthority(Role.ADMIN.name())
-                            .requestMatchers(HttpMethod.PATCH,"/admins/**").hasAuthority(Role.ADMIN.name())
-                            .requestMatchers(HttpMethod.POST,"/admins/**").hasAuthority(Role.ADMIN.name())
-
-                            .requestMatchers(HttpMethod.DELETE, "/users/**")
-                                .hasAnyAuthority(Role.ALUMNI.name(), Role.FACULTY.name(), Role.ADMIN.name())
-                           .anyRequest().authenticated();
+                    authroize.anyRequest().permitAll();
+//                   authroize
+//                            .requestMatchers("/auth/**").permitAll()
+//                            .requestMatchers("/news/**").permitAll()
+//
+//                            .requestMatchers(HttpMethod.GET,"/alumnus/**").hasAuthority(Role.ALUMNI.name())
+//                            .requestMatchers(HttpMethod.PUT,"/alumnus/**").hasAuthority(Role.ALUMNI.name())
+//
+//                            .requestMatchers(HttpMethod.PUT,"/admins/**").hasAuthority(Role.ADMIN.name())
+//                            .requestMatchers(HttpMethod.GET,"/admins/**").hasAuthority(Role.ADMIN.name())
+//                            .requestMatchers(HttpMethod.PATCH,"/admins/**").hasAuthority(Role.ADMIN.name())
+//                            .requestMatchers(HttpMethod.POST,"/admins/**").hasAuthority(Role.ADMIN.name())
+//
+//                            .requestMatchers(HttpMethod.DELETE, "/users/**")
+//                                .hasAnyAuthority(Role.ALUMNI.name(), Role.FACULTY.name(), Role.ADMIN.name())
+//                           .anyRequest().authenticated();
                 })
 //                .formLogin(httpSecurityFormLoginConfigurer -> {
 //                    httpSecurityFormLoginConfigurer
