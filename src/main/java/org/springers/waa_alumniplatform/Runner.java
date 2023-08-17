@@ -12,6 +12,7 @@ import org.springers.waa_alumniplatform.repository.CompanyRepo;
 import org.springers.waa_alumniplatform.repository.JobPostRepo;
 import org.springers.waa_alumniplatform.repository.LocationRepo;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -27,7 +28,9 @@ public class Runner  {
     private final JobPostRepo jobPostRepo;
     private final LocationRepo locationRepo;
     private final CompanyRepo companyRepo;
-//    private final EntityManager em;
+    private final BCryptPasswordEncoder passwordEncoder;
+
+    //    private final EntityManager em;
 //        @Override
     public void run(String... args) throws Exception {
         System.out.println(">>>>>>>>>>>>>>>>>>> Runner Started >>>>>>>>>>>");
@@ -62,15 +65,15 @@ public class Runner  {
         Company company5 = Company.builder().name("Facebook").location(location5).build();
 
 
-        Alumni alumni1 = Alumni.builder().firstName("John").lastName("Smith").email("1alumni@demo.com").password("123").industry(industry1).location(location1).role(Role.ALUMNI).accountStatus(AccountStatus.ACTIVE).build();
+        Alumni alumni1 = Alumni.builder().firstName("John").lastName("Smith").email("1alumni@demo.com").password(passwordEncoder.encode("123")).isAccountNonLocked(true).industry(industry1).location(location1).role(Role.ALUMNI).accountStatus(AccountStatus.ACTIVE).build();
         // Alumni 2
-        Alumni alumni2 = Alumni.builder().firstName("Jane").lastName("Doe").email("2alumni@demo.com").password("123").industry(industry2).location(location2).role(Role.ALUMNI).accountStatus(AccountStatus.ACTIVE).build();
+        Alumni alumni2 = Alumni.builder().firstName("Jane").lastName("Doe").email("2alumni@demo.com").password(passwordEncoder.encode("123")).isAccountNonLocked(true).industry(industry2).location(location2).role(Role.ALUMNI).accountStatus(AccountStatus.ACTIVE).build();
         // Alumni 3
-        Alumni alumni3 = Alumni.builder().firstName("Michael").lastName("Johnson").email("3alumni@demo.com").password("123").industry(industry3).location(location3).role(Role.ALUMNI).accountStatus(AccountStatus.ACTIVE).build();
+        Alumni alumni3 = Alumni.builder().firstName("Michael").lastName("Johnson").email("3alumni@demo.com").password(passwordEncoder.encode("123")).isAccountNonLocked(true).industry(industry3).location(location3).role(Role.ALUMNI).accountStatus(AccountStatus.ACTIVE).build();
         // Alumni 4
-        Alumni alumni4 = Alumni.builder().firstName("Emily").lastName("Williams").email("4alumni@demo.com").password("123").industry(industry4).location(location4).role(Role.ALUMNI).accountStatus(AccountStatus.ACTIVE).build();
+        Alumni alumni4 = Alumni.builder().firstName("Emily").lastName("Williams").email("4alumni@demo.com").password(passwordEncoder.encode("123")).isAccountNonLocked(true).industry(industry4).location(location4).role(Role.ALUMNI).accountStatus(AccountStatus.ACTIVE).build();
         // Alumni 5
-        Alumni alumni5 = Alumni.builder().firstName("David").lastName("Brown").email("5alumni@demo.com").password("123").industry(industry5).location(location5).role(Role.ALUMNI).accountStatus(AccountStatus.ACTIVE).build();
+        Alumni alumni5 = Alumni.builder().firstName("David").lastName("Brown").email("5alumni@demo.com").password(passwordEncoder.encode("123")).isAccountNonLocked(true).industry(industry5).location(location5).role(Role.ALUMNI).accountStatus(AccountStatus.ACTIVE).build();
 
         alumniRepo.save(alumni1);
         alumniRepo.save(alumni2);
@@ -361,7 +364,6 @@ public class Runner  {
                         "Strong communication skills to convey technical concepts")
                 .postedAt(LocalDateTime.of(LocalDate.of(2023, 07, 8), LocalTime.of(11, 30)))
                 .build();
-
 
 
         jobPostRepo.save(jobPost1);

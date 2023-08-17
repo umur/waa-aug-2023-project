@@ -5,16 +5,36 @@ import { store } from './app/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import AlumnusDirectory from './AlumnusDirectory/AlumnusDirectory';
+import AlumniProfile from './AlumniProfile/AlumniProfile';
+import ExploreJobs from './ExploreJobs/ExploreJobs';
+import Login from './Login/Login';
+import Register from './Register/Register';
+import JobPost from './JobPost/JobPost';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
 
 root.render(
-  <React.StrictMode>
+  
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<App/>}>
+          <Route index element={<AlumnusDirectory/>} />
+          <Route path='directory' element = {<AlumnusDirectory/>}/>
+          <Route path='alumniProfile' element={<AlumniProfile/>} />
+          <Route path='exploreJobs' element={<ExploreJobs/>} />
+          <Route path='login' element={<Login/>}/>
+          <Route path='register' element={<Register/>}/>
+          <Route path='jobPost' element={<JobPost/>}/>
+        </Route>
+      </Routes>
+      </BrowserRouter>
     </Provider>
-  </React.StrictMode>
+
+
 );
 
 // If you want to start measuring performance in your app, pass a function

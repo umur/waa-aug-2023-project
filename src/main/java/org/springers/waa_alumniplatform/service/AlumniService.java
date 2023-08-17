@@ -18,4 +18,6 @@ public interface AlumniService {
     List<AlumniPublic> getAlumnusByDept(String dept);
 
     List<AlumniPublic> getAlumnusByIndustry(String industry);
+
+    List<AlumniPublic> getAll();
 }

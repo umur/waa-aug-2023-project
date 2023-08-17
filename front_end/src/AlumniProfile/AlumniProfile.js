@@ -25,7 +25,7 @@ function AlumniProfile() {
             <div className="right_bar columnFlex">
                 <EducationHistory />
                 <ProfessionalExperienceList />
-                <button class="btn btn-primary">Save Changes</button>
+                <button class="btn btn-dark">Save Changes</button>
             </div>
         </div>
     );

@@ -15,9 +15,9 @@ function ProfessionalExperienceList() {
         <div className="professionalExperience">
             {ProfessionalHistoryComponet}
             <div className="rowFlex">
-                <button onClick={addProffesionalHostory} class="btn btn-primary roundButton">+</button>
+                <button onClick={addProffesionalHostory} class="btn btn-dark roundButton">+</button>
                 <h4>Professional History</h4>
-                <button onClick={removeProffesionalHostory} class="btn btn-primary roundButton">-</button>
+                <button onClick={removeProffesionalHostory} class="btn btn-dark roundButton">-</button>
             </div>
         </div>
     );

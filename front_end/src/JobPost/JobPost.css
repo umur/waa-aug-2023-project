@@ -1,0 +1,7 @@
+.jobPost{
+    padding: 20px 35% 20px 35%;
+}
+
+.jobPost > button {
+    margin-top: 10px;
+}

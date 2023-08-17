@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/alumnus")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST}, allowedHeaders = "*")
 public class AlumniController {
     private final AlumniService alumniService;
 
@@ -37,6 +38,11 @@ public class AlumniController {
     public ResponseEntity<AlumniProfile> updateOne(@PathVariable int alumni_id, @RequestBody AlumniProfile alumniProfile, Principal principal){
         System.out.println("Update one alumni controller reached");
         return ResponseEntity.ok(alumniService.updateById(principal, alumni_id, alumniProfile));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<AlumniPublic>> getAll(){
+        return ResponseEntity.ok(alumniService.getAll());
     }
 
 

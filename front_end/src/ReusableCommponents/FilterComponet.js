@@ -9,9 +9,9 @@ function FilterComponet({ options }) {
                 <option selected disabled>Filter By</option>
                 {options.map(option => <option>{option}</option>)}
             </select>
-            <input class="form-control form-control-sm" type="number" placeholder="Filter Value" />
+            <input class="form-control form-control-sm" type="text" placeholder="Filter Value" />
 
-            <button class="form-control btn btn-primary">Filter</button>
+            <button class="form-control btn btn-dark">Filter</button>
         </div>
     );
 }

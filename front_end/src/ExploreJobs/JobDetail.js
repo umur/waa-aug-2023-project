@@ -10,7 +10,7 @@ function JobDetail({ jobId }) {
     return (
         <div className="jobDetail">
             <div className="top">
-                <h3>Software Developer</h3>
+                <h3>Software Engineer</h3>
                 <div className="rowFlex dateNapplicants">
                     <p>20/02/2033</p>
                     <p>125 Applicants</p>
@@ -27,6 +27,7 @@ function JobDetail({ jobId }) {
                     <ConstructionIcon />
                     <p>Information Technology</p>
                 </div>
+                <button class="form-control btn btn-dark">Apply</button>
             </div>
             <div className="bottom">
                 <h4>Required Skills</h4>

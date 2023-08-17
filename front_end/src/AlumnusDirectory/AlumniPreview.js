@@ -10,8 +10,9 @@ function AlumniPreview({ picture, lname, fname, phone }) {
             <div className="nameNphone columnFlex">
                 <h1>{fname + " " + lname}</h1>
                 <h5>{phone}</h5>
-                <button class="form-control btn btn-primary">View Details</button>
+                <button class="form-control btn btn-dark">View Details</button>
             </div>
+            
         </div>
 
 

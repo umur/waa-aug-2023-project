@@ -9,3 +9,8 @@
 .bottom > h4{
     margin-top: 20px;
 }
+
+.top > button{
+    width: 30%;
+    border-radius: 30px;
+}

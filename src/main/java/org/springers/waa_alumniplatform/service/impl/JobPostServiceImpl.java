@@ -12,6 +12,7 @@ import org.springers.waa_alumniplatform.service.JobPostService;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -25,8 +26,9 @@ public class JobPostServiceImpl implements JobPostService {
         Alumni alumni = alumniService.getAlumniById(alumni_id);
         JobPost jobPost = modelMapper.map(newJobPost, JobPost.class);
         jobPost.setPoster(alumni);
-        jobPostRepo.save(jobPost);
-        return newJobPost;
+        jobPost.setPostedAt(LocalDateTime.now());
+        JobPost savedJobPost = jobPostRepo.save(jobPost);
+        return modelMapper.map(savedJobPost, NewJobPost.class);
     }
 
     @Override

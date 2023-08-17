@@ -59,6 +59,16 @@ public class AlumniServiceImpl implements AlumniService {
     }
 
     @Override
+    public List<AlumniPublic> getAll() {
+        List<Alumni> alumuns = alumniRepo.findAll();
+        List<AlumniPublic> alumunsPublic = new ArrayList<>();
+        alumuns.forEach(alumni -> {
+            alumunsPublic.add(modelMapper.map(alumni, AlumniPublic.class));
+        });
+        return alumunsPublic;
+    }
+
+    @Override
     public List<AlumniPublic> getAlumnusByGradYear(int year) {
         List<Alumni> alumnus = alumniRepo.findAllByEduInOurUniGradYear(year);
         return mapListOfAlumniToAlumniPublic(alumnus);
