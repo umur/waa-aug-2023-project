@@ -5,16 +5,18 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
-@Getter
 @Setter
-public class SurveyResponse {
+@Getter
+@Entity
+public class Application {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @OneToOne
-    private Student student;
-    private String response;
+    private Long appId;
 
+
+    private boolean isDeleted;
+
+    @ManyToOne
+    private User student;
 
 }
