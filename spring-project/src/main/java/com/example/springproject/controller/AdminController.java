@@ -10,6 +10,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/admin")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
+
 public class AdminController {
     private final NewsService newsService;
     private final StudentService studentService;
@@ -28,6 +30,7 @@ public class AdminController {
     public List<News> getNews() {
         return newsService.findAll();
     }
+    
     @DeleteMapping("/news/{id}")
     public ResponseEntity<String> deleteNews(@PathVariable int id){
         newsService.remove(id);

@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/applications")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class ApplicationController {
 
     @Qualifier("aps")
