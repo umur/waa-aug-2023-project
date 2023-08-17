@@ -4,7 +4,7 @@ import UserTable from '../components/table/userTable';
 const User = () => {
     return (
         <div>
-            <h1>User Page: </h1>
+            <h1>Admin Panel Page: </h1>
             <UserTable />
         </div>
     )

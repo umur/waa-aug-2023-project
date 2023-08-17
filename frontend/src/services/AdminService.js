@@ -42,10 +42,30 @@ const handleDeactiveApi = async (endpoint, id, requestData = {}, options = {}) =
     }
 };
 
+const handleResetPasswordApi = async (endpoint, id, requestData = {}, options = {}) => {
+    try {
+        const response = await axios.post(`${API_BASE_URL}/${endpoint}/reset-password/${id}`, requestData, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + ACCESS_TOKEN,
+                ...options.headers
+            },
+            ...options
+        });
+        if (response.status !== 200) {
+            throw new Error(`API request failed with status: ${response.status}`);
+        }
+        return response.data;
+    } catch (error) {
+        throw new Error(`API request error: ${error.message}`);
+    }
+};
+
 
 const AdminService = {
     handleActiveApi,
-    handleDeactiveApi
+    handleDeactiveApi,
+    handleResetPasswordApi
 }
 
 export default AdminService;

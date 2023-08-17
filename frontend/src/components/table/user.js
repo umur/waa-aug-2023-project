@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../../css/UserTable.css';
 import AdminService from '../../services/AdminService';
+import { Link } from 'react-router-dom';
 
 const User = ({ id, email, userRole, lastLogin, loginAttempt, active }) => {
     const [isChecked, setIsChecked] = useState(active);
@@ -31,6 +32,8 @@ const User = ({ id, email, userRole, lastLogin, loginAttempt, active }) => {
                 <td>User Role</td>
                 <td>Last Login</td>
                 <td>Login Attempt</td>
+                <td>Active</td>
+                <td>Command</td>
             </thead>
             <tbody>
                 <tr key={id}>
@@ -47,6 +50,7 @@ const User = ({ id, email, userRole, lastLogin, loginAttempt, active }) => {
                             onChange={handleCheckboxChange}
                         />
                     </td>
+                    <td><Link to={`/admin/reset-password/${id}`}>Reset Password</Link></td>
                 </tr>
             </tbody>
         </table>

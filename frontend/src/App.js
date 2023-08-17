@@ -11,6 +11,7 @@ import Register from './views/register';
 import AppFooter from './components/footer/AppFooter';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import User from './views/user';
+import Reset from './views/reset';
 
 const Home = React.lazy(() => import('./views/home'))
 const Login = React.lazy(() => import('./views/login'))
@@ -36,13 +37,14 @@ class App extends Component {
                   <Suspense fallback={loading}>
                     <Routes>
                       <Route path="/login" name="Login Page" element={<Login />} />
-                      <Route path="/user" name="User Page" element={<User />} />
                       <Route path="/register" name="Register Page" element={<Register />} />
-                      <Route path="/create-profile" name="Create Profile Page" element={<CreateProfile />} />
-                      <Route path="/edit-profile" name="Create Profile Page" element={<EditProfile />} />
+                      <Route path="/profile/create" name="Create Profile Page" element={<CreateProfile />} />
+                      <Route path="/profile/edit" name="Create Profile Page" element={<EditProfile />} />
                       <Route path="/jobs/create" name="Create Job Advertiment Page" element={<CreateJob />} />
                       <Route path="/jobs/edit" name="Edit Job Advertisment List Page" element={<EditJobList />} />
                       <Route path="/jobs/:id/update" name="Edit Job Advertisment Page" element={<EditJob />} />
+                      <Route path="/admin/user" name="User Page" element={<User />} />
+                      <Route path="/admin/reset-password/:id" name="Reset Password Page" element={<Reset />} />
                       <Route path="/404" name="Not Found Page" element={<NotFoundError />} />
                       <Route path="/500" name="Internal Server Page" element={<InternalServerError />} />
                       <Route path="*" element={<Home />} />
