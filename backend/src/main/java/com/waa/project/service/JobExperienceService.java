@@ -7,4 +7,5 @@ import java.util.List;
 public interface JobExperienceService {
     List<JobExperience> getAllJobExperiences();
     JobExperience createJobExperience(JobExperience jobExperience);
+    JobExperience getJobExperiences(Long id);
 }

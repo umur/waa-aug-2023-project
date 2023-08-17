@@ -33,4 +33,12 @@ public class JobExperienceController {
         JobExperience createdJobExperience = jobExperienceService.createJobExperience(jobExperience);
         return new ResponseEntity<>(createdJobExperience, HttpStatus.CREATED);
     }
+
+    @LogMe
+    @CheckUserActive
+    @GetMapping("/{id}")
+    public ResponseEntity<JobExperience> getJobExperiences(@PathVariable long id) {
+        JobExperience jobExperience = jobExperienceService.getJobExperiences(id);
+        return new ResponseEntity<>(jobExperience, HttpStatus.OK);
+    }
 }

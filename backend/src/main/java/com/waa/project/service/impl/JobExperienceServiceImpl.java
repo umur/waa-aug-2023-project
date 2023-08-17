@@ -6,6 +6,7 @@ import com.waa.project.service.JobExperienceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class JobExperienceServiceImpl implements JobExperienceService {
@@ -21,5 +22,9 @@ public class JobExperienceServiceImpl implements JobExperienceService {
     @Override
     public JobExperience createJobExperience(JobExperience jobExperience) {
         return jobExperienceRepository.save(jobExperience);
+    }
+    @Override
+    public JobExperience getJobExperiences(Long id) {
+        return jobExperienceRepository.findById(id).get();
     }
 }

@@ -1,0 +1,46 @@
+/* Apply styling to the entire form container */
+.job-ex-form-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Style the form labels */
+  .job-ex-form-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  /* Style the form inputs */
+  .job-ex-form-container input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  /* Style the save button */
+  .job-ex-form-container button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .job-ex-form-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Style the error message */
+  .job-ex-form-container p {
+    color: red;
+    font-weight: bold;
+  }
+  
