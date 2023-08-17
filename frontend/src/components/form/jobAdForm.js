@@ -43,7 +43,7 @@ const CreateJobAdForm = () => {
     };
 
     return (
-        <div className="job-advertisement-form-container">
+        <div className="profile-form-container">
             <label>Title:
                 <input
                     name="title"
