@@ -51,12 +51,8 @@ public class UserProfileController {
     public ResponseEntity<String> addJobExperienceToUserProfile(
             @PathVariable long userProfileId,
             @RequestBody JobExperience jobExperience) {
-        try {
             userProfileService.addJobExperienceToUserProfile(userProfileId, jobExperience);
             return ResponseEntity.ok("Job experience added to the user profile.");
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.notFound().build();
-        }
     }
     @LogMe
     @CheckUserActive

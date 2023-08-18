@@ -61,7 +61,7 @@ const EditProfileForm = () => {
   return (
     <div className="profile-form-container">
       {editable ? (
-        <form>
+        <div>
           <label htmlFor="firstName">First Name:</label>
           <input type="text" id="firstName" 
           value={user.firstName} 
@@ -135,9 +135,9 @@ const EditProfileForm = () => {
             <button onClick={handlesumbitUpdate}>Save Changes</button>
           </div>
           <div>
-            <button onClick={() => navigate(`/jobEx/${userId}/create`)}>Add Job Experience</button>
+            <button onClick={() => navigate(`/jobEx/${profileId}/create`)}>Add Job Experience</button>
           </div>
-        </form>
+        </div>
       ) : (
         <p>You are not authorized to edit this profile.</p>
       )}

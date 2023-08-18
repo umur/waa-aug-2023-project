@@ -6,7 +6,7 @@ import '../../css/experiencetable.css';
 import Button from '../button/Button';
 
 const ExperienceTable = () => {
-    const { userId } = useAuth();
+    const { profileId } = useAuth();
     const [userData, setUserData] = useState([]);
     const [filters, setFilters] = useState({
         companyName: '',
@@ -19,7 +19,7 @@ const ExperienceTable = () => {
 
     const fetchData = async () => {
         try {
-            const data = await jobService.getExperiencesByStudentId(userId);
+            const data = await jobService.getExperiencesByStudentId(profileId);
             console.log(data.jobExperienceList);
             setUserData(data.jobExperienceList);
         } catch (error) {
