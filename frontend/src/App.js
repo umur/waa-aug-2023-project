@@ -43,7 +43,7 @@ class App extends Component {
                       <Route path="/register" name="Register Page" element={<Register />} />
                       <Route path="/profile/create" name="Create Profile Page" element={<CreateProfile />} />
                       <Route path="/profile/edit" name="Create Profile Page" element={<EditProfile />} />
-                      <Route path="/jobEx/create" name="Create Job Experience Page" element={<CreateJobEx />} />
+                      <Route path="/jobEx/:id/create" name="Create Job Experience Page" element={<CreateJobEx />} />
                       <Route path="/jobEx/:id/edit" name="Edit Job Experience Page" element={<EditJobEx />} />
                       <Route path="/jobs/create" name="Create Job Advertiment Page" element={<CreateJob />} />
                       <Route path="/jobs/edit" name="Edit Job Advertisment List Page" element={<EditJobList />} />

@@ -13,8 +13,8 @@ const AppSidebar = () => {
                 <li><Link to="/login" children="Login Page" /></li>
                 {role !== "ADMIN" && (
                     <li>
-                        <Link to="/profile/create" children="Edit Profile Page"/>
-                        <Link to="/profile/edit" children="Create Profile Page" />
+                        <Link to="/profile/edit" children="Edit Profile Page"/>
+                        <Link to="/profile/create" children="Create Profile Page" />
                     </li>
                 )}
                 {role === "ALUMNI" && (

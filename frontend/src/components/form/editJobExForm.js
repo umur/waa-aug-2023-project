@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import jobService from '../../services/jobService';
 import profileService from '../../services/ProfileService';
+import { useParams } from 'react-router-dom';
 
 import '../../css/editJobEx.css'; 
 
 const EditJobExForm = ({ jobId }) => {
+  const {id} = useParams();
   const { token, userId } = useAuth();
 
   const [jobExperience, setJobExperience] = useState(null);
@@ -14,11 +16,11 @@ const EditJobExForm = ({ jobId }) => {
   useEffect(() => {
     const fetchJobExperience = async () => {
       try {
-        const response = await profileService.handleGetSingleApi("profile",userId);
-        console.log(response.jobExperienceList)
+        const response = await profileService.handleGetSingleApi(userId);
+        console.log(response)
         if (response) {
           setEditable(true);
-          setJobExperience(response.jobExperienceList);
+          setJobExperience(response);
         }
       } catch (error) {
         console.error('An error occurred:', error);
@@ -26,7 +28,7 @@ const EditJobExForm = ({ jobId }) => {
     };
 
     fetchJobExperience();
-  }, [jobId]);
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -38,7 +40,7 @@ const EditJobExForm = ({ jobId }) => {
 
   const handleSubmitUpdate = async (e) => {
     try {
-      const response = await jobService.updateJobExperience(jobId, jobExperience);
+      const response = await jobService.updateJobExperience(id, jobExperience);
       if (response) {
         alert('Update successful');
         // You might want to redirect or perform other actions after successful update
@@ -52,12 +54,12 @@ const EditJobExForm = ({ jobId }) => {
     <div className="job-ex-form-container">
       {editable ? (
         <form>
-          <label htmlFor="company">Company:</label>
+          <label htmlFor="companyName">CompanyName:</label>
           <input
             type="text"
-            id="company"
-            name="company"
-            value={jobExperience.company}
+            id="companyName"
+            name="companyName"
+            value={jobExperience.companyName}
             onChange={handleInputChange}
           />
 
@@ -69,11 +71,11 @@ const EditJobExForm = ({ jobId }) => {
             value={jobExperience.position}
             onChange={handleInputChange}
           />
-          <button onClick={handleSubmitUpdate}>Save Changes</button>
         </form>
       ) : (
         <p>You are not authorized to edit this job experience.</p>
       )}
+      <button onClick={handleSubmitUpdate}>Save Changes</button>
     </div>
   );
 };

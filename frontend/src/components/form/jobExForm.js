@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Button from '../button/Button';
 import Loading from '../loading/loading';
 
@@ -7,10 +7,11 @@ import jobService from '../../services/jobService';
 
 import '../../css/jobEx.css';
 
-const JobExForm = () => {
+const JobExForm = (props) => {
+    const {id} = useParams();
     const navigate = useNavigate();
     const [handleJobExInput, setHandleJobExInput] = useState({
-       company: '',
+       companyName: '',
        position: ''
     });
     const [isLoading, setIsLoading] = useState(false);
@@ -26,12 +27,12 @@ const JobExForm = () => {
     const handleJobEx = async () => {
         try {
             setIsLoading(true);
-            const apiResponse = await jobService.createJobEx(handleJobExInput); 
+            const apiResponse = await jobService.createJobEx(id,handleJobExInput); 
             setIsLoading(false);
             if (apiResponse) {
                 localStorage.setItem('JobEx_id', apiResponse.id);
                 alert('Create Job Experience successfully');
-                navigate('/');
+                navigate('/experiences');
             } else {
                 alert('Bad credentials, try again');
             }
@@ -46,9 +47,9 @@ const JobExForm = () => {
         <div className="JobEx-form-container">
             <label>Company:
                 <input
-                    name="company"
+                    name="companyName"
                     type="text"
-                    value={handleJobExInput.company}
+                    value={handleJobExInput.companyName}
                     onChange={handleInputChange}
                 />
             </label>
@@ -64,6 +65,11 @@ const JobExForm = () => {
             <Button color="primary" onClick={handleJobEx}>
                 Create Job Experience
             </Button>
+            {/* </br> */}
+             <Button color="secondary" onClick={props.onCancel}>
+             Cancel
+             </Button>
+
             {isLoading && <Loading />}
         </div>
     );

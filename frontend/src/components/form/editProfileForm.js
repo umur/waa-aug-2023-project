@@ -4,15 +4,19 @@ import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import UserService from '../../services/userService';
+import JobExForm from './jobExForm';
 
 import '../../css/ProfileForm.css';
 
 const EditProfileForm = () => {
   const navigate = useNavigate();
-  const { token, profileId } = useAuth();
+  const { token, profileId, userId } = useAuth();
 
   const [user, setUser] = useState(null);
   const [editable, setEditable] = useState(false);
+
+  const [addingJobExperience, setAddingJobExperience] = useState(false);
+
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -128,6 +132,15 @@ const EditProfileForm = () => {
             />
           </label>
           <button onClick={handlesumbitUpdate}>Save Changes</button>
+          
+          
+          <button onClick={() => navigate(`/jobEx/${userId}/create`)}>Add Job Experience</button>
+          
+          
+          {/* {addingJobExperience ? (
+            <JobExForm onCancel={() => setAddingJobExperience(false)} />
+          ) : null} */}
+          
         </form>
       ) : (
         <p>You are not authorized to edit this profile.</p>

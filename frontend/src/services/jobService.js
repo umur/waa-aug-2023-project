@@ -103,9 +103,10 @@ const JobService = {
     }
   },
   //create job Experience
-  createJobEx: async (requestData = {}, options = {}) => {
+  createJobEx: async (id, requestData = {}, options = {}) => {
+    console.log(`${API_BASE_URL}/profile/${id}/experience`)
     try {
-      const response = await axios.post(`${API_BASE_URL}/experiences`, requestData, {
+      const response = await axios.post(`${API_BASE_URL}/profile/${id}/experience`, requestData, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + ACCESS_TOKEN,
@@ -113,7 +114,7 @@ const JobService = {
         },
         ...options
       });
-      if (response.status !== 201) {
+      if (response.status !== 200) {
         throw new Error(`API request failed with status: ${response.status}`);
       }
       return response.data;
@@ -141,8 +142,9 @@ const JobService = {
   },
 
   updateJobExperience: async (id, requestData = {}, options = {}) => {
+    console.log(`${API_BASE_URL}/experiences/${id}`)
     try {
-      const response = await axios.post(`${API_BASE_URL}/${id}/experience`, requestData, {
+      const response = await axios.put(`${API_BASE_URL}/experiences/${id}`, requestData, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + ACCESS_TOKEN,
@@ -150,7 +152,7 @@ const JobService = {
         },
         ...options
       });
-      if (response.status !== 200) {
+      if (response.status !== 201) {
         throw new Error(`API request failed with status: ${response.status}`);
       }
       return response.data;

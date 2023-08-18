@@ -80,10 +80,10 @@ const handleUpdateApi = async (updatedProfileData, userRole, options = {}) => {
     }
 };
 
-const handleGetSingleApi = async (endpoint, id, options={}) => {
-    console.log(`${API_BASE_URL}/${endpoint}/${id}`)
+const handleGetSingleApi = async (id, options={}) => {
+    console.log(`${API_BASE_URL}/experiences/${id}`)
     try {
-        const response = await axios.get(`${API_BASE_URL}/${endpoint}/${id}`, {
+        const response = await axios.get(`${API_BASE_URL}/experiences/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + ACCESS_TOKEN,
