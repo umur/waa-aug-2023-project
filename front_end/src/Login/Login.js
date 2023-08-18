@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 
 import './Login.css'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setIsLoggedIn } from "../NavBar/isLoggedInSlice";
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     function login(){
         console.log({email, password});
@@ -14,8 +18,12 @@ function Login() {
            { email, password}
         ))
         .then((res) => {
-            console.log('token', res.data.token);
+            console.log('data res', res.data);
             localStorage.setItem('token', res.data.token);
+            localStorage.setItem('userId', res.data.id);
+            localStorage.setItem('userName', res.data.name)
+            dispatch(setIsLoggedIn(true));
+            navigate('/');
         })
         .catch((err)=> console.log(err))
     }

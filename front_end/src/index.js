@@ -12,6 +12,7 @@ import ExploreJobs from './ExploreJobs/ExploreJobs';
 import Login from './Login/Login';
 import Register from './Register/Register';
 import JobPost from './JobPost/JobPost';
+import AlumniDashboard from './AlumniDashboard/AlumniDashboard';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -29,6 +30,7 @@ root.render(
           <Route path='login' element={<Login/>}/>
           <Route path='register' element={<Register/>}/>
           <Route path='jobPost' element={<JobPost/>}/>
+          <Route path='dashboard' element={<AlumniDashboard/>}/>
         </Route>
       </Routes>
       </BrowserRouter>

@@ -50,7 +50,7 @@ function Register() {
                         <select onChange={(e) => setAccountType(e.target.value)} class="form-control" id="exampleFormControlSelect1">
                             <option selected disabled>Account Type</option>
                             <option value={'ALUMNI'} >Almuni</option>
-                            <option value={'FACULTY'} >Almuni</option>
+                            <option value={'FACULTY'} >Faculty</option>
                         </select>
                     </div> 
                 </form>

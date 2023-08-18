@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Location({ companyState }) {
+function Location({ companyState,  }) {
     const [location, setLocation] = useState({});
 
     return (

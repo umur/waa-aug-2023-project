@@ -29,7 +29,6 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public Token register(NewUser newUser) {
-        //TODO check if email is already in use and throw appropriate exception
         ensureEmailIsUnique(newUser.getEmail());
         User user;
         if (newUser.getAccountType() == NewUserAccountType.ALUMNI) user = createAlumni(newUser);
@@ -58,6 +57,8 @@ public class AuthServiceImpl implements AuthService {
     public Token generateToken(User user) {
         return Token.builder()
                 .token(jwtService.generateToken(user))
+                .id(user.getId())
+                .name(user.getFirstName())
                 .build();
     }
 

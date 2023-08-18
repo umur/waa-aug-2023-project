@@ -4,8 +4,10 @@ import './JobPost.css';
 import Location from "../ReusableCommponents/Location";
 import Company from "../ReusableCommponents/Company";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 function JobPost() {
+    const navigate = useNavigate();
     const [position, setPosition] = useState('');
     const [skills, setSkills] = useState('');
     const [otherReq, setOtherReq] = useState('');
@@ -26,7 +28,7 @@ function JobPost() {
             'http://localhost:8080/alumnus/2/jobPosts', 
             {position, skills, otherReq, industry, company}
         )
-        .then(res => console.log(res))
+        .then(res => navigate('/exploreJobs'))
         .catch(err => console.log(err));
     }
 
