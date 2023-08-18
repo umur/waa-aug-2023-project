@@ -12,6 +12,7 @@ import AppFooter from './components/footer/AppFooter';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import User from './views/user';
 import Reset from './views/reset';
+import LogSystem from './views/logSystem';
 
 const Home = React.lazy(() => import('./views/home'))
 const Login = React.lazy(() => import('./views/login'))
@@ -50,6 +51,7 @@ class App extends Component {
                       <Route path="/jobs/:id/update" name="Edit Job Advertisment Page" element={<EditJob />} />
                       <Route path="/admin/user" name="User Page" element={<User />} />
                       <Route path="/admin/reset-password/:id" name="Reset Password Page" element={<Reset />} />
+                      <Route path="/admin/log" name="Log System Page" element={<LogSystem />} />
                       <Route path="/404" name="Not Found Page" element={<NotFoundError />} />
                       <Route path="/500" name="Internal Server Page" element={<InternalServerError />} />
                       <Route path="/experiences" name="Edit Job Experience Page" element={<Experience />} />

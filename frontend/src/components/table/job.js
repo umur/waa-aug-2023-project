@@ -25,8 +25,6 @@ const Job = ({ id, title, description, state, companyName, city}) => {
                     <td>{city}</td>
                     <td>
                         <Link to={`/jobs/${id}/update`}>Update</Link>
-                        <br/>
-                        <Link to={`/jobs/${id}/update`}>Delete</Link>
                     </td>
                 </tr>
             </tbody>

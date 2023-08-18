@@ -19,8 +19,6 @@ const Experience = ({id, companyName, position}) => {
                     <td>{position}</td>
                     <td>
                         <Link to={`/jobEx/${id}/edit`}>Update</Link>
-                        <br/>
-                        <Link to={`/experiences/${id}/update`}>Delete</Link>
                     </td>
                 </tr>
             </tbody>

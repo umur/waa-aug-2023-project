@@ -26,10 +26,13 @@ const AppSidebar = () => {
                     </li>
                 )}
                 {role === "ADMIN" && (
-                    <li><Link to="/admin/user" children="User Page" /></li>
+                    <ul>
+                        <li><Link to="/admin/user" children="User Page" /></li>
+                        <li><Link to="/admin/log" children="Log System Page" /></li>
+                    </ul>
                 )}
                 <li><Link to="/register" children="Register Page" /></li>
-                <li><Link to="/experiences" children="Experience Page" /></li>
+                <li><Link to="/" children="Experience Page" /></li>
                 <li><Link to="/404" children="404 Page" /></li>
                 <li><Link to="/500" children="500 Page" /></li>
             </ul>
