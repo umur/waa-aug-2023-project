@@ -131,16 +131,12 @@ const EditProfileForm = () => {
               onChange={handleInputChange}
             />
           </label>
-          <button onClick={handlesumbitUpdate}>Save Changes</button>
-          
-          
-          <button onClick={() => navigate(`/jobEx/${userId}/create`)}>Add Job Experience</button>
-          
-          
-          {/* {addingJobExperience ? (
-            <JobExForm onCancel={() => setAddingJobExperience(false)} />
-          ) : null} */}
-          
+          <div>
+            <button onClick={handlesumbitUpdate}>Save Changes</button>
+          </div>
+          <div>
+            <button onClick={() => navigate(`/jobEx/${userId}/create`)}>Add Job Experience</button>
+          </div>
         </form>
       ) : (
         <p>You are not authorized to edit this profile.</p>

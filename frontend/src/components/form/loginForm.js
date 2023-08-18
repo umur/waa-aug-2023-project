@@ -17,7 +17,6 @@ const LoginForm = () => {
         password: '',
     });
     const [isLoading, setIsLoading] = useState(false);
-    const [loginAttempts, setLoginAttempts] = useState(0);
     const [isLocked, setIsLocked] = useState(false);
 
     const handleInputChange = (e) => {
@@ -43,23 +42,12 @@ const LoginForm = () => {
                 localStorage.setItem('accessToken', apiResponse.accessToken);
                 localStorage.setItem('role', apiResponse.role);
                 localStorage.setItem('user_id', apiResponse.id);
-                setLoginAttempts(0);
                 navigate('/');
             }
         } catch (error) {
             setIsLoading(false);
-            console.log(loginAttempts)
-            if (loginAttempts + 1 >= MAX_LOGIN_ATTEMPTS) {
-                setIsLocked(true);
-                setTimeout(() => {
-                    setIsLocked(false);
-                    setLoginAttempts(loginAttempts);
-                }, LOCKOUT_DURATION);
-                alert('Too many failed login attempts. Account locked.');
-            } else {
-                setLoginAttempts(loginAttempts + 1);
-                alert('Bad credentials, try again');
-            }
+            console.log(error);
+            navigate("/500")
         }
     };
 

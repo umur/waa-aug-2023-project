@@ -3,16 +3,16 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Button from '../button/Button';
 import Loading from '../loading/loading';
 
-import jobService from '../../services/jobService'; 
+import jobService from '../../services/jobService';
 
 import '../../css/jobEx.css';
 
 const JobExForm = (props) => {
-    const {id} = useParams();
+    const { id } = useParams();
     const navigate = useNavigate();
     const [handleJobExInput, setHandleJobExInput] = useState({
-       companyName: '',
-       position: ''
+        companyName: '',
+        position: ''
     });
     const [isLoading, setIsLoading] = useState(false);
 
@@ -27,7 +27,7 @@ const JobExForm = (props) => {
     const handleJobEx = async () => {
         try {
             setIsLoading(true);
-            const apiResponse = await jobService.createJobEx(id,handleJobExInput); 
+            const apiResponse = await jobService.createJobEx(id, handleJobExInput);
             setIsLoading(false);
             if (apiResponse) {
                 localStorage.setItem('JobEx_id', apiResponse.id);
@@ -61,14 +61,14 @@ const JobExForm = (props) => {
                     onChange={handleInputChange}
                 />
             </label>
-           
+
             <Button color="primary" onClick={handleJobEx}>
                 Create Job Experience
             </Button>
             {/* </br> */}
-             <Button color="secondary" onClick={props.onCancel}>
-             Cancel
-             </Button>
+            <Button color="secondary" onClick={props.onCancel}>
+                Cancel
+            </Button>
 
             {isLoading && <Loading />}
         </div>
