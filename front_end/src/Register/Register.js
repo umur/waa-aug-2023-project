@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import './Register.css'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 
@@ -12,12 +12,17 @@ function Register() {
     const [password, setPassword] = useState('');
     const [accountType, setAccountType] = useState('');
 
+    const navigate = useNavigate();
+
     function register(){
         console.log({firstName, lastName, email, password, accountType});
         axios.post('http://localhost:8080/auth/register', 
             {firstName, lastName, email, password, accountType}
         )
-        .then((res) => console.log(res))
+        .then((res) => {
+            console.log(res);
+            navigate('/login');
+        })
         .catch((err)=> console.log(err))
     }
 

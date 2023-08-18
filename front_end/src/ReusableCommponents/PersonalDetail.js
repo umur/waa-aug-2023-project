@@ -47,7 +47,7 @@ function PersonalDetail({ alumniProfileState }) {
                         { ...alumniProfileState.alumniProfile, industry: {...alumniProfileState.alumniProfile.industry, name: e.target.value}}
                     );
                 }}
-                value={ alumniProfileState.alumniProfile.industry.name}
+                // value={ alumniProfileState.alumniProfile.industry.name}
                 class="form-control form-control-sm" type="text" placeholder="Industry i.e. IT" />
         </div>
     );

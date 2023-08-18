@@ -25,6 +25,8 @@ public class AlumniController {
     public ResponseEntity<List<AlumniPublic>> getAlumnusByGradYear(@RequestParam int year){
         return ResponseEntity.ok(alumniService.getAlumnusByGradYear(year));
     }
+
+    @CrossOrigin(origins = "*", methods = {RequestMethod.GET}, allowedHeaders = "*")
     @GetMapping("/filterByDept")
     public ResponseEntity<List<AlumniPublic>> getAlumnusByDept(@RequestParam String dept){
         return ResponseEntity.ok(alumniService.getAlumnusByDept(dept));
