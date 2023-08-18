@@ -1,0 +1,33 @@
+.user-table {
+    width: 30%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+  }
+  
+  .user-table th,
+  .user-table td {
+    padding: 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+  
+  .user-table th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+  }
+  
+  .user-table a {
+    text-decoration: none;
+    color: #007bff;
+    margin-right: 0px;
+  }
+  
+  .user-table a:hover {
+    text-decoration: underline;
+  }
+  .user-table-container {
+    display: flex;
+    justify-content: right;
+  }
+  
+  

@@ -1,0 +1,42 @@
+/* Sidebar.css */
+.app-sidebar {
+    position: absolute;
+    top: 68px;
+    left: 0;
+    width: 250px;
+    height: calc(189vh - 77px);
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    z-index: 1;
+}
+
+.app-sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-sidebar li {
+    margin-bottom: 10px;
+}
+
+.app-sidebar li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    padding: 5px;
+    display: inline-block;
+}
+
+.app-sidebar li a:hover {
+    color: #61dafb;
+    background-color: #444;
+}
+
+.app-sidebar li a:active {
+    color: #fff;
+    background-color: #333;
+    transform: scale(0.95);
+}
