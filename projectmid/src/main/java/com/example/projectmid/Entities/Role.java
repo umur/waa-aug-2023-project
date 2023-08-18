@@ -7,5 +7,5 @@ import jakarta.persistence.Id;
 
 public enum Role {
     Adminstrator,
-    Alumni
+    Alumni,
 }

@@ -1,5 +1,7 @@
 package com.example.projectmid.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,10 +21,13 @@ public class Event {
     private String description;
     private String location;
     private LocalDateTime eventDate;
-    @ManyToOne
-    @JoinColumn(name = "alumni_id")
-    private Alumni alumni;
-    @ManyToMany
-    private List<Alumni> attendentList;
+//    @JsonBackReference
+//    @ManyToOne
+//    @JoinColumn(name = "alumni_id")
+//    private Alumni alumni;
+
+//    @JsonManagedReference
+//    @ManyToMany
+//    private List<Alumni> attendentList;
 
 }

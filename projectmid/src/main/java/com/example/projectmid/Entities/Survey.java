@@ -1,5 +1,6 @@
 package com.example.projectmid.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +19,7 @@ public class Survey {
     private String description;
     private LocalDate surveyDate;
     private String feedBack;
+    @JsonBackReference
     @ManyToOne
     private Alumni alumni;
 }

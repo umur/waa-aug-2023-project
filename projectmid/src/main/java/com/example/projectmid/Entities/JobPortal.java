@@ -1,5 +1,6 @@
 package com.example.projectmid.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,6 +24,7 @@ public class JobPortal {
     One User can be a Job Seeker and apply for multiple Job Postings (one-to-many relationship).
     One Job Posting can have multiple Job Seekers applying (one-to-many relationship).*/
     //comment: add job seeker so that he can apply for the jobs.
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "alumni_id")
     private Alumni alumni;

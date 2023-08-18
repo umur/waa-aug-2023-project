@@ -36,6 +36,7 @@ public class EventService {
     }
 
     public List<Alumni> findAlumniByEvent(int eventId) {
-        return eventRepository.findAlumniByEvent(eventId);
+        return null;
+       // return eventRepository.findAlumniByEvent(eventId);
     }
 }

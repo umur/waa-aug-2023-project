@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface EventRepository extends JpaRepository<Event, Integer> {
 
-    @Query("select e.attendentList from Event e JOIN Alumni a on e.id =?1")
-    public List<Alumni> findAlumniByEvent(int event_id);
+//    @Query("select e.attendentList from Event e JOIN Alumni a on e.id =?1")
+//    public List<Alumni> findAlumniByEvent(int event_id);
 
 }

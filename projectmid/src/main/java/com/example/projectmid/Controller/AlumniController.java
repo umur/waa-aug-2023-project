@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/alumni")
 @AllArgsConstructor
 public class AlumniController {
@@ -35,7 +36,8 @@ public class AlumniController {
     }
     @GetMapping
     public List<Alumni> findAll(){
-        return alumniService.findAll();
+        List<Alumni> LA = alumniService.findAll();
+        return LA;
     }
     @GetMapping("/{id}")
     public Alumni findById(@PathVariable int id){
