@@ -37,30 +37,5 @@ The Alumni Management System is a comprehensive web-based application designed t
  * Log all user activities on the system.
  * Limit login attempts. If a user try to login with an invalid password more than 5 times, the system will lock the user and make it unable to login for 15 minutes.
 
-#### Technical Details
----
-* Use Java and Spring Boot framework for the backend project.
-* Use React framework for the frontend project.
-* Use n-tier software architecture model.
-* Populate your database with dummy data using `data.sql`.
-	* Prepare your dummy data for testing and presentation.
-* If necessary, change isolation levels.
-* If necessary, change Fetch mode.
-
-
-#### Submission
----
-* Submit a detailed project plan for your daily performance (day/task/time) and submit it with your code.
-* Fork this repository and push your changes.
-* Once you finished your project, send a Pull Request. (Send only one Pull Request once you finish the assignment.)
-* Project will be evaluated based on your code quality. It is possible that I will need to schedule meetings with some students about their source-code.
-
-#### Important Notes
----
-* You are not allowed to share codes with your classmates. If detected, you will get NC.
- 
-* Remember to respect the code honor submission policy. All written code must be original. Presenting something as one’s own work when it came from another source is plagiarism and is forbidden.
-    
-* Plagiarism is a very serious thing in all American academic institutions and is guarded against vigilantly by every professor.
  
 
