@@ -1,0 +1,11 @@
+.exploreJobs{
+    padding: 0 20% 0 20%;
+}
+.JobListNsingleJobDetail{
+    margin-top: 30px;
+    justify-content: space-between;
+}
+
+.JobListNsingleJobDetail > *{
+    width: 48%;
+}

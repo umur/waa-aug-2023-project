@@ -1,0 +1,20 @@
+.loggedOut > button{
+    width: 80px;
+    margin-left: 10px;
+    /* background-color: #343a40!important; */
+}
+.loggedOut{
+    background-color: #343a40!important;
+}
+
+.loggedIn > p{
+    background-color: #343a40!important;
+    color: white;
+    font-size: large;
+    margin-right: 20px;
+}
+
+.loggedIn  {
+    background-color: #343a40!important;
+    align-items:baseline;
+}

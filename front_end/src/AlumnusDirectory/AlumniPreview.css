@@ -1,0 +1,24 @@
+.almuniPreview{
+    align-items: center;
+    margin-top: 30px;
+    background-color: white;
+    border: 1px solid #dddddd;
+    border-radius: 20px;
+}
+
+.almuniPreview  :hover{
+    border: 1px solid #0c0c0c;
+}
+.nameNphone > h1{
+    background-color: inherit;
+}
+.almuniPreview > div {
+    margin-left: 20px;
+}
+.nameNphone{
+    width: 350px;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 20px;
+}

@@ -1,0 +1,26 @@
+.almuniDashboard{
+    margin-top: 7%;
+}
+
+.cell{
+    justify-content: center;
+    padding: 80px 0;
+    background-color: white;
+    margin-top: 15px;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 300px;
+}
+
+.cell > * {
+    background-color: inherit;
+}
+
+.cell > h4 {
+    margin-left: 10px;
+}
+
+.row{
+    justify-content: space-evenly;
+}
